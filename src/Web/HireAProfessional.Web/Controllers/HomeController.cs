@@ -2,15 +2,25 @@
 {
     using System.Diagnostics;
 
+    using HireAProfessional.Services.Data;
     using HireAProfessional.Web.ViewModels;
 
     using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : BaseController
     {
+        private readonly ICategoryService categoryService;
+
+        public HomeController(ICategoryService categoryService)
+        {
+            this.categoryService = categoryService;
+        }
+
         public IActionResult Index()
         {
-            return this.View();
+            var categories = this.categoryService.GetAllCategories();
+
+            return this.View(categories);
         }
 
         public IActionResult Privacy()

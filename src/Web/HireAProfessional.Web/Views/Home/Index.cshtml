@@ -1,9 +1,31 @@
 ﻿@using HireAProfessional.Common
+@using HireAProfessional.Data.Models;
+@model List<Category>
 @{
     this.ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-1">@GlobalConstants.SystemName!</h1>
+    <h4 class="display-4">Number one site for hiring specialist from all fields</h4>
+</div>
+
+<hr />
+
+<h1 class="text-center">Categories</h1>
+
+<hr />
+
+<div class="row">
+    @foreach (var category in this.Model)
+    {
+        <div class="col-md-4 card" style="width: 18rem;">
+            <img class="card-img-top" src=".../100px180/" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">@category.Name</h5>
+                <p class="card-text">@category.Description</p>
+                <a href="#" class="btn btn-primary">Visit</a>
+            </div>
+        </div>
+    }
 </div>
