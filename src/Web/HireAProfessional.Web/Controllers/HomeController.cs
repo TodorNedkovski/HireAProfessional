@@ -1,10 +1,11 @@
 ﻿namespace HireAProfessional.Web.Controllers
 {
     using System.Diagnostics;
+    using System.Linq;
 
     using HireAProfessional.Services.Data;
     using HireAProfessional.Web.ViewModels;
-
+    using HireAProfessional.Web.ViewModels.Categories;
     using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : BaseController

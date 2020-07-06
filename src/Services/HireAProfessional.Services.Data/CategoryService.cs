@@ -7,6 +7,7 @@
 
     using HireAProfessional.Data.Common.Repositories;
     using HireAProfessional.Data.Models;
+    using HireAProfessional.Web.ViewModels.Categories;
 
     public class CategoryService : ICategoryService
     {
@@ -17,9 +18,14 @@
             this.categoryRepository = categoryRepository;
         }
 
-        public ICollection<Category> GetAllCategories()
+        public ICollection<CategoryViewModel> GetAllCategories()
         {
-            return this.categoryRepository.All().ToList();
+            return this.categoryRepository.All().Select(c => new CategoryViewModel
+            {
+                Description = c.Description,
+                ImageUrl = c.ImageUrl,
+                Name = c.Name,
+            }).ToList();
         }
     }
 }

@@ -10,6 +10,7 @@
     {
         public Category()
         {
+            this.Id = Guid.NewGuid().ToString();
             this.Professionals = new HashSet<Professional>();
         }
 
