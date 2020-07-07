@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
     using System.Text;
     using System.Threading;
 
@@ -11,14 +12,15 @@
     {
         public Professional()
         {
-            this.IsDeleted = false;
-            this.DeletedOn = null;
+            this.Id = Guid.NewGuid().ToString();
         }
 
         public int Name { get; set; }
 
         public int Age { get; set; }
 
-        public Category Fild { get; set; }
+        public Category Category { get; set; }
+
+        public string CategoryId { get; set; }
     }
 }

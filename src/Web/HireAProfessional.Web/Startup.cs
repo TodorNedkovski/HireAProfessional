@@ -64,7 +64,7 @@
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
-            services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<ICategoriesService, CategoriesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -105,6 +105,10 @@
                     {
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                        endpoints.MapControllerRoute(
+                            "categories",
+                            "Categories/{name}",
+                            new { controller = "Categories", action = "CategoryByName" });
                         endpoints.MapRazorPages();
                     });
         }

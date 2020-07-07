@@ -180,14 +180,14 @@ namespace HireAProfessional.Data.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
+                    b.Property<string>("CategoryId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("FildId")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -200,7 +200,7 @@ namespace HireAProfessional.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FildId");
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex("IsDeleted");
 
@@ -345,9 +345,9 @@ namespace HireAProfessional.Data.Migrations
 
             modelBuilder.Entity("HireAProfessional.Data.Models.Professional", b =>
                 {
-                    b.HasOne("HireAProfessional.Data.Models.Category", "Fild")
+                    b.HasOne("HireAProfessional.Data.Models.Category", "Category")
                         .WithMany("Professionals")
-                        .HasForeignKey("FildId");
+                        .HasForeignKey("CategoryId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

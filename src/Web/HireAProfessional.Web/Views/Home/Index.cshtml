@@ -1,6 +1,6 @@
 ﻿@using HireAProfessional.Common
 @using HireAProfessional.Web.ViewModels.Categories;
-@model List<CategoryViewModel>
+@model CategoriesListViewModel
 @{
     this.ViewData["Title"] = "Home Page";
 }
@@ -17,14 +17,14 @@
 <hr />
 
 <div class="row">
-    @foreach (var category in this.Model)
+    @foreach (var category in this.Model.Categories)
     {
-        <div class="col-md-4 card" style="width: 18rem;">
+        <div class=" col-md-4 card" style="width: 18rem;">
             <img class="card-img-top" src="@category.ImageUrl" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">@category.Name</h5>
                 <p class="card-text">@category.Description</p>
-                <a href="Category/@category.Name.Replace(" ", string.Empty)" class="btn btn-primary">Visit</a>
+                <a href="Categories/@category.Name.Replace(" ", "-")" class="btn btn-primary">Visit</a>
             </div>
         </div>
     }
