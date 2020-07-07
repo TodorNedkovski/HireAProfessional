@@ -15,12 +15,26 @@
             this.Id = Guid.NewGuid().ToString();
         }
 
-        public int Name { get; set; }
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
 
         public int Age { get; set; }
+
+        public string ImageUrl { get; set; }
 
         public Category Category { get; set; }
 
         public string CategoryId { get; set; }
+
+        public string Company { get; set; }
+
+        public string Education { get; set; }
+
+        public string TwitterAccountLink { get; set; }
+
+        public string LinkedInAccountLink { get; set; }
+
+        public string FacebookAccountLink { get; set; }
     }
 }

@@ -25,6 +25,8 @@
         {
             var category = this.categoryService.GetCategoryByName(name);
 
+            var professionals = category.Professionals;
+
             return this.View(category);
         }
     }

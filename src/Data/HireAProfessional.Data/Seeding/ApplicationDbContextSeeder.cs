@@ -28,6 +28,7 @@
                               new RolesSeeder(),
                               new SettingsSeeder(),
                               new CategorySeeder(),
+                              new ProfessionalsSeeder(),
                           };
 
             foreach (var seeder in seeders)

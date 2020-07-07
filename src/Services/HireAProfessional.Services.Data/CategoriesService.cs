@@ -29,30 +29,33 @@
                     Description = c.Description,
                     ImageUrl = c.ImageUrl,
                     Name = c.Name,
-                    Professionals = c.Professionals.Select(p => new ProfessionalViewModel 
-                    {
-                        FirstName = 1,
-                    }),
                 }).ToList(),
             };
         }
 
         public CategoryViewModel GetCategoryByName(string name)
         {
-            var category = this.categoryRepository
+            return this.categoryRepository
                 .All()
-                .FirstOrDefault(c => c.Name == name.Replace("-", " "));
-
-            return new CategoryViewModel
-            {
-                Name = category.Name,
-                Description = category.Description,
-                ImageUrl = category.ImageUrl,
-                Professionals = category.Professionals.Select(p => new ProfessionalViewModel 
+                .Select(c => new CategoryViewModel
                 {
-                    Company = "g",
-                }),
-            };
+                    Name = c.Name,
+                    Description = c.Description,
+                    ImageUrl = c.ImageUrl,
+                    Professionals = c.Professionals.Select(p => new ProfessionalViewModel
+                    {
+                        FirstName = p.FirstName,
+                        LastName = p.LastName,
+                        FacebookAccountLink = p.FacebookAccountLink,
+                        TwitterAccountLink = p.TwitterAccountLink,
+                        LinkedInAccountLink = p.LinkedInAccountLink,
+                        Age = p.Age,
+                        Company = p.Company,
+                        Education = p.Education,
+                        ImageUrl = p.ImageUrl,
+                    }),
+                })
+                .FirstOrDefault(c => c.Name == name.Replace("-", " "));
         }
     }
 }
