@@ -11,7 +11,7 @@
         public Category()
         {
             this.Id = Guid.NewGuid().ToString();
-            this.Professionals = new HashSet<Professional>();
+            this.Professionals = new HashSet<ApplicationUser>();
         }
 
         public string Name { get; set; }
@@ -22,6 +22,6 @@
 
         public string Description { get; set; }
 
-        public ICollection<Professional> Professionals { get; set; }
+        public ICollection<ApplicationUser> Professionals { get; set; }
     }
 }

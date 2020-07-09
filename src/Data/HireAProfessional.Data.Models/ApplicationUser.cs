@@ -28,6 +28,30 @@ namespace HireAProfessional.Data.Models
 
         public DateTime? DeletedOn { get; set; }
 
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public int Age { get; set; }
+
+        public string ImageUrl { get; set; }
+
+        public Category Category { get; set; }
+
+        public string CategoryId { get; set; }
+
+        public string Company { get; set; }
+
+        public string Education { get; set; }
+
+        public int Points { get; set; }
+
+        public string TwitterAccountLink { get; set; }
+
+        public string LinkedInAccountLink { get; set; }
+
+        public string FacebookAccountLink { get; set; }
+
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }

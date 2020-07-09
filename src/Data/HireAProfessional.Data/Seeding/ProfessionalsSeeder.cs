@@ -7,6 +7,8 @@
     using System.Threading.Tasks;
 
     using HireAProfessional.Data.Models;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.Extensions.DependencyInjection;
 
     public class ProfessionalsSeeder : ISeeder
     {
@@ -17,17 +19,19 @@
                 return;
             }
 
-            var professionals = new List<Professional>
+            var professionals = new List<ApplicationUser>
             {
-                new Professional
+                new ApplicationUser
                 {
+                    Email = "example@example.com",
+                    NormalizedEmail = "EXAMPLE@EXAMPLE.COM",
                     FirstName = "Bon",
                     LastName = "Jovi",
                     Age = 40,
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
                     ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
                 },
-                new Professional
+                new ApplicationUser
                 {
                     FirstName = "Sarah",
                     LastName = "Hyland",
@@ -35,7 +39,7 @@
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Sales"),
                     ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
                 },
-                new Professional
+                new ApplicationUser
                 {
                     FirstName = "Ty",
                     LastName = "Burrell",
@@ -43,7 +47,7 @@
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Sales"),
                     ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
                 },
-                new Professional
+                new ApplicationUser
                 {
                     FirstName = "Nathan",
                     LastName = "Fillion",
@@ -51,7 +55,7 @@
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
                     ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
                 },
-                new Professional
+                new ApplicationUser
                 {
                     FirstName = "Stana",
                     LastName = "Katic",
@@ -59,7 +63,7 @@
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
                     ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
                 },
-                new Professional
+                new ApplicationUser
                 {
                     FirstName = "Charlie",
                     LastName = "Sheen",
@@ -67,7 +71,7 @@
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Gardener"),
                     ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
                 },
-                new Professional
+                new ApplicationUser
                 {
                     FirstName = "Jon",
                     LastName = "Cryer",
@@ -75,7 +79,7 @@
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Gardener"),
                     ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
                 },
-                new Professional
+                new ApplicationUser
                 {
                     FirstName = "Angus",
                     LastName = "Jones",
@@ -83,7 +87,7 @@
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Sales"),
                     ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
                 },
-                new Professional
+                new ApplicationUser
                 {
                     FirstName = "Ashton",
                     LastName = "Kutcher",
@@ -91,7 +95,7 @@
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
                     ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
                 },
-                new Professional
+                new ApplicationUser
                 {
                     FirstName = "April",
                     LastName = "Bowlby",
@@ -99,8 +103,7 @@
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
                     ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
                 },
-
-                new Professional
+                new ApplicationUser
                 {
                     FirstName = "Bon",
                     LastName = "Jovi",
@@ -108,7 +111,7 @@
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
                     ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
                 },
-                new Professional
+                new ApplicationUser
                 {
                     FirstName = "Sarah",
                     LastName = "Hyland",
@@ -116,7 +119,7 @@
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Sales"),
                     ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
                 },
-                new Professional
+                new ApplicationUser
                 {
                     FirstName = "Ty",
                     LastName = "Burrell",
@@ -124,7 +127,7 @@
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Sales"),
                     ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
                 },
-                new Professional
+                new ApplicationUser
                 {
                     FirstName = "Nathan",
                     LastName = "Fillion",
@@ -132,7 +135,7 @@
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
                     ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
                 },
-                new Professional
+                new ApplicationUser
                 {
                     FirstName = "Stana",
                     LastName = "Katic",
@@ -140,7 +143,7 @@
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
                     ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
                 },
-                new Professional
+                new ApplicationUser
                 {
                     FirstName = "Charlie",
                     LastName = "Sheen",
@@ -148,7 +151,7 @@
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Gardener"),
                     ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
                 },
-                new Professional
+                new ApplicationUser
                 {
                     FirstName = "Jon",
                     LastName = "Cryer",
@@ -156,7 +159,7 @@
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Gardener"),
                     ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
                 },
-                new Professional
+                new ApplicationUser
                 {
                     FirstName = "Angus",
                     LastName = "Jones",
@@ -164,7 +167,7 @@
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Sales"),
                     ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
                 },
-                new Professional
+                new ApplicationUser
                 {
                     FirstName = "Ashton",
                     LastName = "Kutcher",
@@ -172,169 +175,7 @@
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
                     ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
                 },
-                new Professional
-                {
-                    FirstName = "April",
-                    LastName = "Bowlby",
-                    Age = 40,
-                    Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
-                    ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
-                },
-
-                new Professional
-                {
-                    FirstName = "Bon",
-                    LastName = "Jovi",
-                    Age = 40,
-                    Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
-                    ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
-                },
-                new Professional
-                {
-                    FirstName = "Sarah",
-                    LastName = "Hyland",
-                    Age = 29,
-                    Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Sales"),
-                    ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
-                },
-                new Professional
-                {
-                    FirstName = "Ty",
-                    LastName = "Burrell",
-                    Age = 40,
-                    Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Sales"),
-                    ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
-                },
-                new Professional
-                {
-                    FirstName = "Nathan",
-                    LastName = "Fillion",
-                    Age = 49 ,
-                    Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
-                    ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
-                },
-                new Professional
-                {
-                    FirstName = "Stana",
-                    LastName = "Katic",
-                    Age = 40,
-                    Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
-                    ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
-                },
-                new Professional
-                {
-                    FirstName = "Charlie",
-                    LastName = "Sheen",
-                    Age = 40,
-                    Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Gardener"),
-                    ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
-                },
-                new Professional
-                {
-                    FirstName = "Jon",
-                    LastName = "Cryer",
-                    Age = 29,
-                    Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Gardener"),
-                    ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
-                },
-                new Professional
-                {
-                    FirstName = "Angus",
-                    LastName = "Jones",
-                    Age = 40,
-                    Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Sales"),
-                    ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
-                },
-                new Professional
-                {
-                    FirstName = "Ashton",
-                    LastName = "Kutcher",
-                    Age = 49 ,
-                    Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
-                    ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
-                },
-                new Professional
-                {
-                    FirstName = "April",
-                    LastName = "Bowlby",
-                    Age = 40,
-                    Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
-                    ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
-                },
-
-                new Professional
-                {
-                    FirstName = "Bon",
-                    LastName = "Jovi",
-                    Age = 40,
-                    Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
-                    ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
-                },
-                new Professional
-                {
-                    FirstName = "Sarah",
-                    LastName = "Hyland",
-                    Age = 29,
-                    Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Sales"),
-                    ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
-                },
-                new Professional
-                {
-                    FirstName = "Ty",
-                    LastName = "Burrell",
-                    Age = 40,
-                    Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Sales"),
-                    ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
-                },
-                new Professional
-                {
-                    FirstName = "Nathan",
-                    LastName = "Fillion",
-                    Age = 49 ,
-                    Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
-                    ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
-                },
-                new Professional
-                {
-                    FirstName = "Stana",
-                    LastName = "Katic",
-                    Age = 40,
-                    Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
-                    ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
-                },
-                new Professional
-                {
-                    FirstName = "Charlie",
-                    LastName = "Sheen",
-                    Age = 40,
-                    Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Gardener"),
-                    ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
-                },
-                new Professional
-                {
-                    FirstName = "Jon",
-                    LastName = "Cryer",
-                    Age = 29,
-                    Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Gardener"),
-                    ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
-                },
-                new Professional
-                {
-                    FirstName = "Angus",
-                    LastName = "Jones",
-                    Age = 40,
-                    Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Sales"),
-                    ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
-                },
-                new Professional
-                {
-                    FirstName = "Ashton",
-                    LastName = "Kutcher",
-                    Age = 49 ,
-                    Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
-                    ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
-                },
-                new Professional
+                new ApplicationUser
                 {
                     FirstName = "April",
                     LastName = "Bowlby",
@@ -343,6 +184,13 @@
                     ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
                 },
             };
+
+            var userManager = (UserManager<ApplicationUser>)serviceProvider.GetService(typeof(UserManager<ApplicationUser>));
+
+            foreach (var professional in professionals)
+            {
+                await userManager.AddToRoleAsync(professional, "Professional");
+            }
 
             await dbContext.AddRangeAsync(professionals);
         }

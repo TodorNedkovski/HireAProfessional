@@ -26,7 +26,7 @@
 
         public DbSet<Setting> Settings { get; set; }
 
-        public DbSet<Professional> Professionals { get; set; }
+        public DbSet<ApplicationUser> Professionals { get; set; }
 
         public DbSet<Category> Categories { get; set; }
 
