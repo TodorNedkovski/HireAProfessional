@@ -1,4 +1,5 @@
 ﻿using System;
+
 using HireAProfessional.Data;
 using HireAProfessional.Data.Models;
 using Microsoft.AspNetCore.Hosting;

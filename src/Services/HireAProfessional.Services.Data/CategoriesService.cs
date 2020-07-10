@@ -42,17 +42,17 @@
                     Name = c.Name,
                     Description = c.Description,
                     ImageUrl = c.ImageUrl,
-                    Professionals = c.Professionals.Select(p => new ProfessionalViewModel
+                    Professionals = c.ProfessionalUsers.Select(p => new ProfessionalViewModel
                     {
-                        FirstName = p.FirstName,
-                        LastName = p.LastName,
-                        FacebookAccountLink = p.FacebookAccountLink,
-                        TwitterAccountLink = p.TwitterAccountLink,
-                        LinkedInAccountLink = p.LinkedInAccountLink,
-                        Age = p.Age,
-                        Company = p.Company,
-                        Education = p.Education,
-                        ImageUrl = p.ImageUrl,
+                        FirstName = p.User.FirstName,
+                        LastName = p.User.LastName,
+                        FacebookAccountLink = p.User.FacebookAccountLink,
+                        TwitterAccountLink = p.User.TwitterAccountLink,
+                        LinkedInAccountLink = p.User.LinkedInAccountLink,
+                        Age = p.User.Age,
+                        Company = p.User.Company,
+                        Education = p.User.Education,
+                        ImageUrl = p.User.ImageUrl,
                     }),
                 })
                 .FirstOrDefault(c => c.Name == name.Replace("-", " "));

@@ -24,11 +24,13 @@
         {
         }
 
-        public DbSet<Setting> Settings { get; set; }
-
         public DbSet<ApplicationUser> Professionals { get; set; }
 
         public DbSet<Category> Categories { get; set; }
+
+        public DbSet<ApplicationUserCategory> ApplicationUserCategories { get; set; }
+
+        public DbSet<ProfessionalUser> ProfessionalUsers { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 

@@ -8,15 +8,20 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-    public class ProfessionalConfiguration : IEntityTypeConfiguration<ApplicationUser>
+    public class ProfessionalConfiguration : IEntityTypeConfiguration<ProfessionalUser>
     {
-        public void Configure(EntityTypeBuilder<ApplicationUser> builder)
+        public void Configure(EntityTypeBuilder<ProfessionalUser> builder)
         {
-            builder.HasKey(p => p.Id);
+            builder
+                .HasKey(p => new { p.Id });
 
-            builder.HasOne(p => p.Category)
-                .WithMany(c => c.Professionals)
-                .HasForeignKey(p => p.CategoryId);
+            builder
+                .HasOne(pu => pu.User)
+                .WithOne(u => u.ProfessionalUser);
+
+            builder
+                .HasOne(pu => pu.Category)
+                .WithMany(u => u.ProfessionalUsers);
         }
     }
 }

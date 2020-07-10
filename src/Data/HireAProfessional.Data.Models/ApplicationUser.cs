@@ -16,6 +16,7 @@ namespace HireAProfessional.Data.Models
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
+            this.ApplicationUserCategories = new HashSet<ApplicationUserCategory>();
         }
 
         // Audit info
@@ -36,10 +37,6 @@ namespace HireAProfessional.Data.Models
 
         public string ImageUrl { get; set; }
 
-        public Category Category { get; set; }
-
-        public string CategoryId { get; set; }
-
         public string Company { get; set; }
 
         public string Education { get; set; }
@@ -52,10 +49,14 @@ namespace HireAProfessional.Data.Models
 
         public string FacebookAccountLink { get; set; }
 
+        public ProfessionalUser ProfessionalUser { get; set; }
+
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
 
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
+
+        public ICollection<ApplicationUserCategory> ApplicationUserCategories { get; set; }
     }
 }

@@ -11,17 +11,20 @@
         public Category()
         {
             this.Id = Guid.NewGuid().ToString();
-            this.Professionals = new HashSet<ApplicationUser>();
+            this.ApplicationUserCategories = new HashSet<ApplicationUserCategory>();
+            this.ProfessionalUsers = new HashSet<ProfessionalUser>();
         }
 
         public string Name { get; set; }
 
-        public int Count => this.Professionals.Count;
+        public int Count => this.ApplicationUserCategories.Count;
 
         public string ImageUrl { get; set; }
 
         public string Description { get; set; }
 
-        public ICollection<ApplicationUser> Professionals { get; set; }
+        public ICollection<ProfessionalUser> ProfessionalUsers { get; set; }
+
+        public ICollection<ApplicationUserCategory> ApplicationUserCategories { get; set; }
     }
 }

@@ -4,14 +4,16 @@ using HireAProfessional.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HireAProfessional.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200710111933_MakingManyToManyRealation")]
+    partial class MakingManyToManyRealation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -219,7 +221,7 @@ namespace HireAProfessional.Data.Migrations
 
             modelBuilder.Entity("HireAProfessional.Data.Models.ProfessionalUser", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<string>("ProfessionalUserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CategoryId")
@@ -228,7 +230,7 @@ namespace HireAProfessional.Data.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ProfessionalUserId");
 
                     b.HasIndex("CategoryId");
 
