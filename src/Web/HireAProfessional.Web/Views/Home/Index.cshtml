@@ -5,63 +5,70 @@
     this.ViewData["Title"] = "Home Page";
 }
 
-@*<link href="~/css/home.css" rel="stylesheet" />
-
-<div class="container">
-    <div class="split left">
-        <h1>The Designer</h1>
-        <a href="#" class="button">Read More</a>
-    </div>
-    <div class="split right">
-        <h1>The Programmer</h1>
-        <a href="#" class="button">Read More</a>
-    </div>
-</div>
-
-<script>
-    const left = document.querySelector(".left");
-const right = document.querySelector(".right");
-const container = document.querySelector(".container");
-
-left.addEventListener("mouseenter", () => {
-  container.classList.add("hover-left");
-});
-
-left.addEventListener("mouseleave", () => {
-  container.classList.remove("hover-left");
-});
-
-right.addEventListener("mouseenter", () => {
-  container.classList.add("hover-right");
-});
-
-right.addEventListener("mouseleave", () => {
-  container.classList.remove("hover-right");
-});
-
-</script>*@
-
-<div class="text-center">
-    <h1 class="display-1">@GlobalConstants.SystemName!</h1>
-    <h4 class="display-4">Number one site for hiring specialist from all fields</h4>
-</div>
-
-<hr />
-
-<h1 class="text-center">Categories</h1>
-
-<hr />
-
-<div class="row">
-    @foreach (var category in this.Model.Categories)
+@if (!this.User.Identity.IsAuthenticated)
+{
     {
-        <div class=" col-md-4 card" style="width: 18rem;">
-            <img class="card-img-top" src="@category.ImageUrl" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">@category.Name</h5>
-                <p class="card-text">@category.Description</p>
-                <a href="Categories/@category.Name.Replace(" ", "-")" class="btn btn-primary">Visit</a>
-            </div>
-        </div>
+        this.Layout = "../../Views/Shared/_EmptyLayout.cshtml";
     }
-</div>
+
+    <div class="container">
+        <div class="split left">
+            <h1>Are you hiring?</h1>
+            <a href="Identity/Account/Login" class="button">HIRE!</a>
+        </div>
+        <div class="split right">
+            <h1>Are you applying?</h1>
+            <a href="Identity/Account/Login" class="button">APPLY!</a>
+        </div>
+    </div>
+
+    <script>
+        const left = document.querySelector(".left");
+        const right = document.querySelector(".right");
+        const container = document.querySelector(".container");
+
+        left.addEventListener("mouseenter", () => {
+            container.classList.add("hover-left");
+        });
+
+        left.addEventListener("mouseleave", () => {
+            container.classList.remove("hover-left");
+        });
+
+        right.addEventListener("mouseenter", () => {
+            container.classList.add("hover-right");
+        });
+
+        right.addEventListener("mouseleave", () => {
+            container.classList.remove("hover-right");
+        });
+
+    </script>
+}
+else
+{
+    <div class="text-center">
+        <h1 class="display-1">@GlobalConstants.SystemName!</h1>
+        <h4 class="display-4">Number one site for hiring specialist from all fields</h4>
+    </div>
+
+    <hr />
+
+    <h1 class="text-center">Categories</h1>
+
+    <hr />
+
+    <div class="row">
+        @foreach (var category in this.Model.Categories)
+        {
+            <div class=" col-md-4 card" style="width: 18rem;">
+                <img class="card-img-top" src="@category.ImageUrl" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">@category.Name</h5>
+                    <p class="card-text">@category.Description</p>
+                    <a href="Categories/@category.Name.Replace(" ", "-")" class="btn btn-primary">Visit</a>
+                </div>
+            </div>
+        }
+    </div>
+}

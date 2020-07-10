@@ -6,6 +6,7 @@
     using HireAProfessional.Services.Data;
     using HireAProfessional.Web.ViewModels;
     using HireAProfessional.Web.ViewModels.Categories;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : BaseController
@@ -20,7 +21,7 @@
         public IActionResult Index()
         {
             var categories = this.categoryService.GetAllCategories();
-
+            
             return this.View(categories);
         }
 
