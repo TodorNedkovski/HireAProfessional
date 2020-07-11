@@ -21,7 +21,7 @@
         public IActionResult Index()
         {
             var categories = this.categoryService.GetAllCategories();
-            
+
             return this.View(categories);
         }
 

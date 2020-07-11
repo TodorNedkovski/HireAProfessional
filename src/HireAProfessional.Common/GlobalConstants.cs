@@ -6,7 +6,7 @@
 
         public const string AdministratorRoleName = "Administrator";
 
-        public const string ConsumerRoleName = "Consumer";
+        public const string ContractorRoleName = "Contractor";
 
         public const string ProfessionalRoleName = "Professional";
     }

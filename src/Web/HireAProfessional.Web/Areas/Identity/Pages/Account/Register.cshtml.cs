@@ -111,8 +111,6 @@ namespace HireAProfessional.Web.Areas.Identity.Pages.Account
             [DataType(DataType.ImageUrl)]
             [Display(Name = "Please upload a picture")]
             public string ImageUrl { get; set; }
-
-
         }
 
         public async Task OnGetAsync(string returnUrl = null)
