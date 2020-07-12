@@ -33,6 +33,11 @@
             };
         }
 
+        public ICollection<Category> GetAllCategoriesWithoutViewModel()
+        {
+            return this.categoryRepository.All().ToList();
+        }
+
         public CategoryViewModel GetCategoryByName(string name)
         {
             return this.categoryRepository

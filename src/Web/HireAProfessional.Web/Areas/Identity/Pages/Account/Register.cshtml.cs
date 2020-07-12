@@ -15,6 +15,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using HireAProfessional.Services.Data;
+using System.Collections.Immutable;
 
 namespace HireAProfessional.Web.Areas.Identity.Pages.Account
 {
@@ -25,17 +27,23 @@ namespace HireAProfessional.Web.Areas.Identity.Pages.Account
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly IRegisterService _registerService;
+        private readonly ICategoriesService _categoryService;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IRegisterService registerService,
+            ICategoriesService categoryService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _registerService = registerService;
+            _categoryService = categoryService;
         }
 
         [BindProperty]
@@ -79,7 +87,11 @@ namespace HireAProfessional.Web.Areas.Identity.Pages.Account
 
             [Required]
             [DataType(DataType.Text)]
-            public string Roll { get; set; }
+            public string Role { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            public string Category { get; set; }
 
             [Required]
             [Display(Name = "Twitter Account Link")]
@@ -139,7 +151,18 @@ namespace HireAProfessional.Web.Areas.Identity.Pages.Account
                     TwitterAccountLink = this.Input.TwitterAccountLink,
                     Points = 100,
                 };
+
+                var category = this._categoryService.GetAllCategoriesWithoutViewModel().FirstOrDefault(c => c.Name == this.Input.Category);
+
                 var result = await _userManager.CreateAsync(user, this.Input.Password);
+
+                if (this.Input.Role == "Professional")
+                {
+                    await this._registerService.MakeUserProfessional(user, category);
+                }
+
+                await this._userManager.AddToRoleAsync(user, this.Input.Role);
+
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");

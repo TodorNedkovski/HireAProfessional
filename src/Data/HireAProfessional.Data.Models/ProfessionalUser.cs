@@ -4,7 +4,9 @@
     using System.Collections.Generic;
     using System.Text;
 
-    public class ProfessionalUser
+    using HireAProfessional.Data.Common.Models;
+
+    public class ProfessionalUser : IDeletableEntity
     {
         public ProfessionalUser()
         {
@@ -20,5 +22,9 @@
         public string CategoryId { get; set; }
 
         public Category Category { get; set; }
+
+        public bool IsDeleted { get; set; }
+
+        public DateTime? DeletedOn { get; set; }
     }
 }

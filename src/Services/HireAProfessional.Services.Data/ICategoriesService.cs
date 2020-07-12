@@ -12,6 +12,8 @@
     {
         CategoriesListViewModel GetAllCategories();
 
+        ICollection<Category> GetAllCategoriesWithoutViewModel();
+
         CategoryViewModel GetCategoryByName(string name);
     }
 }
