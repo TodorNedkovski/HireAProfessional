@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using HireAProfessional.Services.Data;
 using System.Collections.Immutable;
+using HireAProfessional.Web.ViewModels.Categories;
 
 namespace HireAProfessional.Web.Areas.Identity.Pages.Account
 {
@@ -50,6 +51,10 @@ namespace HireAProfessional.Web.Areas.Identity.Pages.Account
         public InputModel Input { get; set; }
 
         public string ReturnUrl { get; set; }
+
+        public IEnumerable<CategoryRegisterViewModel> Categories
+            => this._categoryService.GetAllCategoriesWithoutViewModel()
+            .Select(c => new CategoryRegisterViewModel { Name = c.Name });
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
