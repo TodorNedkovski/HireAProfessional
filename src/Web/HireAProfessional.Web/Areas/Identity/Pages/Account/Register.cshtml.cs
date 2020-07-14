@@ -28,7 +28,6 @@ namespace HireAProfessional.Web.Areas.Identity.Pages.Account
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
-        private readonly IRegisterService _registerService;
         private readonly ICategoriesService _categoryService;
 
         public RegisterModel(
@@ -36,14 +35,12 @@ namespace HireAProfessional.Web.Areas.Identity.Pages.Account
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            IRegisterService registerService,
             ICategoriesService categoryService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
-            _registerService = registerService;
             _categoryService = categoryService;
         }
 
@@ -157,14 +154,11 @@ namespace HireAProfessional.Web.Areas.Identity.Pages.Account
                     Points = 100,
                 };
 
-                var category = this._categoryService.GetAllCategoriesWithoutViewModel().FirstOrDefault(c => c.Name == this.Input.Category);
+                var category = this._categoryService
+                    .GetAllCategoriesWithoutViewModel()
+                    .FirstOrDefault(c => c.Name == this.Input.Category);
 
                 var result = await _userManager.CreateAsync(user, this.Input.Password);
-
-                if (this.Input.Role == "Professional")
-                {
-                    await this._registerService.MakeUserProfessional(user, category);
-                }
 
                 await this._userManager.AddToRoleAsync(user, this.Input.Role);
 

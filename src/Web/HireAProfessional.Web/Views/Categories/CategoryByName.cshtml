@@ -12,7 +12,7 @@
 <hr />
 
 <div id="professionalsTable" class="row">
-    @foreach (var professional in this.Model.Professionals)
+    @foreach (var professional in this.Model.ApplicationUsers)
     {
         <div class="card">
             <img src="@professional.ImageUrl" alt="@professional.FirstName" style="width:100%">

@@ -8,8 +8,8 @@
 
     using HireAProfessional.Data.Common.Repositories;
     using HireAProfessional.Data.Models;
+    using HireAProfessional.Web.ViewModels.ApplicationUsers;
     using HireAProfessional.Web.ViewModels.Categories;
-    using HireAProfessional.Web.ViewModels.Professionals;
 
     public class CategoriesService : ICategoriesService
     {
@@ -47,17 +47,17 @@
                     Name = c.Name,
                     Description = c.Description,
                     ImageUrl = c.ImageUrl,
-                    Professionals = c.ProfessionalUsers.Select(p => new ProfessionalViewModel
+                    ApplicationUsers = c.ApplicationUserCategories.Select(p => new ApplicationUserViewModel
                     {
-                        FirstName = p.User.FirstName,
-                        LastName = p.User.LastName,
-                        FacebookAccountLink = p.User.FacebookAccountLink,
-                        TwitterAccountLink = p.User.TwitterAccountLink,
-                        LinkedInAccountLink = p.User.LinkedInAccountLink,
-                        Age = p.User.Age,
-                        Company = p.User.Company,
-                        Education = p.User.Education,
-                        ImageUrl = p.User.ImageUrl,
+                        FirstName = p.ApplicationUser.FirstName,
+                        LastName = p.ApplicationUser.LastName,
+                        FacebookAccountLink = p.ApplicationUser.FacebookAccountLink,
+                        TwitterAccountLink = p.ApplicationUser.TwitterAccountLink,
+                        LinkedInAccountLink = p.ApplicationUser.LinkedInAccountLink,
+                        Age = p.ApplicationUser.Age,
+                        Company = p.ApplicationUser.Company,
+                        Education = p.ApplicationUser.Education,
+                        ImageUrl = p.ApplicationUser.ImageUrl,
                     }),
                 })
                 .FirstOrDefault(c => c.Name == name.Replace("-", " "));

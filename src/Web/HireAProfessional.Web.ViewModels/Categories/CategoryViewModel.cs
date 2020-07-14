@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Text;
 
-    using HireAProfessional.Web.ViewModels.Professionals;
+    using HireAProfessional.Web.ViewModels.ApplicationUsers;
 
     public class CategoryViewModel
     {
@@ -14,6 +14,6 @@
 
         public string Description { get; set; }
 
-        public IEnumerable<ProfessionalViewModel> Professionals { get; set; }
+        public IEnumerable<ApplicationUserViewModel> ApplicationUsers { get; set; }
     }
 }

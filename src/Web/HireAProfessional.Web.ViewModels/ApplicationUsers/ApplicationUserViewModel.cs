@@ -1,6 +1,6 @@
-﻿namespace HireAProfessional.Web.ViewModels.Professionals
+﻿namespace HireAProfessional.Web.ViewModels.ApplicationUsers
 {
-    public class ProfessionalViewModel
+    public class ApplicationUserViewModel
     {
         public string FirstName { get; set; }
 

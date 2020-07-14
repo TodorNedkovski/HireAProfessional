@@ -30,8 +30,6 @@
 
         public DbSet<ApplicationUserCategory> ApplicationUserCategories { get; set; }
 
-        public DbSet<ProfessionalUser> ProfessionalUsers { get; set; }
-
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

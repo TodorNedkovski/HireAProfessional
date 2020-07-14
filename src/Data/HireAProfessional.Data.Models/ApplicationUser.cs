@@ -49,8 +49,6 @@ namespace HireAProfessional.Data.Models
 
         public string FacebookAccountLink { get; set; }
 
-        public ProfessionalUser ProfessionalUser { get; set; }
-
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }

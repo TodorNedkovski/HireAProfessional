@@ -16,9 +16,9 @@
                 .HasKey(c => c.Id);
 
             categoryEntity
-                .HasMany(c => c.ProfessionalUsers)
-                .WithOne(pu => pu.Category)
-                .HasForeignKey(pu => pu.CategoryId);
+                .HasMany(c => c.ApplicationUserCategories)
+                .WithOne(uc => uc.Category)
+                .HasForeignKey(uc => uc.CategoryId);
         }
     }
 }
