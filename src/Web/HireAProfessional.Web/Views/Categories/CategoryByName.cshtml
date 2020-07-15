@@ -1,5 +1,5 @@
-﻿@using HireAProfessional.Web.ViewModels.Categories;
-@model CategoryViewModel
+﻿@using HireAProfessional.Web.ViewModels.Posts;
+@model PostAllViewModel
 @{
     ViewData["Title"] = "CategoryByName";
 }
@@ -12,16 +12,16 @@
 <hr />
 
 <div id="professionalsTable" class="row">
-    @foreach (var professional in this.Model.ApplicationUsers)
+    @foreach (var post in this.Model.Posts)
     {
         <div class="card">
-            <img src="@professional.ImageUrl" alt="@professional.FirstName" style="width:100%">
-            <h1>@professional.FirstName @professional.LastName</h1>
-            <p class="title">@professional.Company</p>
-            <p>@professional.Education</p>
-            <a href="@professional.TwitterAccountLink"><i class="fa fa-twitter"></i></a>
-            <a href="@professional.LinkedInAccountLink"><i class="fa fa-linkedin"></i></a>
-            <a href="@professional.FacebookAccountLink"><i class="fa fa-facebook"></i></a>
+            <img src="12" alt="@post.JobTitle" style="width:100%">
+            <h1>@post.JobTitle @post.JobTitle</h1>
+            <p class="title">@post.Company</p>
+            <p>@post.JobTitle</p>
+            <a href="@post.JobTitle"><i class="fa fa-twitter"></i></a>
+            <a href="@post.JobTitle"><i class="fa fa-linkedin"></i></a>
+            <a href="@post.JobTitle"><i class="fa fa-facebook"></i></a>
             <p><button>Contact</button></p>
         </div>
     }

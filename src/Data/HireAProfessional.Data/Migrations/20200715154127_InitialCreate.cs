@@ -47,7 +47,17 @@ namespace HireAProfessional.Data.Migrations
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
-                    DeletedOn = table.Column<DateTime>(nullable: true)
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    Age = table.Column<int>(nullable: false),
+                    ImageUrl = table.Column<string>(nullable: true),
+                    Company = table.Column<string>(nullable: true),
+                    Education = table.Column<string>(nullable: true),
+                    Points = table.Column<int>(nullable: false),
+                    TwitterAccountLink = table.Column<string>(nullable: true),
+                    LinkedInAccountLink = table.Column<string>(nullable: true),
+                    FacebookAccountLink = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -70,24 +80,6 @@ namespace HireAProfessional.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Settings",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CreatedOn = table.Column<DateTime>(nullable: false),
-                    ModifiedOn = table.Column<DateTime>(nullable: true),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    DeletedOn = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    Value = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Settings", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -197,7 +189,31 @@ namespace HireAProfessional.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Professionals",
+                name: "ApplicationUserCategories",
+                columns: table => new
+                {
+                    ApplicationUserId = table.Column<string>(nullable: false),
+                    CategoryId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ApplicationUserCategories", x => new { x.CategoryId, x.ApplicationUserId });
+                    table.ForeignKey(
+                        name: "FK_ApplicationUserCategories_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ApplicationUserCategories_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Posts",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
@@ -205,20 +221,28 @@ namespace HireAProfessional.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<int>(nullable: false),
-                    Age = table.Column<int>(nullable: false),
-                    CategoryId = table.Column<string>(nullable: true)
+                    JobTitle = table.Column<string>(nullable: true),
+                    Company = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    JobLocation = table.Column<string>(nullable: true),
+                    CategoryId = table.Column<string>(nullable: true),
+                    EmploymentType = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Professionals", x => x.Id);
+                    table.PrimaryKey("PK_Posts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Professionals_Categories_CategoryId",
+                        name: "FK_Posts_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ApplicationUserCategories_ApplicationUserId",
+                table: "ApplicationUserCategories",
+                column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -275,23 +299,21 @@ namespace HireAProfessional.Data.Migrations
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Professionals_CategoryId",
-                table: "Professionals",
+                name: "IX_Posts_CategoryId",
+                table: "Posts",
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Professionals_IsDeleted",
-                table: "Professionals",
-                column: "IsDeleted");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Settings_IsDeleted",
-                table: "Settings",
+                name: "IX_Posts_IsDeleted",
+                table: "Posts",
                 column: "IsDeleted");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "ApplicationUserCategories");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -308,10 +330,7 @@ namespace HireAProfessional.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Professionals");
-
-            migrationBuilder.DropTable(
-                name: "Settings");
+                name: "Posts");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

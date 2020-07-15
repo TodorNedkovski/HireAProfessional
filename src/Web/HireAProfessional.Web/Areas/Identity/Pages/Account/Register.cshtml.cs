@@ -92,10 +92,6 @@ namespace HireAProfessional.Web.Areas.Identity.Pages.Account
             public string Role { get; set; }
 
             [Required]
-            [DataType(DataType.Text)]
-            public string Category { get; set; }
-
-            [Required]
             [Display(Name = "Twitter Account Link")]
             [DataType(DataType.Text)]
             public string TwitterAccountLink { get; set; }
@@ -153,10 +149,6 @@ namespace HireAProfessional.Web.Areas.Identity.Pages.Account
                     TwitterAccountLink = this.Input.TwitterAccountLink,
                     Points = 100,
                 };
-
-                var category = this._categoryService
-                    .GetAllCategoriesWithoutViewModel()
-                    .FirstOrDefault(c => c.Name == this.Input.Category);
 
                 var result = await _userManager.CreateAsync(user, this.Input.Password);
 

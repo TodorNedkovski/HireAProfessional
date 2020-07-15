@@ -5,17 +5,15 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using HireAProfessional.Data.Common.Repositories;
-    using HireAProfessional.Data.Models;
     using HireAProfessional.Services.Data;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    public class CategoriesController : Controller
+    public class PostController : Controller
     {
         private readonly IPostService postService;
 
-        public CategoriesController(IPostService postService)
+        public PostController(IPostService postService)
         {
             this.postService = postService;
         }
