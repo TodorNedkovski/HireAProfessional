@@ -13,6 +13,8 @@
 
         PostAllViewModel GetAllPosts();
 
+        PostViewModel GetPostById(string id);
+
         PostAllViewModel GetAllPostsByCategory(string categoryName);
     }
 }

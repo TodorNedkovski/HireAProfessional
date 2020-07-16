@@ -19,11 +19,11 @@
         }
 
         [Authorize]
-        public IActionResult CategoryByName(string name)
+        public IActionResult ById(string id)
         {
-            var posts = this.postService.GetAllPostsByCategory(name);
+            var post = this.postService.GetPostById(id);
 
-            return this.View(posts);
+            return this.View(post);
         }
     }
 }

@@ -6,6 +6,8 @@
     using System.Text;
     using System.Threading.Tasks;
 
+    using AutoMapper;
+
     using HireAProfessional.Data.Common.Repositories;
     using HireAProfessional.Data.Models;
     using HireAProfessional.Web.ViewModels.Posts;
@@ -69,6 +71,23 @@
                         })
                         .Where(p => p.Category.Name == categoryName)
                         .ToList(),
+            };
+        }
+
+        public PostViewModel GetPostById(string id)
+        {
+            var post = this.postRepository
+                .All()
+                .FirstOrDefault(p => p.Id == id);
+
+            return new PostViewModel
+            {
+                Category = post.Category,
+                Company = post.Company,
+                Description = post.Description,
+                EmploymentType = post.EmploymentType,
+                JobLocation = post.JobLocation,
+                JobTitle = post.JobTitle,
             };
         }
     }

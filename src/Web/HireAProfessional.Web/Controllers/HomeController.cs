@@ -11,18 +11,23 @@
 
     public class HomeController : BaseController
     {
-        private readonly ICategoriesService categoryService;
+        private readonly IPostService postsService;
 
-        public HomeController(ICategoriesService categoryService)
+        public HomeController(IPostService postsService)
         {
-            this.categoryService = categoryService;
+            this.postsService = postsService;
         }
 
         public IActionResult Index()
         {
-            var categories = this.categoryService.GetAllCategories();
+            return this.View();
+        }
 
-            return this.View(categories);
+        public IActionResult BySearch()
+        {
+            var posts = this.postsService.GetAllPosts();
+
+            return this.View(posts);
         }
 
         public IActionResult Privacy()
