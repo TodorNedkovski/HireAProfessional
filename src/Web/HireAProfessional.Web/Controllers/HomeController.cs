@@ -6,6 +6,7 @@
     using HireAProfessional.Services.Data;
     using HireAProfessional.Web.ViewModels;
     using HireAProfessional.Web.ViewModels.Categories;
+    using HireAProfessional.Web.ViewModels.Posts;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -21,13 +22,6 @@
         public IActionResult Index()
         {
             return this.View();
-        }
-
-        public IActionResult BySearch()
-        {
-            var posts = this.postsService.GetAllPosts();
-
-            return this.View(posts);
         }
 
         public IActionResult Privacy()

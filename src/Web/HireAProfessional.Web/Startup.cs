@@ -106,9 +106,13 @@
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute(
-                            "categories",
-                            "Categories/{name}",
-                            new { controller = "Categories", action = "CategoryByName" });
+                            "posts",
+                            "Posts/{id}",
+                            new { controller = "Posts", action = "ById" });
+                        endpoints.MapControllerRoute(
+                            "home",
+                            "Posts/All",
+                            new { controller = "Posts", action = "BySearch" });
                         endpoints.MapRazorPages();
                     });
         }

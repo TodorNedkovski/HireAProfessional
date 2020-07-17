@@ -31,6 +31,8 @@
                 EmploymentType = post.EmploymentType,
                 Description = post.Description,
             });
+
+            await this.postRepository.SaveChangesAsync();
         }
 
         public PostAllViewModel GetAllPosts()
