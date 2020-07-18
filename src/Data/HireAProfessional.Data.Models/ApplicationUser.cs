@@ -56,5 +56,9 @@ namespace HireAProfessional.Data.Models
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
 
         public ICollection<ApplicationUserCategory> ApplicationUserCategories { get; set; }
+
+        public ICollection<Post> Posts { get; set; }
+
+        public ICollection<Blog> Blogs { get; set; }
     }
 }

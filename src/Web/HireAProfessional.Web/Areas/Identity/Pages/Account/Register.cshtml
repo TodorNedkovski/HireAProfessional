@@ -5,13 +5,12 @@
     this.Layout = null;
 }
 
-@*<h1>@ViewData["Title"]</h1>*@
-
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css">
 
+<h1 style="text-align: center;">@ViewData["Title"]</h1>
 <div>
-    <div class="col-md-12">
-        <form asp-route-returnUrl="@Model.ReturnUrl" style="width:80%; margin: 0 auto;" method="post">
+    <div style="text-align: center;" class="col-md-12">
+        <form asp-route-returnUrl="@Model.ReturnUrl" style="display: inline-block; width: 70%;" method="post">
             <h4 style="text-align: center">Create a new account.</h4>
             <hr />
             <div asp-validation-summary="All">

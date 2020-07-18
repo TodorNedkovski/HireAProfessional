@@ -30,6 +30,8 @@
 
         public DbSet<Post> Posts { get; set; }
 
+        public DbSet<Blog> Blogs { get; set; }
+
         public DbSet<ApplicationUserCategory> ApplicationUserCategories { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);

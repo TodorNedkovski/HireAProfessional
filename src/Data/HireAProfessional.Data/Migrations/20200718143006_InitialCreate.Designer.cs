@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HireAProfessional.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200715154127_InitialCreate")]
+    [Migration("20200718143006_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -186,6 +186,41 @@ namespace HireAProfessional.Data.Migrations
                     b.ToTable("ApplicationUserCategories");
                 });
 
+            modelBuilder.Entity("HireAProfessional.Data.Models.Blog", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("AuthorId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("Blogs");
+                });
+
             modelBuilder.Entity("HireAProfessional.Data.Models.Category", b =>
                 {
                     b.Property<string>("Id")
@@ -224,6 +259,9 @@ namespace HireAProfessional.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("CategoryId")
                         .HasColumnType("nvarchar(450)");
 
@@ -255,6 +293,8 @@ namespace HireAProfessional.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("CategoryId");
 
@@ -382,10 +422,21 @@ namespace HireAProfessional.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("HireAProfessional.Data.Models.Blog", b =>
+                {
+                    b.HasOne("HireAProfessional.Data.Models.ApplicationUser", "Author")
+                        .WithMany("Blogs")
+                        .HasForeignKey("AuthorId");
+                });
+
             modelBuilder.Entity("HireAProfessional.Data.Models.Post", b =>
                 {
+                    b.HasOne("HireAProfessional.Data.Models.ApplicationUser", null)
+                        .WithMany("Posts")
+                        .HasForeignKey("ApplicationUserId");
+
                     b.HasOne("HireAProfessional.Data.Models.Category", "Category")
-                        .WithMany()
+                        .WithMany("Posts")
                         .HasForeignKey("CategoryId");
                 });
 

@@ -16,13 +16,10 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/mediaelementplayer.min.css">
 
-
-
     <link rel="stylesheet" href="~/fonts/flaticon/font/flaticon.css" asp-append-version="true">
 
     <link rel="stylesheet" href="~/css/aos.css" asp-append-version="true">
     <link rel="stylesheet" href="~/css/style.css" asp-append-version="true">
-
 </head>
 <body>
 
@@ -62,8 +59,20 @@
                                                         <li><a href="#">Employeer Profile</a></li>
                                                     </ul>
                                                 </li>
-                                                <li class="active"><a href="/Identity/Account/Login">Login</a></li>
-                                                <li class="active"><a href="/Identity/Account/Register">Register</a></li>
+                                                @if (!this.User.Identity.IsAuthenticated)
+                                                {
+                                                    <li class="active"><a href="/Identity/Account/Login">Login</a></li>
+                                                    <li class="active"><a href="/Identity/Account/Register">Register</a></li>
+                                                }
+                                                else
+                                                {
+                                                    <li class="nav-item">
+                                                        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">
+                                                            <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                                                        </form>
+                                                    </li>
+                                                }
+
                                                 <li><a href="/Posts/CreatePost"><span class="bg-primary text-white py-3 px-4 rounded"><span class="icon-plus mr-3"></span>Post New Job</span></a></li>
                                             </ul>
                                         </div>
@@ -76,59 +85,14 @@
             </div>
         </header>
 
-
-
         <div style="height: 113px;"></div>
 
         <!-- <main role="main" class="pb-3"> -->
         @this.RenderBody()
         <!--</main> -->
 
-        <footer class="site-footer">
+        <footer style="margin-top: 25%;" class="site-footer">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <h3 class="footer-heading mb-4 text-white">About</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat quos rem ullam, placeat amet.</p>
-                        <p><a href="#" class="btn btn-primary pill text-white px-4">Read More</a></p>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h3 class="footer-heading mb-4 text-white">Quick Menu</h3>
-                                <ul class="list-unstyled">
-                                    <li><a href="#">About</a></li>
-                                    <li><a href="#">Services</a></li>
-                                    <li><a href="#">Approach</a></li>
-                                    <li><a href="#">Sustainability</a></li>
-                                    <li><a href="#">News</a></li>
-                                    <li><a href="#">Careers</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-md-6">
-                                <h3 class="footer-heading mb-4 text-white">Categories</h3>
-                                <ul class="list-unstyled">
-                                    <li><a href="#">Full Time</a></li>
-                                    <li><a href="#">Freelance</a></li>
-                                    <li><a href="#">Temporary</a></li>
-                                    <li><a href="#">Internship</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-2">
-                        <div class="col-md-12"><h3 class="footer-heading mb-4 text-white">Social Icons</h3></div>
-                        <div class="col-md-12">
-                            <p>
-                                <a href="#" class="pb-2 pr-2 pl-0"><span class="icon-facebook"></span></a>
-                                <a href="#" class="p-2"><span class="icon-twitter"></span></a>
-                                <a href="#" class="p-2"><span class="icon-instagram"></span></a>
-                                <a href="#" class="p-2"><span class="icon-vimeo"></span></a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
                 <div class="row pt-5 mt-5 text-center">
                     <div class="col-md-12">
                         <p>
@@ -139,7 +103,6 @@
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         </p>
                     </div>
-
                 </div>
             </div>
         </footer>

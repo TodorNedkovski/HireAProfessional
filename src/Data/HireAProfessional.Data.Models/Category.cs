@@ -23,5 +23,7 @@
         public string Description { get; set; }
 
         public ICollection<ApplicationUserCategory> ApplicationUserCategories { get; set; }
+
+        public ICollection<Post> Posts { get; set; }
     }
 }
