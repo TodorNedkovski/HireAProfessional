@@ -78,20 +78,6 @@ namespace HireAProfessional.Web.Areas.Identity.Pages.Account
             public int Age { get; set; }
 
             [Required]
-            [Display(Name = "Company")]
-            [DataType(DataType.Text)]
-            public string Company { get; set; }
-
-            [Required]
-            [Display(Name = "Education")]
-            [DataType(DataType.Text)]
-            public string Education { get; set; }
-
-            [Required]
-            [DataType(DataType.Text)]
-            public string Role { get; set; }
-
-            [Required]
             [Display(Name = "Twitter Account Link")]
             [DataType(DataType.Text)]
             public string TwitterAccountLink { get; set; }
@@ -143,16 +129,12 @@ namespace HireAProfessional.Web.Areas.Identity.Pages.Account
                     LastName = this.Input.LastName,
                     Age = this.Input.Age,
                     FacebookAccountLink = this.Input.FacebookAccountLink,
-                    Education = this.Input.Education,
-                    Company = this.Input.Company,
                     ImageUrl = this.Input.ImageUrl,
                     TwitterAccountLink = this.Input.TwitterAccountLink,
                     Points = 100,
                 };
 
                 var result = await _userManager.CreateAsync(user, this.Input.Password);
-
-                await this._userManager.AddToRoleAsync(user, this.Input.Role);
 
                 if (result.Succeeded)
                 {

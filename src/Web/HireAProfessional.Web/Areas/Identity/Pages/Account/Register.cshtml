@@ -2,6 +2,7 @@
 @model RegisterModel
 @{
     ViewData["Title"] = "Register";
+    this.Layout = null;
 }
 
 @*<h1>@ViewData["Title"]</h1>*@
@@ -35,16 +36,6 @@
                     <span asp-validation-for="Input.Age" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Input.Company"></label>
-                    <input asp-for="Input.Company" class="form-control" />
-                    <span asp-validation-for="Input.Company" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Input.Education"></label>
-                    <input asp-for="Input.Education" class="form-control" />
-                    <span asp-validation-for="Input.Education" class="text-danger"></span>
-                </div>
-                <div class="form-group">
                     <label asp-for="Input.FacebookAccountLink"></label>
                     <input asp-for="Input.FacebookAccountLink" class="form-control" />
                     <span asp-validation-for="Input.FacebookAccountLink" class="text-danger"></span>
@@ -63,13 +54,6 @@
                     <label asp-for="Input.ImageUrl"></label>
                     <input asp-for="Input.ImageUrl" class="form-control" />
                     <span asp-validation-for="Input.ImageUrl" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Input.Role">Please select roll</label>
-                    <select asp-for="Input.Role" class="form-control" id="exampleFormControlSelect2">
-                        <option>Professional</option>
-                        <option>Contractor</option>
-                    </select>
                 </div>
                 <div class="form-group">
                     <label asp-for="Input.Password"></label>
