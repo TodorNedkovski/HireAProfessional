@@ -10,11 +10,11 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
 
-    public class ProfessionalsSeeder : ISeeder
+    public class ApplicationUsersSeeder : ISeeder
     {
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
-            if (dbContext.Professionals.Any())
+            if (dbContext.Users.Any())
             {
                 return;
             }
@@ -183,7 +183,7 @@
                 await userManager.AddToRoleAsync(applicationUser, "Professional");
             }
 
-            await dbContext.AddRangeAsync(applicationUsers);
+            await dbContext.Users.AddRangeAsync(applicationUsers);
         }
     }
 }

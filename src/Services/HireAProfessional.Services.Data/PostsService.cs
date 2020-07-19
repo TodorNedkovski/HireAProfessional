@@ -12,11 +12,11 @@
     using HireAProfessional.Data.Models;
     using HireAProfessional.Web.ViewModels.Posts;
 
-    public class PostService : IPostService
+    public class PostsService : IPostsService
     {
         private readonly IDeletableEntityRepository<Post> postRepository;
 
-        public PostService(IDeletableEntityRepository<Post> postRepository)
+        public PostsService(IDeletableEntityRepository<Post> postRepository)
         {
             this.postRepository = postRepository;
         }
@@ -35,9 +35,9 @@
             await this.postRepository.SaveChangesAsync();
         }
 
-        public PostAllViewModel GetAllPosts()
+        public PostsListViewModel GetAllPosts()
         {
-            return new PostAllViewModel
+            return new PostsListViewModel
             {
                 Posts = this.
                         postRepository
@@ -55,9 +55,9 @@
             };
         }
 
-        public PostAllViewModel GetAllPostsByCategory(string categoryName)
+        public PostsListViewModel GetAllPostsByCategory(string categoryName)
         {
-            return new PostAllViewModel
+            return new PostsListViewModel
             {
                 Posts = this.
                         postRepository

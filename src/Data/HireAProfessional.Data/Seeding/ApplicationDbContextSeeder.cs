@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using HireAProfessional.Data.Models;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
@@ -28,8 +29,9 @@
                           {
                               new RolesSeeder(),
                               new CategorySeeder(),
-                              new ProfessionalsSeeder(),
+                              new ApplicationUsersSeeder(),
                               new PostSeeder(),
+                              new BlogSeeder(),
                           };
 
             foreach (var seeder in seeders)

@@ -1,27 +1,42 @@
 ﻿namespace HireAProfessional.Web.Controllers
 {
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
 
+    using HireAProfessional.Data.Models;
     using HireAProfessional.Services.Data;
     using HireAProfessional.Web.ViewModels;
+    using HireAProfessional.Web.ViewModels.Blogs;
     using HireAProfessional.Web.ViewModels.Categories;
+    using HireAProfessional.Web.ViewModels.Indexes;
     using HireAProfessional.Web.ViewModels.Posts;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : BaseController
     {
-        private readonly IPostService postsService;
+        private readonly IPostsService postsService;
+        private readonly IBlogsService blogsService;
+        private readonly ICategoriesService categoriesService;
 
-        public HomeController(IPostService postsService)
+        public HomeController(IPostsService postsService, IBlogsService blogsService, ICategoriesService categoriesService)
         {
             this.postsService = postsService;
+            this.blogsService = blogsService;
+            this.categoriesService = categoriesService;
         }
 
         public IActionResult Index()
         {
-            return this.View();
+            var indexModel = new IndexViewModel
+            {
+                BlogsListViewModel = this.blogsService.GetAllBlogs(),
+                CategoriesListViewModel = this.categoriesService.GetAllCategories(),
+                PostsListViewModel = this.postsService.GetAllPosts(),
+            };
+
+            return this.View(indexModel);
         }
 
         public IActionResult Privacy()

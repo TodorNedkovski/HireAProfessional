@@ -7,14 +7,14 @@
 
     using HireAProfessional.Web.ViewModels.Posts;
 
-    public interface IPostService
+    public interface IPostsService
     {
         Task CreatePost(PostInputViewModel post);
 
-        PostAllViewModel GetAllPosts();
+        PostsListViewModel GetAllPosts();
 
         PostViewModel GetPostById(string id);
 
-        PostAllViewModel GetAllPostsByCategory(string categoryName);
+        PostsListViewModel GetAllPostsByCategory(string categoryName);
     }
 }

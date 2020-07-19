@@ -1,6 +1,6 @@
 ﻿@using HireAProfessional.Common
-@using HireAProfessional.Web.ViewModels.Categories;
-@model CategoriesListViewModel
+@using HireAProfessional.Web.ViewModels.Indexes;
+@model IndexViewModel
 @{
     this.ViewData["Title"] = "Home Page";
 }
@@ -294,43 +294,6 @@
         </div>
     </div>
 
-    <div class="site-section site-block-feature bg-light">
-        <div class="container">
-
-            <div class="text-center mb-5 section-heading">
-                <h2>Why Choose Us</h2>
-            </div>
-            <div class="d-block d-md-flex border-bottom">
-                <div class="text-center p-4 item border-right" data-aos="fade">
-                    <span class="flaticon-worker display-3 mb-3 d-block text-primary"></span>
-                    <h2 class="h4">More Jobs Every Day</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati reprehenderit explicabo quos fugit vitae dolorum.</p>
-                    <p><a href="#">Read More <span class="icon-arrow-right small"></span></a></p>
-                </div>
-                <div class="text-center p-4 item" data-aos="fade">
-                    <span class="flaticon-wrench display-3 mb-3 d-block text-primary"></span>
-                    <h2 class="h4">Creative Jobs</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati reprehenderit explicabo quos fugit vitae dolorum.</p>
-                    <p><a href="#">Read More <span class="icon-arrow-right small"></span></a></p>
-                </div>
-            </div>
-            <div class="d-block d-md-flex">
-                <div class="text-center p-4 item border-right" data-aos="fade">
-                    <span class="flaticon-stethoscope display-3 mb-3 d-block text-primary"></span>
-                    <h2 class="h4">Healthcare</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati reprehenderit explicabo quos fugit vitae dolorum.</p>
-                    <p><a href="#">Read More <span class="icon-arrow-right small"></span></a></p>
-                </div>
-                <div class="text-center p-4 item" data-aos="fade">
-                    <span class="flaticon-calculator display-3 mb-3 d-block text-primary"></span>
-                    <h2 class="h4">Finance &amp; Accounting</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati reprehenderit explicabo quos fugit vitae dolorum.</p>
-                    <p><a href="#">Read More <span class="icon-arrow-right small"></span></a></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="site-section block-15">
         <div class="container">
             <div class="row">
@@ -340,16 +303,19 @@
             </div>
             <div class="nonloop-block-15 owl-carousel">
 
-                <div class="media-with-text">
-                    <div class="img-border-sm mb-4">
-                        <a href="#" class="image-play">
-                            <img src="~/images/img_1.jpg" alt="" class="img-fluid">
-                        </a>
+                @foreach (var blog in this.Model.BlogsListViewModel.Blogs)
+                {
+                    <div class="media-with-text">
+                        <div class="img-border-sm mb-4">
+                            <a href="#" class="image-play">
+                                <img src="~/images/img_1.jpg" alt="" class="img-fluid">
+                            </a>
+                        </div>
+                        <h2 class="heading mb-0 h5"><a href="#">Jobs are made easy</a></h2>
+                        <span class="mb-3 d-block post-date">January 20, 2018 &bullet; By <a href="#">Josh Holmes</a></span>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio dolores culpa qui aliquam placeat nobis veritatis tempora natus rerum obcaecati.</p>
                     </div>
-                    <h2 class="heading mb-0 h5"><a href="#">Jobs are made easy</a></h2>
-                    <span class="mb-3 d-block post-date">January 20, 2018 &bullet; By <a href="#">Josh Holmes</a></span>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio dolores culpa qui aliquam placeat nobis veritatis tempora natus rerum obcaecati.</p>
-                </div>
+                }
 
                 <div class="media-with-text">
                     <div class="img-border-sm mb-4">
@@ -438,8 +404,9 @@
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio dolores culpa qui aliquam placeat nobis veritatis tempora natus rerum obcaecati.</p>
                 </div>
             </div>
-            <div class="row">
 
+            <div class="col-md-12 text-center mt-5">
+                <a href="/Blogs/All" class="btn btn-primary rounded py-3 px-5"><span class="icon-plus-circle"></span> Show More Jobs</a>
             </div>
         </div>
     </div>

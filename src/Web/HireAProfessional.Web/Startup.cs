@@ -62,9 +62,10 @@
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
             // Application services
-            services.AddTransient<IPostService, PostService>();
+            services.AddTransient<IPostsService, PostsService>();
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ICategoriesService, CategoriesService>();
+            services.AddTransient<IBlogsService, BlogsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -106,13 +107,21 @@
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute(
-                            "posts",
+                            "post",
                             "Posts/{id}",
                             new { controller = "Posts", action = "ById" });
                         endpoints.MapControllerRoute(
-                            "home",
+                            "posts",
                             "Posts/All",
                             new { controller = "Posts", action = "BySearch" });
+                        endpoints.MapControllerRoute(
+                            "blog",
+                            "BLogs/{name}",
+                            new { controller = "Blogs", action = "ByBlogName" });
+                        endpoints.MapControllerRoute(
+                            "blogs",
+                            "BLogs/All",
+                            new { controller = "Blogs", action = "AllBlogs" });
                         endpoints.MapRazorPages();
                     });
         }

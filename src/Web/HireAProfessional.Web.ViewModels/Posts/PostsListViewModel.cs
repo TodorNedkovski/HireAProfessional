@@ -7,7 +7,7 @@
     using HireAProfessional.Data.Models;
     using HireAProfessional.Data.Models.Enums;
 
-    public class PostAllViewModel
+    public class PostsListViewModel
     {
         public ICollection<PostViewModel> Posts { get; set; }
     }

@@ -12,9 +12,9 @@
 
     public class PostsController : Controller
     {
-        private readonly IPostService postsService;
+        private readonly IPostsService postsService;
 
-        public PostsController(IPostService postsService)
+        public PostsController(IPostsService postsService)
         {
             this.postsService = postsService;
         }

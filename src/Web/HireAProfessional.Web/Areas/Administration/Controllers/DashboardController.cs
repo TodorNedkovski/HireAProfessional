@@ -1,7 +1,6 @@
 ﻿namespace HireAProfessional.Web.Areas.Administration.Controllers
 {
     using HireAProfessional.Services.Data;
-    using HireAProfessional.Web.ViewModels.Administration.Dashboard;
 
     using Microsoft.AspNetCore.Mvc;
 

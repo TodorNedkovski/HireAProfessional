@@ -13,9 +13,9 @@
 
     public class CategoriesController : Controller
     {
-        private readonly IPostService postService;
+        private readonly IPostsService postService;
 
-        public CategoriesController(IPostService postService)
+        public CategoriesController(IPostsService postService)
         {
             this.postService = postService;
         }
