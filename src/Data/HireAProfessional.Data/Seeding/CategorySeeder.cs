@@ -56,6 +56,24 @@
                     ImageUrl = "https://dcassetcdn.com/design_img/3639605/767649/767649_20351797_3639605_3ca6a847_image.jpg",
                     Description = "Some text",
                 },
+                new Category
+                {
+                    Name = "Healthcare",
+                    ImageUrl = "https://dcassetcdn.com/design_img/3639605/767649/767649_20351797_3639605_3ca6a847_image.jpg",
+                    Description = "Some text",
+                },
+                new Category
+                {
+                    Name = "Automotive Jobs",
+                    ImageUrl = "https://dcassetcdn.com/design_img/3639605/767649/767649_20351797_3639605_3ca6a847_image.jpg",
+                    Description = "Some text",
+                },
+                new Category
+                {
+                    Name = "Transportaion & Logistics",
+                    ImageUrl = "https://dcassetcdn.com/design_img/3639605/767649/767649_20351797_3639605_3ca6a847_image.jpg",
+                    Description = "Some text",
+                },
             };
 
             await dbContext.Categories.AddRangeAsync(categories);

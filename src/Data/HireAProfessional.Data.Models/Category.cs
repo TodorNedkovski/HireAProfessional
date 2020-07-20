@@ -24,6 +24,6 @@
 
         public ICollection<ApplicationUserCategory> ApplicationUserCategories { get; set; }
 
-        public ICollection<Post> Posts { get; set; }
+        public ICollection<JobPosts> Posts { get; set; }
     }
 }

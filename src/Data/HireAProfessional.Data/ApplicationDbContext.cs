@@ -26,7 +26,7 @@
 
         public DbSet<Category> Categories { get; set; }
 
-        public DbSet<Post> Posts { get; set; }
+        public DbSet<JobPosts> JobPosts { get; set; }
 
         public DbSet<Blog> Blogs { get; set; }
 

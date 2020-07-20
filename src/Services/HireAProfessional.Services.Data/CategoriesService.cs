@@ -8,8 +8,11 @@
 
     using HireAProfessional.Data.Common.Repositories;
     using HireAProfessional.Data.Models;
+    using HireAProfessional.Web.Infrastructure;
+    using HireAProfessional.Web.Infrastructure.Enums;
     using HireAProfessional.Web.ViewModels.ApplicationUsers;
     using HireAProfessional.Web.ViewModels.Categories;
+    using Microsoft.EntityFrameworkCore.Internal;
 
     public class CategoriesService : ICategoriesService
     {
@@ -20,16 +23,23 @@
             this.categoryRepository = categoryRepository;
         }
 
-        public CategoriesListViewModel GetAllCategories()
+        public CategoriesListViewModel GetAllCategories(int count, string param, OrderType orderType)
         {
-            return new CategoriesListViewModel
-            {
-                Categories = this.categoryRepository.All().Select(c => new CategoryViewModel
+            var categories = this.categoryRepository
+                .All()
+                .Take(count)
+                .OrderBy<Category>(param, orderType)
+                .Select(c => new CategoryViewModel
                 {
                     Description = c.Description,
                     ImageUrl = c.ImageUrl,
                     Name = c.Name,
-                }).ToList(),
+                })
+                .ToList();
+
+            return new CategoriesListViewModel
+            {
+                Categories = categories,
             };
         }
 

@@ -6,6 +6,7 @@
 
     using HireAProfessional.Data.Models;
     using HireAProfessional.Services.Data;
+    using HireAProfessional.Web.Infrastructure.Enums;
     using HireAProfessional.Web.ViewModels;
     using HireAProfessional.Web.ViewModels.Blogs;
     using HireAProfessional.Web.ViewModels.Categories;
@@ -31,9 +32,9 @@
         {
             var indexModel = new IndexViewModel
             {
-                BlogsListViewModel = this.blogsService.GetAllBlogs(),
-                CategoriesListViewModel = this.categoriesService.GetAllCategories(),
-                PostsListViewModel = this.postsService.GetAllPosts(),
+                BlogsListViewModel = this.blogsService.GetAllBlogs(3, "CreatedOn", OrderType.Descending),
+                CategoriesListViewModel = this.categoriesService.GetAllCategories(8, "CreatedOn", OrderType.Descending),
+                PostsListViewModel = this.postsService.GetAllPosts(5, "CreatedOn", OrderType.Descending),
             };
 
             return this.View(indexModel);

@@ -8,6 +8,8 @@
 
     using HireAProfessional.Data.Common.Repositories;
     using HireAProfessional.Data.Models;
+    using HireAProfessional.Web.Infrastructure;
+    using HireAProfessional.Web.Infrastructure.Enums;
     using HireAProfessional.Web.ViewModels.ApplicationUsers;
     using HireAProfessional.Web.ViewModels.Blogs;
 
@@ -39,12 +41,14 @@
             });
         }
 
-        public BlogsListViewModel GetAllBlogs()
+        public BlogsListViewModel GetAllBlogs(int count, string param, OrderType orderType)
         {
             return new BlogsListViewModel
             {
                 Blogs = this.blogRepository
                 .AllAsNoTracking()
+                .Take(count)
+                .OrderBy<Blog>(param, orderType)
                 .Select(b => new BlogViewModel
                 {
                     Author = new ApplicationUserViewModel

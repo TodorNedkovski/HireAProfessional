@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Linq.Expressions;
     using System.Text;
     using System.Threading.Tasks;
 
@@ -10,20 +11,22 @@
 
     using HireAProfessional.Data.Common.Repositories;
     using HireAProfessional.Data.Models;
+    using HireAProfessional.Web.Infrastructure;
+    using HireAProfessional.Web.Infrastructure.Enums;
     using HireAProfessional.Web.ViewModels.Posts;
 
     public class PostsService : IPostsService
     {
-        private readonly IDeletableEntityRepository<Post> postRepository;
+        private readonly IDeletableEntityRepository<JobPosts> postRepository;
 
-        public PostsService(IDeletableEntityRepository<Post> postRepository)
+        public PostsService(IDeletableEntityRepository<JobPosts> postRepository)
         {
             this.postRepository = postRepository;
         }
 
         public async Task CreatePost(PostInputViewModel post)
         {
-            await this.postRepository.AddAsync(new Post
+            await this.postRepository.AddAsync(new JobPosts
             {
                 Company = post.Company,
                 JobTitle = post.JobTitle,
@@ -35,13 +38,13 @@
             await this.postRepository.SaveChangesAsync();
         }
 
-        public PostsListViewModel GetAllPosts()
+        public PostsListViewModel GetAllPosts(int count, string param, OrderType orderType)
         {
-            return new PostsListViewModel
-            {
-                Posts = this.
+            var posts = this.
                         postRepository
                         .AllAsNoTracking()
+                        .Take(count)
+                        .OrderBy<JobPosts>(param, orderType)
                         .Select(p => new PostViewModel
                         {
                             Company = p.Company,
@@ -51,7 +54,11 @@
                             JobTitle = p.JobTitle,
                             Category = p.Category,
                         })
-                        .ToList(),
+                        .ToList();
+
+            return new PostsListViewModel
+            {
+                Posts = posts,
             };
         }
 

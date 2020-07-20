@@ -7,9 +7,9 @@
     using HireAProfessional.Data.Common.Models;
     using HireAProfessional.Data.Models.Enums;
 
-    public class Post : BaseDeletableModel<string>
+    public class JobPosts : BaseDeletableModel<string>
     {
-        public Post()
+        public JobPosts()
         {
             this.Id = Guid.NewGuid().ToString();
         }
