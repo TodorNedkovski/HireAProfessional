@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HireAProfessional.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200718143006_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20200722000847_Added Cities Table")]
+    partial class AddedCitiesTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -254,7 +254,75 @@ namespace HireAProfessional.Data.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("HireAProfessional.Data.Models.Post", b =>
+            modelBuilder.Entity("HireAProfessional.Data.Models.City", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CountryCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CountryId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Region")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CountryId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("Cities");
+                });
+
+            modelBuilder.Entity("HireAProfessional.Data.Models.Country", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("Countries");
+                });
+
+            modelBuilder.Entity("HireAProfessional.Data.Models.JobPosts", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -300,7 +368,7 @@ namespace HireAProfessional.Data.Migrations
 
                     b.HasIndex("IsDeleted");
 
-                    b.ToTable("Posts");
+                    b.ToTable("JobPosts");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -429,7 +497,14 @@ namespace HireAProfessional.Data.Migrations
                         .HasForeignKey("AuthorId");
                 });
 
-            modelBuilder.Entity("HireAProfessional.Data.Models.Post", b =>
+            modelBuilder.Entity("HireAProfessional.Data.Models.City", b =>
+                {
+                    b.HasOne("HireAProfessional.Data.Models.Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId");
+                });
+
+            modelBuilder.Entity("HireAProfessional.Data.Models.JobPosts", b =>
                 {
                     b.HasOne("HireAProfessional.Data.Models.ApplicationUser", null)
                         .WithMany("Posts")

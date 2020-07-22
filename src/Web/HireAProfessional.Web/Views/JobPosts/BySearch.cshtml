@@ -3,15 +3,19 @@
 }
 @using HireAProfessional.Web.ViewModels.Posts;
 @model PostsListViewModel
-
 <!--mb-5 mb-md-0-->
-<div class="row">
-    <div class="col-md-12  " data-aos="fade-up" data-aos-delay="100">
-        <div class="rounded border jobs-wrap">
+<!-- Example single danger button -->
+<div class="btn-group">
+
+</div>
+
+<div>
+    <div data-aos="fade-up" data-aos-delay="100">
+        <div class="rounded border jobs-wrap row">
             <!--Recent posts-->
             @foreach (var post in this.Model.Posts)
             {
-                <a href="job-single.html" class="job-item d-block d-md-flex align-items-center @post.EmploymentType.ToString().ToLower()">
+                <a href="job-single.html" class="job-item d-block d-md-flex align-items-center col-md-12 @post.EmploymentType.ToString().ToLower()">
                     <div class="company-logo blank-logo text-center text-md-left pl-3">
                         <img src="images/logo_2.png" alt="Image" class="img-fluid mx-auto">
                     </div>

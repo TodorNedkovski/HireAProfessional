@@ -38,7 +38,7 @@
             await this.postRepository.SaveChangesAsync();
         }
 
-        public PostsListViewModel GetAllPosts(int count, string param, OrderType orderType)
+        public PostsListViewModel GetAllPosts(int count, string param, string location, string jobConstraints, OrderType orderType)
         {
             var posts = this.
                         postRepository

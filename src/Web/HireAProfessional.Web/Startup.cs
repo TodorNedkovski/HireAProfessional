@@ -113,14 +113,14 @@
                         endpoints.MapControllerRoute(
                             "posts",
                             "Jobs/All",
-                            new { controller = "Posts", action = "BySearch" });
+                            new { controller = "JobPosts", action = "BySearch" });
                         endpoints.MapControllerRoute(
                             "blog",
-                            "BLogs/{name}",
+                            "Blogs/{name}",
                             new { controller = "Blogs", action = "ByBlogName" });
                         endpoints.MapControllerRoute(
                             "blogs",
-                            "BLogs/All",
+                            "Blogs/All",
                             new { controller = "Blogs", action = "AllBlogs" });
                         endpoints.MapRazorPages();
                     });

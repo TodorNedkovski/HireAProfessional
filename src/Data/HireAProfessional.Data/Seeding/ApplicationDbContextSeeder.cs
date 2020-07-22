@@ -32,6 +32,8 @@
                               new ApplicationUsersSeeder(),
                               new PostSeeder(),
                               new BlogSeeder(),
+                              new CountriesSeeder(),
+                              new CitiesSeeder(),
                           };
 
             foreach (var seeder in seeders)

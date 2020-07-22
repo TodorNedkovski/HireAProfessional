@@ -6,22 +6,23 @@
     using System.Threading.Tasks;
 
     using HireAProfessional.Services.Data;
+    using HireAProfessional.Web.Infrastructure.Enums;
     using HireAProfessional.Web.ViewModels.Posts;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    public class PostsController : Controller
+    public class JobPostsController : Controller
     {
         private readonly IPostsService postsService;
 
-        public PostsController(IPostsService postsService)
+        public JobPostsController(IPostsService postsService)
         {
             this.postsService = postsService;
         }
 
-        public IActionResult BySearch()
+        public IActionResult BySearch(string location, string jobConstraints)
         {
-            var searchResult = this.postsService.GetAllPosts();
+            var searchResult = this.postsService.GetAllPosts(10, "Id", jobConstraints, location, OrderType.Ascending);
 
             return this.View(searchResult);
         }

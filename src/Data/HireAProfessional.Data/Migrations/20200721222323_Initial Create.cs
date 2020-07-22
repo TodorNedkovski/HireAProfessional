@@ -83,6 +83,23 @@ namespace HireAProfessional.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Countries",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    Code = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Countries", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -237,7 +254,7 @@ namespace HireAProfessional.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Posts",
+                name: "JobPosts",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
@@ -255,15 +272,15 @@ namespace HireAProfessional.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Posts", x => x.Id);
+                    table.PrimaryKey("PK_JobPosts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Posts_AspNetUsers_ApplicationUserId",
+                        name: "FK_JobPosts_AspNetUsers_ApplicationUserId",
                         column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Posts_Categories_CategoryId",
+                        name: "FK_JobPosts_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
@@ -340,18 +357,23 @@ namespace HireAProfessional.Data.Migrations
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Posts_ApplicationUserId",
-                table: "Posts",
+                name: "IX_Countries_IsDeleted",
+                table: "Countries",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_JobPosts_ApplicationUserId",
+                table: "JobPosts",
                 column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Posts_CategoryId",
-                table: "Posts",
+                name: "IX_JobPosts_CategoryId",
+                table: "JobPosts",
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Posts_IsDeleted",
-                table: "Posts",
+                name: "IX_JobPosts_IsDeleted",
+                table: "JobPosts",
                 column: "IsDeleted");
         }
 
@@ -379,7 +401,10 @@ namespace HireAProfessional.Data.Migrations
                 name: "Blogs");
 
             migrationBuilder.DropTable(
-                name: "Posts");
+                name: "Countries");
+
+            migrationBuilder.DropTable(
+                name: "JobPosts");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
