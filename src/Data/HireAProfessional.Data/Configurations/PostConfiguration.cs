@@ -8,9 +8,9 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-    public class PostConfiguration : IEntityTypeConfiguration<JobPosts>
+    public class PostConfiguration : IEntityTypeConfiguration<JobPost>
     {
-        public void Configure(EntityTypeBuilder<JobPosts> builder)
+        public void Configure(EntityTypeBuilder<JobPost> builder)
         {
             builder
                 .HasOne(p => p.Category)

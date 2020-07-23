@@ -33,7 +33,7 @@
                               new PostSeeder(),
                               new BlogSeeder(),
                               new CountriesSeeder(),
-                              new CitiesSeeder(),
+                              //new CitiesSeeder(),
                           };
 
             foreach (var seeder in seeders)

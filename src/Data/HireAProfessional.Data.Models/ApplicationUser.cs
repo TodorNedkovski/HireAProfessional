@@ -57,7 +57,7 @@ namespace HireAProfessional.Data.Models
 
         public ICollection<ApplicationUserCategory> ApplicationUserCategories { get; set; }
 
-        public ICollection<JobPosts> Posts { get; set; }
+        public ICollection<JobPost> Posts { get; set; }
 
         public ICollection<Blog> Blogs { get; set; }
     }

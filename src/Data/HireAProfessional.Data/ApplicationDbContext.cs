@@ -28,11 +28,13 @@
 
         public DbSet<City> Cities { get; set; }
 
-        public DbSet<JobPosts> JobPosts { get; set; }
+        public DbSet<JobPost> JobPosts { get; set; }
 
         public DbSet<Blog> Blogs { get; set; }
 
         public DbSet<Country> Countries { get; set; }
+
+        public DbSet<Vote> Votes { get; set; }
 
         public DbSet<ApplicationUserCategory> ApplicationUserCategories { get; set; }
 

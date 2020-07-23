@@ -29,7 +29,9 @@
                 return;
             }
 
-            for (int offset = 0; offset <= 190; offset += 10)
+            //273570
+
+            for (int offset = 0; offset <= 100000; offset += 10)
             {
                 var citiesJsonModel = APIService<CityJsonModel>.GetCountries(offset, "cities").Data;
 
@@ -41,16 +43,17 @@
                     {
                         Country = dbContext
                         .Countries
-                        .FirstOrDefault(c => c.Name == cityJsonModel.Name),
+                        .FirstOrDefault(c => c.Name == cityJsonModel.Country),
                         CountryCode = cityJsonModel.CountryCode,
                         Name = cityJsonModel.Name,
                         Region = cityJsonModel.Region,
                     });
                 }
 
-                Thread.Sleep(1000);
+                Thread.Sleep(2000);
 
                 await dbContext.Cities.AddRangeAsync(cities);
+                await dbContext.SaveChangesAsync();
             }
         }
     }

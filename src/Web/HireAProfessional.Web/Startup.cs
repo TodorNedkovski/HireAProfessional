@@ -108,8 +108,8 @@
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute(
                             "post",
-                            "Jobs/{id}",
-                            new { controller = "Posts", action = "ById" });
+                            "Jobs/All/{id}",
+                            new { controller = "JobPosts", action = "ById" });
                         endpoints.MapControllerRoute(
                             "posts",
                             "Jobs/All",

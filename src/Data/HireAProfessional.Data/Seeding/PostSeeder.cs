@@ -18,9 +18,9 @@
                 return;
             }
 
-            var posts = new List<JobPosts>
+            var posts = new List<JobPost>
             {
-                new JobPosts
+                new JobPost
                 {
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
                     Company = "Apple",
@@ -29,7 +29,7 @@
                     JobTitle = "Coffee Guy",
                     EmploymentType = EmploymentType.FullTime,
                 },
-                new JobPosts
+                new JobPost
                 {
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Front End Developer"),
                     Company = "Microsoft",
@@ -38,7 +38,7 @@
                     JobTitle = "Coffee Guy",
                     EmploymentType = EmploymentType.FullTime,
                 },
-                new JobPosts
+                new JobPost
                 {
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
                     Company = "Amazon",
@@ -47,7 +47,7 @@
                     JobTitle = "Coffee Guy",
                     EmploymentType = EmploymentType.FullTime,
                 },
-                new JobPosts
+                new JobPost
                 {
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
                     Company = "Apple",
@@ -56,7 +56,7 @@
                     JobTitle = "Coffee Guy",
                     EmploymentType = EmploymentType.FullTime,
                 },
-                new JobPosts
+                new JobPost
                 {
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
                     Company = "Apple",
@@ -65,7 +65,7 @@
                     JobTitle = "Coffee Guy",
                     EmploymentType = EmploymentType.FullTime,
                 },
-                new JobPosts
+                new JobPost
                 {
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
                     Company = "Apple",
@@ -74,7 +74,7 @@
                     JobTitle = "Coffee Guy",
                     EmploymentType = EmploymentType.FullTime,
                 },
-                new JobPosts
+                new JobPost
                 {
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
                     Company = "Apple",
@@ -83,7 +83,7 @@
                     JobTitle = "Coffee Guy",
                     EmploymentType = EmploymentType.FullTime,
                 },
-                new JobPosts
+                new JobPost
                 {
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
                     Company = "Apple",
@@ -92,7 +92,7 @@
                     JobTitle = "Coffee Guy",
                     EmploymentType = EmploymentType.FullTime,
                 },
-                new JobPosts
+                new JobPost
                 {
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
                     Company = "Apple",
@@ -101,7 +101,7 @@
                     JobTitle = "Coffee Guy",
                     EmploymentType = EmploymentType.FullTime,
                 },
-                new JobPosts
+                new JobPost
                 {
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
                     Company = "Apple",
@@ -110,7 +110,7 @@
                     JobTitle = "Coffee Guy",
                     EmploymentType = EmploymentType.FullTime,
                 },
-                new JobPosts
+                new JobPost
                 {
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
                     Company = "Apple",
@@ -119,7 +119,7 @@
                     JobTitle = "Coffee Guy",
                     EmploymentType = EmploymentType.FullTime,
                 },
-                new JobPosts
+                new JobPost
                 {
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
                     Company = "Apple",

@@ -17,16 +17,16 @@
 
     public class PostsService : IPostsService
     {
-        private readonly IDeletableEntityRepository<JobPosts> postRepository;
+        private readonly IDeletableEntityRepository<JobPost> postRepository;
 
-        public PostsService(IDeletableEntityRepository<JobPosts> postRepository)
+        public PostsService(IDeletableEntityRepository<JobPost> postRepository)
         {
             this.postRepository = postRepository;
         }
 
         public async Task CreatePost(PostInputViewModel post)
         {
-            await this.postRepository.AddAsync(new JobPosts
+            await this.postRepository.AddAsync(new JobPost
             {
                 Company = post.Company,
                 JobTitle = post.JobTitle,
@@ -44,9 +44,10 @@
                         postRepository
                         .AllAsNoTracking()
                         .Take(count)
-                        .OrderBy<JobPosts>(param, orderType)
+                        .OrderBy<JobPost>(param, orderType)
                         .Select(p => new PostViewModel
                         {
+                            Id = p.Id,
                             Company = p.Company,
                             Description = p.Description,
                             EmploymentType = p.EmploymentType,
@@ -71,6 +72,7 @@
                         .AllAsNoTracking()
                         .Select(p => new PostViewModel
                         {
+                            Id = p.Id,
                             Company = p.Company,
                             Description = p.Description,
                             EmploymentType = p.EmploymentType,
@@ -91,6 +93,7 @@
 
             return new PostViewModel
             {
+                Id = post.Id,
                 Category = post.Category,
                 Company = post.Company,
                 Description = post.Description,
