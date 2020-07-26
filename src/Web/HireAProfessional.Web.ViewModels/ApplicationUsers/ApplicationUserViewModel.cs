@@ -1,4 +1,6 @@
-﻿namespace HireAProfessional.Web.ViewModels.ApplicationUsers
+﻿using HireAProfessional.Data.Models;
+
+namespace HireAProfessional.Web.ViewModels.ApplicationUsers
 {
     public class ApplicationUserViewModel
     {
@@ -10,7 +12,7 @@
 
         public string ImageUrl { get; set; }
 
-        public string Company { get; set; }
+        public Company Company { get; set; }
 
         public string Education { get; set; }
 

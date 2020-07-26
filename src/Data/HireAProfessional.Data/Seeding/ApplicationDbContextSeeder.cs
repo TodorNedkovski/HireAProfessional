@@ -2,6 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
     using System.Threading.Tasks;
 
     using HireAProfessional.Data.Models;
@@ -25,15 +27,22 @@
 
             var logger = serviceProvider.GetService<ILoggerFactory>().CreateLogger(typeof(ApplicationDbContextSeeder));
 
+            var assembly = Assembly.GetExecutingAssembly();
+            var seederImplementors = assembly
+                .GetTypes()
+                .Where(t => t.BaseType == typeof(ISeeder));
+
             var seeders = new List<ISeeder>
                           {
-                              new RolesSeeder(),
-                              new CategorySeeder(),
-                              new ApplicationUsersSeeder(),
-                              new PostSeeder(),
-                              new BlogSeeder(),
+                              new LocationsSeeder(),
+                              new CompaniesSeeder(),
+                              new CategoriesSeeder(),
+                              new CitiesSeeder(),
                               new CountriesSeeder(),
-                              //new CitiesSeeder(),
+                              new ApplicationUsersSeeder(),
+                              new RolesSeeder(),
+                              new PostSeeder(),
+                              new BlogsSeeder(),
                           };
 
             foreach (var seeder in seeders)

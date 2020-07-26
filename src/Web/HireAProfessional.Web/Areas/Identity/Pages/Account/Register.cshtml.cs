@@ -88,9 +88,19 @@ namespace HireAProfessional.Web.Areas.Identity.Pages.Account
             public string FacebookAccountLink { get; set; }
 
             [Required]
-            [Display(Name = "Indeed Account Link")]
+            [Display(Name = "LinkedIn Account Link")]
             [DataType(DataType.Text)]
-            public string IndeedAccountLink { get; set; }
+            public string LinkedInAccountLink { get; set; }
+
+            [Required]
+            [Display(Name = "Company")]
+            [DataType(DataType.Text)]
+            public string Company { get; set; }
+
+            [Required]
+            [Display(Name = "Education")]
+            [DataType(DataType.Text)]
+            public string Education { get; set; }
 
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
@@ -121,16 +131,19 @@ namespace HireAProfessional.Web.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser 
-                { 
+                var user = new ApplicationUser
+                {
                     UserName = this.Input.Email,
                     Email = this.Input.Email,
                     FirstName = this.Input.FirstName,
                     LastName = this.Input.LastName,
+                    //Company = this.Input.Company,
+                    Education = this.Input.Education,
                     Age = this.Input.Age,
                     FacebookAccountLink = this.Input.FacebookAccountLink,
                     ImageUrl = this.Input.ImageUrl,
                     TwitterAccountLink = this.Input.TwitterAccountLink,
+                    LinkedInAccountLink = this.Input.LinkedInAccountLink,
                     Points = 100,
                 };
 

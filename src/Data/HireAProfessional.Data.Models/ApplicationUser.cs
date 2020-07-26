@@ -3,6 +3,8 @@ namespace HireAProfessional.Data.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     using HireAProfessional.Data.Common.Models;
 
@@ -29,25 +31,40 @@ namespace HireAProfessional.Data.Models
 
         public DateTime? DeletedOn { get; set; }
 
+        [Required]
         public string FirstName { get; set; }
 
+        [Required]
         public string LastName { get; set; }
 
         public int Age { get; set; }
 
+        [Required]
         public string ImageUrl { get; set; }
 
-        public string Company { get; set; }
+        public string CompanyId { get; set; }
 
+        public Company Company { get; set; }
+
+        [Required]
         public string Education { get; set; }
 
         public int Points { get; set; }
 
+        [Required]
         public string TwitterAccountLink { get; set; }
 
+        [Required]
         public string LinkedInAccountLink { get; set; }
 
+        [Required]
         public string FacebookAccountLink { get; set; }
+
+        public ICollection<JobPost> Posts { get; set; }
+
+        public ICollection<Blog> Blogs { get; set; }
+
+        public ICollection<ApplicationUsersCompanies> ApplicationUsersCompanies { get; set; }
 
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 
@@ -56,9 +73,5 @@ namespace HireAProfessional.Data.Models
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
 
         public ICollection<ApplicationUserCategory> ApplicationUserCategories { get; set; }
-
-        public ICollection<JobPost> Posts { get; set; }
-
-        public ICollection<Blog> Blogs { get; set; }
     }
 }

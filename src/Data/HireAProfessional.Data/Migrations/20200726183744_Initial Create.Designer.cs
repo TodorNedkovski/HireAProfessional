@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HireAProfessional.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200721222323_Initial Create")]
+    [Migration("20200726183744_Initial Create")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -73,8 +73,8 @@ namespace HireAProfessional.Data.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
-                    b.Property<string>("Company")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("CompanyId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -87,6 +87,7 @@ namespace HireAProfessional.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Education")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -97,21 +98,26 @@ namespace HireAProfessional.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FacebookAccountLink")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageUrl")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LinkedInAccountLink")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
@@ -147,6 +153,7 @@ namespace HireAProfessional.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TwitterAccountLink")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -157,6 +164,8 @@ namespace HireAProfessional.Data.Migrations
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CompanyId");
 
                     b.HasIndex("IsDeleted");
 
@@ -183,7 +192,20 @@ namespace HireAProfessional.Data.Migrations
 
                     b.HasIndex("ApplicationUserId");
 
-                    b.ToTable("ApplicationUserCategories");
+                    b.ToTable("ApplicationUserCategory");
+                });
+
+            modelBuilder.Entity("HireAProfessional.Data.Models.ApplicationUsersCompanies", b =>
+                {
+                    b.Property<string>("CompanyId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("CompanyId", "ApplicationUserId");
+
+                    b.ToTable("ApplicationUsersCompanies");
                 });
 
             modelBuilder.Entity("HireAProfessional.Data.Models.Blog", b =>
@@ -192,9 +214,11 @@ namespace HireAProfessional.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("AuthorId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Content")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedOn")
@@ -210,6 +234,7 @@ namespace HireAProfessional.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -233,9 +258,11 @@ namespace HireAProfessional.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageUrl")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
@@ -245,6 +272,7 @@ namespace HireAProfessional.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -254,12 +282,92 @@ namespace HireAProfessional.Data.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("HireAProfessional.Data.Models.City", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CountryCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CountryId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LocationId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Region")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CountryId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("LocationId");
+
+                    b.ToTable("Cities");
+                });
+
+            modelBuilder.Entity("HireAProfessional.Data.Models.Company", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LocationId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("LocationId");
+
+                    b.ToTable("Companies");
+                });
+
             modelBuilder.Entity("HireAProfessional.Data.Models.Country", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Code")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedOn")
@@ -275,6 +383,7 @@ namespace HireAProfessional.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -284,7 +393,7 @@ namespace HireAProfessional.Data.Migrations
                     b.ToTable("Countries");
                 });
 
-            modelBuilder.Entity("HireAProfessional.Data.Models.JobPosts", b =>
+            modelBuilder.Entity("HireAProfessional.Data.Models.JobPost", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -293,9 +402,11 @@ namespace HireAProfessional.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CategoryId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Company")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedOn")
@@ -305,22 +416,34 @@ namespace HireAProfessional.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("EmploymentType")
                         .HasColumnType("int");
 
+                    b.Property<double?>("HighestSalary")
+                        .HasColumnType("float");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("JobLocation")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("JobTitle")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LocationId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<double>("StartingSalary")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -330,7 +453,71 @@ namespace HireAProfessional.Data.Migrations
 
                     b.HasIndex("IsDeleted");
 
+                    b.HasIndex("LocationId");
+
                     b.ToTable("JobPosts");
+                });
+
+            modelBuilder.Entity("HireAProfessional.Data.Models.Location", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CountryId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CountryId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("Locations");
+                });
+
+            modelBuilder.Entity("HireAProfessional.Data.Models.Vote", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("JobPostId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("VoteType")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("JobPostId");
+
+                    b.ToTable("Votes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -437,6 +624,13 @@ namespace HireAProfessional.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("HireAProfessional.Data.Models.ApplicationUser", b =>
+                {
+                    b.HasOne("HireAProfessional.Data.Models.Company", "Company")
+                        .WithMany("Employees")
+                        .HasForeignKey("CompanyId");
+                });
+
             modelBuilder.Entity("HireAProfessional.Data.Models.ApplicationUserCategory", b =>
                 {
                     b.HasOne("HireAProfessional.Data.Models.ApplicationUser", "ApplicationUser")
@@ -452,14 +646,51 @@ namespace HireAProfessional.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("HireAProfessional.Data.Models.ApplicationUsersCompanies", b =>
+                {
+                    b.HasOne("HireAProfessional.Data.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany("ApplicationUsersCompanies")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("HireAProfessional.Data.Models.Company", "Company")
+                        .WithMany("ApplicationUsersCompanies")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("HireAProfessional.Data.Models.Blog", b =>
                 {
                     b.HasOne("HireAProfessional.Data.Models.ApplicationUser", "Author")
                         .WithMany("Blogs")
-                        .HasForeignKey("AuthorId");
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("HireAProfessional.Data.Models.JobPosts", b =>
+            modelBuilder.Entity("HireAProfessional.Data.Models.City", b =>
+                {
+                    b.HasOne("HireAProfessional.Data.Models.Country", "Country")
+                        .WithMany("Cities")
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("HireAProfessional.Data.Models.Location", null)
+                        .WithMany("Cites")
+                        .HasForeignKey("LocationId");
+                });
+
+            modelBuilder.Entity("HireAProfessional.Data.Models.Company", b =>
+                {
+                    b.HasOne("HireAProfessional.Data.Models.Location", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId");
+                });
+
+            modelBuilder.Entity("HireAProfessional.Data.Models.JobPost", b =>
                 {
                     b.HasOne("HireAProfessional.Data.Models.ApplicationUser", null)
                         .WithMany("Posts")
@@ -467,7 +698,35 @@ namespace HireAProfessional.Data.Migrations
 
                     b.HasOne("HireAProfessional.Data.Models.Category", "Category")
                         .WithMany("Posts")
-                        .HasForeignKey("CategoryId");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("HireAProfessional.Data.Models.Location", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId");
+                });
+
+            modelBuilder.Entity("HireAProfessional.Data.Models.Location", b =>
+                {
+                    b.HasOne("HireAProfessional.Data.Models.Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId");
+                });
+
+            modelBuilder.Entity("HireAProfessional.Data.Models.Vote", b =>
+                {
+                    b.HasOne("HireAProfessional.Data.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("HireAProfessional.Data.Models.JobPost", "JobPost")
+                        .WithMany()
+                        .HasForeignKey("JobPostId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

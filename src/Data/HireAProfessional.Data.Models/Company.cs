@@ -1,0 +1,26 @@
+﻿namespace HireAProfessional.Data.Models
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
+    using HireAProfessional.Data.Common.Models;
+
+    public class Company : BaseDeletableModel<string>
+    {
+        public Company()
+        {
+            this.Id = Guid.NewGuid().ToString();
+        }
+
+        public string Name { get; set; }
+
+        public string LocationId { get; set; }
+
+        public Location Location { get; set; }
+
+        public ICollection<ApplicationUsersCompanies> ApplicationUsersCompanies { get; set; }
+
+        public ICollection<ApplicationUser> Employees { get; set; }
+    }
+}

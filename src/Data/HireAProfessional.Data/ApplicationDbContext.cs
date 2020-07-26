@@ -28,7 +28,13 @@
 
         public DbSet<City> Cities { get; set; }
 
+        public DbSet<Company> Companies { get; set; }
+
+        public DbSet<Location> Locations { get; set; }
+
         public DbSet<JobPost> JobPosts { get; set; }
+
+        public DbSet<ApplicationUserCategory> ApplicationUsersCategories { get; set; }
 
         public DbSet<Blog> Blogs { get; set; }
 

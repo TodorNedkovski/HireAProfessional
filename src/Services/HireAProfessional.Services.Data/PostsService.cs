@@ -18,17 +18,25 @@
     public class PostsService : IPostsService
     {
         private readonly IDeletableEntityRepository<JobPost> postRepository;
+        private readonly IDeletableEntityRepository<Category> categoryRepository;
 
-        public PostsService(IDeletableEntityRepository<JobPost> postRepository)
+        public PostsService(IDeletableEntityRepository<JobPost> postRepository, IDeletableEntityRepository<Category> categoryRepository)
         {
             this.postRepository = postRepository;
+            this.categoryRepository = categoryRepository;
         }
 
         public async Task CreatePost(PostInputViewModel post)
         {
+            var categoryId = this.categoryRepository
+                .AllAsNoTracking()
+                .FirstOrDefault(c => c.Name == post.CategoryName)
+                .Id;
+
             await this.postRepository.AddAsync(new JobPost
             {
-                Company = post.Company,
+                Company = post.CompanyName,
+                CategoryId = categoryId,
                 JobTitle = post.JobTitle,
                 JobLocation = post.JobLocation,
                 EmploymentType = post.EmploymentType,
@@ -55,6 +63,8 @@
                             JobTitle = p.JobTitle,
                             Category = p.Category,
                         })
+                        .ToList()
+                        .Where(p => IsLocated(p, location))
                         .ToList();
 
             return new PostsListViewModel
@@ -101,6 +111,11 @@
                 JobLocation = post.JobLocation,
                 JobTitle = post.JobTitle,
             };
+        }
+
+        private static bool IsLocated(PostViewModel p, string location)
+        {
+            return p.JobLocation.ToLower() == location.ToLower();
         }
     }
 }

@@ -31,7 +31,7 @@
 
             //273570
 
-            for (int offset = 0; offset <= 100000; offset += 10)
+            for (int offset = 0; offset <= 100; offset += 10)
             {
                 var citiesJsonModel = APIService<CityJsonModel>.GetCountries(offset, "cities").Data;
 

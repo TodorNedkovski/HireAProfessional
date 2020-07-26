@@ -1,0 +1,98 @@
+﻿* {
+    box-sizing: border-box;
+    font-family: helvetica;
+    font-family: 'Indie Flower', cursive;
+    font-family: 'Josefin Sans', sans-serif;
+    font-family: 'Kodchasan', sans-serif;
+}
+
+body {
+    background-color: #fff;
+}
+
+header {
+    display: flex-box;
+    text-align: center;
+    width: 100%;
+}
+
+h1 {
+    font-size: 1.8em;
+}
+
+div#post {
+    margin: 0.5em;
+    border: 0.2em dashed #ccccff;
+    padding: 0.5em;
+    background-color: #fff;
+    box-shadow: #444 0.1em 0.1em 0.2em;
+}
+
+div.post {
+    /* border: 0.2em dashed #ff44aa;*/
+    display: flex;
+    margin: 0.5em;
+    background-color: #fff;
+    box-shadow: #444 0.1em 0.1em 0.2em;
+}
+
+    div.post div {
+        flex-flow: column wrap;
+    }
+
+div.vote_button {
+    flex-flow: row wrap;
+    width: 7em;
+}
+
+
+/*Orher stuff*/
+input {
+    border: none;
+    background-color: #fff;
+    box-shadow: #444 0.1em 0.1em 0.1em;
+}
+
+button {
+    margin: 0.5em;
+    font-size: 1.5em;
+    border: none;
+    /* box-shadow:#444 0.1em 0.1em 0.1em;*/
+    background-color: transparent;
+}
+
+span {
+    margin-left: 1em;
+    font-size: 1.2em;
+}
+
+textarea {
+    width: 100%;
+    border: none;
+}
+
+div p {
+    font-family: 'Indie Flower', cursive;
+    line-break: break;
+}
+
+footer {
+    margin-top: 20em;
+    font-family: verdana;
+    text-align: center;
+    background-image: url(https://www.sololearn.com/avatars/dc18c731-340c-4b0b-9bf2-03b16a00aecd.jpg);
+    background-repeat: no-repeat;
+    background-size: 5% auto;
+    background-position: 90% 85%;
+}
+
+.hashtag {
+    color: #77bbff;
+}
+
+div.left {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: row1-start grid-row-end: 3;
+    background-color: Aqua;
+}

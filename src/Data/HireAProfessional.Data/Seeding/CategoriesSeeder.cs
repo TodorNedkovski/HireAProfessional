@@ -9,7 +9,7 @@
     using HireAProfessional.Data.Models;
     using Microsoft.EntityFrameworkCore.Internal;
 
-    public class CategorySeeder : ISeeder
+    public class CategoriesSeeder : ISeeder
     {
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {

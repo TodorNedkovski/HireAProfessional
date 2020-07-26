@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
@@ -9,9 +10,8 @@
     using HireAProfessional.Data.Models;
     using HireAProfessional.Services;
     using HireAProfessional.Services.Json;
-    using Microsoft.EntityFrameworkCore.Internal;
 
-    public class CountriesSeeder : ISeeder
+    public class LocationsSeeder : ISeeder
     {
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {

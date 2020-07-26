@@ -12,7 +12,7 @@
     {
         Task CreatePost(PostInputViewModel post);
 
-        PostsListViewModel GetAllPosts(int count = int.MaxValue, string param = "Id", string jobConstraints = "", string location = "", OrderType orderType = OrderType.Ascending);
+        PostsListViewModel GetAllPosts(int count = int.MaxValue, string param = "Id", string jobConstraints = "all", string location = "all", OrderType orderType = OrderType.Ascending);
 
         PostViewModel GetPostById(string id);
 

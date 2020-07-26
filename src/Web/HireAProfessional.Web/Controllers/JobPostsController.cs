@@ -23,6 +23,7 @@
         public IActionResult BySearch(string location, string jobConstraints)
         {
             var searchResult = this.postsService.GetAllPosts(10, "Id", jobConstraints, location, OrderType.Ascending);
+            var searchResult1 = this.postsService.GetAllPosts(10);
 
             return this.View(searchResult);
         }
@@ -42,9 +43,9 @@
         }
 
         [HttpPost]
-        public IActionResult CreatePost(PostInputViewModel post)
+        public async Task<IActionResult> CreatePost(PostInputViewModel post)
         {
-            this.postsService.CreatePost(post).GetAwaiter().GetResult();
+            await this.postsService.CreatePost(post);
 
             return this.Redirect("/");
         }

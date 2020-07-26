@@ -9,7 +9,7 @@
 
     using HireAProfessional.Data.Models;
 
-    public class BlogSeeder : ISeeder
+    public class BlogsSeeder : ISeeder
     {
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {

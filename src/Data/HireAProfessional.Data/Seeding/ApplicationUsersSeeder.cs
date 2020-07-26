@@ -19,6 +19,8 @@
                 return;
             }
 
+            var company = dbContext.Companies.FirstOrDefault();
+
             var applicationUsers = new List<ApplicationUser>
             {
                 new ApplicationUser
@@ -27,6 +29,11 @@
                     NormalizedEmail = "EXAMPLE@EXAMPLE.COM",
                     FirstName = "Bon",
                     LastName = "Jovi",
+                    Company = company,
+                    Education = "MIT",
+                    FacebookAccountLink = "de",
+                    TwitterAccountLink = "fr",
+                    LinkedInAccountLink = "fe",
                     Age = 40,
                     ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
                 },
@@ -35,6 +42,11 @@
                     FirstName = "Sarah",
                     LastName = "Hyland",
                     Age = 29,
+                    Company = company,
+                    FacebookAccountLink = "de",
+                    TwitterAccountLink = "fr",
+                    LinkedInAccountLink = "fe",
+                    Education = "MIT",
                     ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
                 },
                 new ApplicationUser
@@ -42,13 +54,23 @@
                     FirstName = "Ty",
                     LastName = "Burrell",
                     Age = 40,
+                    Company = company,
+                    FacebookAccountLink = "de",
+                    TwitterAccountLink = "fr",
+                    LinkedInAccountLink = "fe",
+                    Education = "MIT",
                     ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
                 },
                 new ApplicationUser
                 {
                     FirstName = "Nathan",
                     LastName = "Fillion",
-                    Age = 49 ,
+                    Age = 49,
+                    Company = company,
+                    FacebookAccountLink = "de",
+                    TwitterAccountLink = "fr",
+                    LinkedInAccountLink = "fe",
+                    Education = "MIT",
                     ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
                 },
                 new ApplicationUser
@@ -56,6 +78,11 @@
                     FirstName = "Stana",
                     LastName = "Katic",
                     Age = 40,
+                    Company = company,
+                    FacebookAccountLink = "de",
+                    TwitterAccountLink = "fr",
+                    LinkedInAccountLink = "fe",
+                    Education = "MIT",
                     ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
                 },
                 new ApplicationUser
@@ -63,6 +90,11 @@
                     FirstName = "Charlie",
                     LastName = "Sheen",
                     Age = 40,
+                    Company = company,
+                    FacebookAccountLink = "de",
+                    TwitterAccountLink = "fr",
+                    LinkedInAccountLink = "fe",
+                    Education = "MIT",
                     ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
                 },
                 new ApplicationUser
@@ -70,6 +102,11 @@
                     FirstName = "Jon",
                     LastName = "Cryer",
                     Age = 29,
+                    Company = company,
+                    FacebookAccountLink = "de",
+                    TwitterAccountLink = "fr",
+                    LinkedInAccountLink = "fe",
+                    Education = "MIT",
                     ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
                 },
                 new ApplicationUser
@@ -77,13 +114,23 @@
                     FirstName = "Angus",
                     LastName = "Jones",
                     Age = 40,
+                    Company = company,
+                    FacebookAccountLink = "de",
+                    TwitterAccountLink = "fr",
+                    LinkedInAccountLink = "fe",
+                    Education = "MIT",
                     ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
                 },
                 new ApplicationUser
                 {
                     FirstName = "Ashton",
                     LastName = "Kutcher",
-                    Age = 49 ,
+                    Age = 49,
+                    Company = company,
+                    FacebookAccountLink = "de",
+                    TwitterAccountLink = "fr",
+                    LinkedInAccountLink = "fe",
+                    Education = "MIT",
                     ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
                 },
                 new ApplicationUser
@@ -91,6 +138,11 @@
                     FirstName = "April",
                     LastName = "Bowlby",
                     Age = 40,
+                    Company = company,
+                    FacebookAccountLink = "de",
+                    TwitterAccountLink = "fr",
+                    LinkedInAccountLink = "fe",
+                    Education = "MIT",
                     ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
                 },
                 new ApplicationUser
@@ -98,6 +150,11 @@
                     FirstName = "Bon",
                     LastName = "Jovi",
                     Age = 40,
+                    Company = company,
+                    FacebookAccountLink = "de",
+                    TwitterAccountLink = "fr",
+                    LinkedInAccountLink = "fe",
+                    Education = "MIT",
                     ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
                 },
                 new ApplicationUser
@@ -105,6 +162,11 @@
                     FirstName = "Sarah",
                     LastName = "Hyland",
                     Age = 29,
+                    Company = company,
+                    FacebookAccountLink = "de",
+                    TwitterAccountLink = "fr",
+                    LinkedInAccountLink = "fe",
+                    Education = "MIT",
                     ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
                 },
                 new ApplicationUser
@@ -112,55 +174,23 @@
                     FirstName = "Ty",
                     LastName = "Burrell",
                     Age = 40,
+                    Company = company,
+                    FacebookAccountLink = "de",
+                    TwitterAccountLink = "fr",
+                    LinkedInAccountLink = "fe",
+                    Education = "MIT",
                     ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
                 },
                 new ApplicationUser
                 {
                     FirstName = "Nathan",
                     LastName = "Fillion",
-                    Age = 49 ,
-                    ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
-                },
-                new ApplicationUser
-                {
-                    FirstName = "Stana",
-                    LastName = "Katic",
-                    Age = 40,
-                    ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
-                },
-                new ApplicationUser
-                {
-                    FirstName = "Charlie",
-                    LastName = "Sheen",
-                    Age = 40,
-                    ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
-                },
-                new ApplicationUser
-                {
-                    FirstName = "Jon",
-                    LastName = "Cryer",
-                    Age = 29,
-                    ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
-                },
-                new ApplicationUser
-                {
-                    FirstName = "Angus",
-                    LastName = "Jones",
-                    Age = 40,
-                    ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
-                },
-                new ApplicationUser
-                {
-                    FirstName = "Ashton",
-                    LastName = "Kutcher",
-                    Age = 49 ,
-                    ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
-                },
-                new ApplicationUser
-                {
-                    FirstName = "April",
-                    LastName = "Bowlby",
-                    Age = 40,
+                    Age = 49,
+                    Company = company,
+                    FacebookAccountLink = "de",
+                    TwitterAccountLink = "fr",
+                    LinkedInAccountLink = "fe",
+                    Education = "MIT",
                     ImageUrl = "https://www.bav.bg/static/img/kartof.6e6aba2.jpg",
                 },
             };
