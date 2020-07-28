@@ -14,31 +14,42 @@
     using HireAProfessional.Web.Infrastructure;
     using HireAProfessional.Web.Infrastructure.Enums;
     using HireAProfessional.Web.ViewModels.Posts;
+    using Microsoft.EntityFrameworkCore;
 
     public class PostsService : IPostsService
     {
         private readonly IDeletableEntityRepository<JobPost> postRepository;
         private readonly IDeletableEntityRepository<Category> categoryRepository;
+        private readonly IDeletableEntityRepository<Location> locationRepository;
 
-        public PostsService(IDeletableEntityRepository<JobPost> postRepository, IDeletableEntityRepository<Category> categoryRepository)
+        public PostsService(
+            IDeletableEntityRepository<JobPost> postRepository,
+            IDeletableEntityRepository<Category> categoryRepository,
+            IDeletableEntityRepository<Location> locationRepository)
         {
             this.postRepository = postRepository;
             this.categoryRepository = categoryRepository;
+            this.locationRepository = locationRepository;
         }
 
         public async Task CreatePost(PostInputViewModel post)
         {
-            var categoryId = this.categoryRepository
+            var category = await this.categoryRepository
                 .AllAsNoTracking()
-                .FirstOrDefault(c => c.Name == post.CategoryName)
-                .Id;
+                .FirstOrDefaultAsync(c => c.Name == post.CategoryName);
+
+            var location = await this.locationRepository
+                .AllAsNoTracking()
+                .FirstOrDefaultAsync(l => l.Country.Name == post.Location || l.Cites.Any(c => c.Name == post.Location));
 
             await this.postRepository.AddAsync(new JobPost
             {
+                HighestSalary = 100,
+                StartingSalary = 11000,
                 Company = post.CompanyName,
-                CategoryId = categoryId,
+                CategoryId = category.Id,
                 JobTitle = post.JobTitle,
-                JobLocation = post.JobLocation,
+                LocationId = location.Id,
                 EmploymentType = post.EmploymentType,
                 Description = post.Description,
             });
@@ -46,11 +57,32 @@
             await this.postRepository.SaveChangesAsync();
         }
 
-        public PostsListViewModel GetAllPosts(int count, string param, string location, string jobConstraints, OrderType orderType)
+        public PostsListViewModel GetAllPosts(int count, string param, string jobConstraints, string location, OrderType orderType)
         {
             var posts = this.
+            postRepository
+            .All()
+            .Take(count)
+            .Where(p => p.Location.Country.Name.ToLower() == location || p.Location.Country.Cities.Any(c => c.Name.ToLower() == location))
+            .OrderBy<JobPost>(param, orderType)
+            .Select(p => new PostViewModel
+            {
+                Id = p.Id,
+                Company = p.Company,
+                Description = p.Description,
+                EmploymentType = p.EmploymentType,
+                VotesCount = p.Votes.Sum(v => (int)v.JobPost.EmploymentType),
+                JobLocation = p.Location,
+                JobTitle = p.JobTitle,
+                Category = p.Category,
+            })
+            .ToList();
+
+            if (location == string.Empty || location == null)
+            {
+                posts = this.
                         postRepository
-                        .AllAsNoTracking()
+                        .All()
                         .Take(count)
                         .OrderBy<JobPost>(param, orderType)
                         .Select(p => new PostViewModel
@@ -59,13 +91,13 @@
                             Company = p.Company,
                             Description = p.Description,
                             EmploymentType = p.EmploymentType,
-                            JobLocation = p.JobLocation,
+                            VotesCount = p.Votes.Sum(v => (int)v.JobPost.EmploymentType),
+                            JobLocation = p.Location,
                             JobTitle = p.JobTitle,
                             Category = p.Category,
                         })
-                        .ToList()
-                        .Where(p => IsLocated(p, location))
                         .ToList();
+            }
 
             return new PostsListViewModel
             {
@@ -86,7 +118,8 @@
                             Company = p.Company,
                             Description = p.Description,
                             EmploymentType = p.EmploymentType,
-                            JobLocation = p.JobLocation,
+                            VotesCount = p.Votes.Sum(v => (int)v.JobPost.EmploymentType),
+                            JobLocation = p.Location,
                             JobTitle = p.JobTitle,
                             Category = p.Category,
                         })
@@ -99,6 +132,7 @@
         {
             var post = this.postRepository
                 .All()
+                .Include(p => p.Votes)
                 .FirstOrDefault(p => p.Id == id);
 
             return new PostViewModel
@@ -106,16 +140,12 @@
                 Id = post.Id,
                 Category = post.Category,
                 Company = post.Company,
+                VotesCount = post.Votes.Sum(v => (int)v.VoteType),
                 Description = post.Description,
                 EmploymentType = post.EmploymentType,
-                JobLocation = post.JobLocation,
+                JobLocation = post.Location,
                 JobTitle = post.JobTitle,
             };
-        }
-
-        private static bool IsLocated(PostViewModel p, string location)
-        {
-            return p.JobLocation.ToLower() == location.ToLower();
         }
     }
 }

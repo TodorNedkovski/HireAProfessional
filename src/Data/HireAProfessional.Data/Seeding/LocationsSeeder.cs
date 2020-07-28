@@ -15,31 +15,25 @@
     {
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
-            if (dbContext.Countries.Any())
+            if (dbContext.Locations.Any())
             {
                 return;
             }
 
-            for (int offset = 0; offset <= 190; offset += 10)
+            var countries = dbContext.Countries;
+            var locations = new List<Location>();
+
+            foreach (var country in countries)
             {
-                var countriesJsonModel = APIService<CountryJsonModel>.GetCountries(offset, "countries").Data;
-
-                var countries = new List<Country>();
-
-                foreach (var countryJsonModel in countriesJsonModel)
+                locations.Add(new Location
                 {
-                    countries.Add(new Country
-                    {
-                        Code = countryJsonModel.Code,
-                        Name = countryJsonModel.Name,
-                    });
-                }
-
-                Thread.Sleep(1000);
-
-                await dbContext.Countries.AddRangeAsync(countries);
-                await dbContext.SaveChangesAsync();
+                    Country = country,
+                    Cites = country.Cities,
+                });
             }
+
+            await dbContext.AddRangeAsync(locations);
+            await dbContext.SaveChangesAsync();
         }
     }
 }

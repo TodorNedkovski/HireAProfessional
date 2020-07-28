@@ -14,7 +14,6 @@
             this.Id = Guid.NewGuid().ToString();
         }
 
-        [Required]
         public string AuthorId { get; set; }
 
         public ApplicationUser Author { get; set; }

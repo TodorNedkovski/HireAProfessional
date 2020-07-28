@@ -23,7 +23,6 @@
         public IActionResult BySearch(string location, string jobConstraints)
         {
             var searchResult = this.postsService.GetAllPosts(10, "Id", jobConstraints, location, OrderType.Ascending);
-            var searchResult1 = this.postsService.GetAllPosts(10);
 
             return this.View(searchResult);
         }

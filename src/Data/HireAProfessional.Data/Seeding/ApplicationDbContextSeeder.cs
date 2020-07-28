@@ -27,20 +27,15 @@
 
             var logger = serviceProvider.GetService<ILoggerFactory>().CreateLogger(typeof(ApplicationDbContextSeeder));
 
-            var assembly = Assembly.GetExecutingAssembly();
-            var seederImplementors = assembly
-                .GetTypes()
-                .Where(t => t.BaseType == typeof(ISeeder));
-
             var seeders = new List<ISeeder>
                           {
+                              new CategoriesSeeder(),
+                              new CountriesSeeder(),
+                              new CitiesSeeder(),
                               new LocationsSeeder(),
                               new CompaniesSeeder(),
-                              new CategoriesSeeder(),
-                              new CitiesSeeder(),
-                              new CountriesSeeder(),
-                              new ApplicationUsersSeeder(),
                               new RolesSeeder(),
+                              new ApplicationUsersSeeder(),
                               new PostSeeder(),
                               new BlogsSeeder(),
                           };

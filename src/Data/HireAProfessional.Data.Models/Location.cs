@@ -19,5 +19,7 @@
         public Country Country { get; set; }
 
         public ICollection<City> Cites { get; set; }
+
+        public ICollection<JobPost> Posts { get; set; }
     }
 }

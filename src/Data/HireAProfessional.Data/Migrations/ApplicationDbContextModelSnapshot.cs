@@ -212,7 +212,6 @@ namespace HireAProfessional.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("AuthorId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Content")
@@ -290,7 +289,6 @@ namespace HireAProfessional.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CountryId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedOn")
@@ -348,6 +346,7 @@ namespace HireAProfessional.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -400,7 +399,6 @@ namespace HireAProfessional.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CategoryId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Company")
@@ -421,14 +419,11 @@ namespace HireAProfessional.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<double?>("HighestSalary")
+                        .IsRequired()
                         .HasColumnType("float");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
-
-                    b.Property<string>("JobLocation")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("JobTitle")
                         .IsRequired()
@@ -663,18 +658,14 @@ namespace HireAProfessional.Data.Migrations
                 {
                     b.HasOne("HireAProfessional.Data.Models.ApplicationUser", "Author")
                         .WithMany("Blogs")
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("AuthorId");
                 });
 
             modelBuilder.Entity("HireAProfessional.Data.Models.City", b =>
                 {
                     b.HasOne("HireAProfessional.Data.Models.Country", "Country")
                         .WithMany("Cities")
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("CountryId");
 
                     b.HasOne("HireAProfessional.Data.Models.Location", null)
                         .WithMany("Cites")
@@ -696,12 +687,10 @@ namespace HireAProfessional.Data.Migrations
 
                     b.HasOne("HireAProfessional.Data.Models.Category", "Category")
                         .WithMany("Posts")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("CategoryId");
 
                     b.HasOne("HireAProfessional.Data.Models.Location", "Location")
-                        .WithMany()
+                        .WithMany("Posts")
                         .HasForeignKey("LocationId");
                 });
 
@@ -715,13 +704,13 @@ namespace HireAProfessional.Data.Migrations
             modelBuilder.Entity("HireAProfessional.Data.Models.Vote", b =>
                 {
                     b.HasOne("HireAProfessional.Data.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
+                        .WithMany("Votes")
                         .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("HireAProfessional.Data.Models.JobPost", "JobPost")
-                        .WithMany()
+                        .WithMany("Votes")
                         .HasForeignKey("JobPostId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();

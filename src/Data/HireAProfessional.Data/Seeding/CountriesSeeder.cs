@@ -35,7 +35,7 @@
                     });
                 }
 
-                Thread.Sleep(1000);
+                Thread.Sleep(2000);
 
                 await dbContext.Countries.AddRangeAsync(countries);
                 await dbContext.SaveChangesAsync();

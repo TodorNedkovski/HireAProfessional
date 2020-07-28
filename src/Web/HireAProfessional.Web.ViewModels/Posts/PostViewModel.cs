@@ -13,13 +13,15 @@
 
         public string JobTitle { get; set; }
 
+        public int VotesCount { get; set; }
+
         public string Company { get; set; }
 
         public string Description { get; set; }
 
         public Category Category { get; set; }
 
-        public string JobLocation { get; set; }
+        public Location JobLocation { get; set; }
 
         public EmploymentType EmploymentType { get; set; }
     }

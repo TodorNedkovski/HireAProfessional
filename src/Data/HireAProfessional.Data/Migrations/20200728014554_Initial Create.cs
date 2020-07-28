@@ -113,7 +113,7 @@ namespace HireAProfessional.Data.Migrations
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(nullable: false),
-                    CountryId = table.Column<string>(nullable: false),
+                    CountryId = table.Column<string>(nullable: true),
                     CountryCode = table.Column<string>(nullable: false),
                     Region = table.Column<string>(nullable: false),
                     LocationId = table.Column<string>(nullable: true)
@@ -144,7 +144,7 @@ namespace HireAProfessional.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: false),
                     LocationId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -345,7 +345,7 @@ namespace HireAProfessional.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    AuthorId = table.Column<string>(nullable: false),
+                    AuthorId = table.Column<string>(nullable: true),
                     Title = table.Column<string>(nullable: false),
                     Content = table.Column<string>(nullable: false)
                 },
@@ -373,10 +373,9 @@ namespace HireAProfessional.Data.Migrations
                     Company = table.Column<string>(nullable: false),
                     LocationId = table.Column<string>(nullable: true),
                     StartingSalary = table.Column<double>(nullable: false),
-                    HighestSalary = table.Column<double>(nullable: true),
+                    HighestSalary = table.Column<double>(nullable: false),
                     Description = table.Column<string>(nullable: false),
-                    JobLocation = table.Column<string>(nullable: false),
-                    CategoryId = table.Column<string>(nullable: false),
+                    CategoryId = table.Column<string>(nullable: true),
                     EmploymentType = table.Column<int>(nullable: false),
                     ApplicationUserId = table.Column<string>(nullable: true)
                 },

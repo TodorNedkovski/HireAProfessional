@@ -8,6 +8,7 @@
 
     using HireAProfessional.Data.Models;
     using HireAProfessional.Data.Models.Enums;
+    using Microsoft.EntityFrameworkCore;
 
     public class PostSeeder : ISeeder
     {
@@ -18,6 +19,8 @@
                 return;
             }
 
+            var location = await dbContext.Locations.FirstOrDefaultAsync();
+
             var posts = new List<JobPost>
             {
                 new JobPost
@@ -25,8 +28,10 @@
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
                     Company = "Apple",
                     Description = "Loerm 1234",
-                    JobLocation = "Santa Monica, California",
+                    Location = location,
                     JobTitle = "Coffee Guy",
+                    HighestSalary = 10000,
+                    StartingSalary = 100,
                     EmploymentType = EmploymentType.FullTime,
                 },
                 new JobPost
@@ -34,7 +39,9 @@
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Front End Developer"),
                     Company = "Microsoft",
                     Description = "Loerm 1234",
-                    JobLocation = "Santa Monica, California",
+                    Location = location,
+                    HighestSalary = 10000,
+                    StartingSalary = 100,
                     JobTitle = "Coffee Guy",
                     EmploymentType = EmploymentType.FullTime,
                 },
@@ -43,7 +50,9 @@
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
                     Company = "Amazon",
                     Description = "Loerm 1234",
-                    JobLocation = "Santa Monica, California",
+                    Location = location,
+                    HighestSalary = 10000,
+                    StartingSalary = 100,
                     JobTitle = "Coffee Guy",
                     EmploymentType = EmploymentType.FullTime,
                 },
@@ -52,8 +61,10 @@
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
                     Company = "Apple",
                     Description = "Loerm 1234",
-                    JobLocation = "Santa Monica, California",
+                    Location = location,
                     JobTitle = "Coffee Guy",
+                    HighestSalary = 10000,
+                    StartingSalary = 100,
                     EmploymentType = EmploymentType.FullTime,
                 },
                 new JobPost
@@ -61,8 +72,10 @@
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
                     Company = "Apple",
                     Description = "Loerm 1234",
-                    JobLocation = "Santa Monica, California",
+                    Location = location,
                     JobTitle = "Coffee Guy",
+                    HighestSalary = 10000,
+                    StartingSalary = 100,
                     EmploymentType = EmploymentType.FullTime,
                 },
                 new JobPost
@@ -70,8 +83,10 @@
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
                     Company = "Apple",
                     Description = "Loerm 1234",
-                    JobLocation = "Santa Monica, California",
+                    Location = location,
                     JobTitle = "Coffee Guy",
+                    HighestSalary = 10000,
+                    StartingSalary = 100,
                     EmploymentType = EmploymentType.FullTime,
                 },
                 new JobPost
@@ -79,8 +94,10 @@
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
                     Company = "Apple",
                     Description = "Loerm 1234",
-                    JobLocation = "Santa Monica, California",
+                    Location = location,
                     JobTitle = "Coffee Guy",
+                    HighestSalary = 10000,
+                    StartingSalary = 100,
                     EmploymentType = EmploymentType.FullTime,
                 },
                 new JobPost
@@ -88,8 +105,10 @@
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
                     Company = "Apple",
                     Description = "Loerm 1234",
-                    JobLocation = "Santa Monica, California",
+                    Location = location,
                     JobTitle = "Coffee Guy",
+                    HighestSalary = 10000,
+                    StartingSalary = 100,
                     EmploymentType = EmploymentType.FullTime,
                 },
                 new JobPost
@@ -97,8 +116,10 @@
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
                     Company = "Apple",
                     Description = "Loerm 1234",
-                    JobLocation = "Santa Monica, California",
+                    Location = location,
                     JobTitle = "Coffee Guy",
+                    HighestSalary = 10000,
+                    StartingSalary = 100,
                     EmploymentType = EmploymentType.FullTime,
                 },
                 new JobPost
@@ -106,8 +127,10 @@
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
                     Company = "Apple",
                     Description = "Loerm 1234",
-                    JobLocation = "Santa Monica, California",
+                    Location = location,
                     JobTitle = "Coffee Guy",
+                    HighestSalary = 10000,
+                    StartingSalary = 100,
                     EmploymentType = EmploymentType.FullTime,
                 },
                 new JobPost
@@ -115,8 +138,10 @@
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
                     Company = "Apple",
                     Description = "Loerm 1234",
-                    JobLocation = "Santa Monica, California",
+                    Location = location,
                     JobTitle = "Coffee Guy",
+                    HighestSalary = 10000,
+                    StartingSalary = 100,
                     EmploymentType = EmploymentType.FullTime,
                 },
                 new JobPost
@@ -124,8 +149,10 @@
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
                     Company = "Apple",
                     Description = "Loerm 1234",
-                    JobLocation = "Santa Monica, California",
+                    Location = location,
                     JobTitle = "Coffee Guy",
+                    HighestSalary = 10000,
+                    StartingSalary = 100,
                     EmploymentType = EmploymentType.FullTime,
                 },
             };

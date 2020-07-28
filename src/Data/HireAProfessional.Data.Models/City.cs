@@ -18,7 +18,6 @@
         [Required]
         public string Name { get; set; }
 
-        [Required]
         public string CountryId { get; set; }
 
         public Country Country { get; set; }

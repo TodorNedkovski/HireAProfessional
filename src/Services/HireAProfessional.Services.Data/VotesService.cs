@@ -27,8 +27,7 @@
             var votesCount = this.voteRepository
                 .AllAsNoTracking()
                 .Where(p => p.JobPostId == postId)
-                .ToList()
-                .Count;
+                .Sum(v => (int)v.VoteType);
 
             return votesCount;
         }

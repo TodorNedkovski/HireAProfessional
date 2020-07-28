@@ -13,6 +13,7 @@
         public JobPost()
         {
             this.Id = Guid.NewGuid().ToString();
+            this.Votes = new HashSet<Vote>();
         }
 
         [Required]
@@ -25,21 +26,21 @@
 
         public Location Location { get; set; }
 
+        [Required]
         public double StartingSalary { get; set; }
 
+        [Required]
         public double? HighestSalary { get; set; }
 
         [Required]
         public string Description { get; set; }
 
-        [Required]
-        public string JobLocation { get; set; }
-
-        [Required]
         public string CategoryId { get; set; }
 
         public Category Category { get; set; }
 
         public EmploymentType EmploymentType { get; set; }
+
+        public ICollection<Vote> Votes { get; set; }
     }
 }
