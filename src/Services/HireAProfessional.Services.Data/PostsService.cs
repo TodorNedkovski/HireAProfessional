@@ -59,11 +59,17 @@
 
         public PostsListViewModel GetAllPosts(int count, string param, string jobConstraints, string location, OrderType orderType)
         {
+            string countryName = location.Split(", ")[0];
+            string cityName = location.Split(", ")[1];
+
             var posts = this.
             postRepository
             .All()
             .Take(count)
-            .Where(p => p.Location.Country.Name.ToLower() == location || p.Location.Country.Cities.Any(c => c.Name.ToLower() == location))
+            .Where(p => p.Location.Country.Name.ToLower() == countryName 
+            || p.Location.Country.Cities.Any(c => c.Name.ToLower() == cityName)
+            || p.Category.Name == jobConstraints.ToLower()
+            || p.JobTitle == jobConstraints.ToLower())
             .OrderBy<JobPost>(param, orderType)
             .Select(p => new PostViewModel
             {

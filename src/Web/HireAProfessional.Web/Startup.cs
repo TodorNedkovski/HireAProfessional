@@ -1,7 +1,7 @@
 ﻿namespace HireAProfessional.Web
 {
     using System.Reflection;
-
+    using AutoMapper;
     using HireAProfessional.Data;
     using HireAProfessional.Data.Common;
     using HireAProfessional.Data.Common.Repositories;
@@ -67,6 +67,7 @@
             services.AddTransient<ICategoriesService, CategoriesService>();
             services.AddTransient<IBlogsService, BlogsService>();
             services.AddTransient<IVotesService, VotesService>();
+            services.AddTransient<ICountriesService, CountriesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -10,6 +10,6 @@
     {
         public string CountryName { get; set; }
 
-        public ICollection<CitiesViewModel> Cities { get; set; }
+        public ICollection<CityViewModel> Cities { get; set; }
     }
 }

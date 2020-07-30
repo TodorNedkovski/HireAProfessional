@@ -125,6 +125,7 @@
     <script src="~/js/mediaelement-and-player.min.js"></script>
     <script src="~/js/main.js"></script>
     <script src="~/js/vote.js"></script>
+    <script src="~/js/autocomplete.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -163,7 +164,7 @@
             // Create the autocomplete object, restricting the search to geographical
             // location types.
             autocomplete = new google.maps.places.Autocomplete(
-                        /** type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+                                /** type {!HTMLInputElement} */(document.getElementById('autocomplete')),
                 { types: ['geocode'] });
             // When the user selects an address from the dropdown, populate the address
             // fields in the form.

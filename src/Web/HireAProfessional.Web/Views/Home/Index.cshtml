@@ -5,6 +5,8 @@
     this.ViewData["Title"] = "Home Page";
 }
 
+<link href="~/css/autocomplete.css" rel="stylesheet" />
+
 <!DOCTYPE html>
 
 <html>
@@ -18,7 +20,7 @@
             <div class="row align-items-center">
                 <div class="col-12" data-aos="fade">
                     <h1>Find Job</h1>
-                    <form method="get" asp-controller="Jobs" asp-action="All">
+                    <form autocomplete="off" method="get" asp-controller="Jobs" asp-action="All">
                         <div class="row mb-3">
                             <div class="col-md-9">
                                 <div class="row">
@@ -28,7 +30,7 @@
                                     <div class="col-md-6 mb-3 mb-md-0">
                                         <div class="input-wrap">
                                             <span class="icon icon-room"></span>
-                                            <input name="location" type="text" class="form-control form-control-block search-input  border-0 px-4" id="autocomplete" placeholder="city, province or region" onFocus="geolocate()">
+                                            <input id="myInput" onclick="get('myInput')" type="text" name="location" class="form-control form-control-block search-input  border-0 px-4" placeholder="city, province or region" onFocus="geolocate()">
                                         </div>
                                     </div>
                                 </div>
@@ -93,9 +95,9 @@
                                 </div>
                                 <div class="job-details h-100">
                                     <div class="p-3 align-self-center">
-                                        <h3>Restaurant Crew</h3>
+                                        <h3>@jobPost.JobTitle</h3>
                                         <div class="d-block d-lg-flex">
-                                            <div class="mr-3"><span class="icon-suitcase mr-1"></span>@jobPost.JobLocation</div>
+                                            <div class="mr-3"><span class="icon-suitcase mr-1"></span></div>
                                             <div class="mr-3"><span class="icon-room mr-1"></span> @jobPost.JobLocation</div>
                                             <div><span class="icon-money mr-1"></span> $55000 &mdash; 70000</div>
                                         </div>
@@ -210,3 +212,4 @@
     </div>
 </body>
 </html>
+

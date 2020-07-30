@@ -15,7 +15,7 @@
             <!--Recent posts-->
             @foreach (var post in this.Model.Posts)
             {
-                <a href="job-single.html" class="job-item d-block d-md-flex align-items-center col-md-12 @post.EmploymentType.ToString().ToLower()">
+                <a href="All/@post.Id" class="job-item d-block d-md-flex align-items-center col-md-12 @post.EmploymentType.ToString().ToLower()">
                     <div class="company-logo blank-logo text-center text-md-left pl-3">
                         <img src="images/logo_2.png" alt="Image" class="img-fluid mx-auto">
                     </div>
@@ -24,7 +24,7 @@
                             <h3>@post.JobTitle</h3>
                             <div class="d-block d-lg-flex">
                                 <div class="mr-3"><span class="icon-suitcase mr-1"></span> @Html.Raw(post.Description)</div>
-                                <div class="mr-3"><span class="icon-room mr-1"></span> @post.JobLocation</div>
+                                <div class="mr-3"><span class="icon-room mr-1"></span> @post.JobLocation.Country</div>
                             </div>
                         </div>
                     </div>

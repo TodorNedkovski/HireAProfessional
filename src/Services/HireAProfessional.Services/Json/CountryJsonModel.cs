@@ -9,5 +9,7 @@
         public string Code { get; set; }
 
         public string Name { get; set; }
+
+        public CityJsonModel[] Cities { get; set; }
     }
 }
