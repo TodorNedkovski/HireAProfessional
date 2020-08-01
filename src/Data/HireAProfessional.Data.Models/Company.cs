@@ -17,10 +17,6 @@
         [Required]
         public string Name { get; set; }
 
-        public string LocationId { get; set; }
-
-        public Location Location { get; set; }
-
         public ICollection<ApplicationUsersCompanies> ApplicationUsersCompanies { get; set; }
 
         public ICollection<ApplicationUser> Employees { get; set; }

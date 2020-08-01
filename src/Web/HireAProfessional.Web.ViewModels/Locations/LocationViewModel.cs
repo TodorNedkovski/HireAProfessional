@@ -1,15 +1,14 @@
 ﻿namespace HireAProfessional.Web.ViewModels.Locations
 {
+    using HireAProfessional.Services.Mapping;
     using System;
     using System.Collections.Generic;
     using System.Text;
 
-    using HireAProfessional.Web.ViewModels.Ctites;
-
-    public class JobLocationViewModel
+    public class LocationViewModel
     {
         public string CountryName { get; set; }
 
-        public ICollection<CityViewModel> Cities { get; set; }
+        public string CityName { get; set; }
     }
 }

@@ -26,6 +26,7 @@
     <ProjectReference Include="..\..\Web\HireAProfessional.Web.Infrastructure\HireAProfessional.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Web\HireAProfessional.Web.ViewModels\HireAProfessional.Web.ViewModels.csproj" />
     <ProjectReference Include="..\HireAProfessional.Services.Mapping\HireAProfessional.Services.Mapping.csproj" />
+    <ProjectReference Include="..\HireAProfessional.Services\HireAProfessional.Services.csproj" />
   </ItemGroup>
 
 </Project>

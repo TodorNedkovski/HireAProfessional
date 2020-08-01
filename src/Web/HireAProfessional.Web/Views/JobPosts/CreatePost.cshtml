@@ -8,6 +8,7 @@
 
     <html>
     <head>
+        <link href="~/css/autocomplete.css" rel="stylesheet" />
         <meta name="viewport" content="width=device-width" />
         <title>CreatePost</title>
         <script src='https://cdn.tiny.cloud/1/xfxp2oibv5iqrqzkvsyli9eb24kxkr27ornpgv3gvtg91tyw/tinymce/5/tinymce.min.js' referrerpolicy="origin">
@@ -72,7 +73,7 @@
                             <div class="row form-group mb-4">
                                 <div class="col-md-12"><h3>Location</h3></div>
                                 <div class="col-md-12 mb-3 mb-md-0">
-                                    <input name="location" type="text" class="form-control" placeholder="New York City">
+                                    <input onclick="get('myInput')" id="myInput" name="location" type="text" class="form-control" placeholder="New York City">
                                 </div>
                             </div>
                             <div class="row form-group">

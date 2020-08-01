@@ -32,7 +32,6 @@
                               new CategoriesSeeder(),
                               new CountriesSeeder(),
                               new CitiesSeeder(),
-                              new LocationsSeeder(),
                               new CompaniesSeeder(),
                               new RolesSeeder(),
                               new ApplicationUsersSeeder(),

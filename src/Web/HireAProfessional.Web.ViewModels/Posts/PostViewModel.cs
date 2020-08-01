@@ -21,8 +21,6 @@
 
         public Category Category { get; set; }
 
-        public Location JobLocation { get; set; }
-
         public EmploymentType EmploymentType { get; set; }
     }
 }

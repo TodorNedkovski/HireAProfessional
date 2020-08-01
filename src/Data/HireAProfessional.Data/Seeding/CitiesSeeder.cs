@@ -11,17 +11,11 @@
     using HireAProfessional.Data.Models;
     using HireAProfessional.Services;
     using HireAProfessional.Services.Json;
+    using Microsoft.EntityFrameworkCore;
     using RestSharp;
 
     public class CitiesSeeder : ISeeder
     {
-        //private readonly IMapper mapper;
-
-        //public CitiesSeeder(IMapper mapper)
-        //{
-        //    this.mapper = mapper;
-        //}
-
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
             if (dbContext.Cities.Any())
@@ -33,7 +27,7 @@
 
             for (int offset = 0; offset <= 100; offset += 10)
             {
-                var citiesJsonModel = APIService<CityJsonModel>.GetCountries(offset, "cities").Data;
+                var citiesJsonModel = GeoDbAPIService<CityJsonModel>.GetCountries(offset, "cities").Data;
 
                 var cities = new List<City>();
 
@@ -41,12 +35,8 @@
                 {
                     cities.Add(new City
                     {
-                        Country = dbContext
-                        .Countries
-                        .FirstOrDefault(c => c.Name == cityJsonModel.Country),
-                        CountryCode = cityJsonModel.CountryCode,
+                        Country = await dbContext.Countries.FirstOrDefaultAsync(c => c.Name == cityJsonModel.Country),
                         Name = cityJsonModel.Name,
-                        Region = cityJsonModel.Region,
                     });
                 }
 

@@ -18,16 +18,19 @@
             a.setAttribute("class", "autocomplete-items");
             /*append the DIV element as a child of the autocomplete container:*/
             this.parentNode.appendChild(a);
+
+            arr = arr.filter(c => c['cities'].length > 0)
             /*for each item in the array...*/
             for (i = 0; i < arr.length; i++) {
+
                 for (var c = 0; c < arr[i]['cities'].length; c++) {
+
                     /*check if the item starts with the same letters as the text field value:*/
-                    if (arr[i]['name'].substr(0, val.length).toUpperCase() == val.toUpperCase()
-                        || arr[i]['cities'][c]['name'].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                    if (arr[i]['cities'][c]['name'].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
                         /*create a DIV element for each matching element:*/
                         b = document.createElement("DIV");
 
-                        let match = arr[i]['name'] + ', ' + arr[i]['cities'][c]['name']
+                        let match = arr[i]['cities'][c]['name'] + ', ' + arr[i]['name']
 
                         /*make the matching letters bold:*/
                         b.innerHTML = "<strong>" + match.substr(0, val.length) + "</strong>";

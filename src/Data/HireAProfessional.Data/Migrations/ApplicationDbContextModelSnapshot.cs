@@ -284,10 +284,6 @@ namespace HireAProfessional.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("CountryCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("CountryId")
                         .HasColumnType("nvarchar(450)");
 
@@ -300,17 +296,10 @@ namespace HireAProfessional.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<string>("LocationId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Region")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -319,8 +308,6 @@ namespace HireAProfessional.Data.Migrations
                     b.HasIndex("CountryId");
 
                     b.HasIndex("IsDeleted");
-
-                    b.HasIndex("LocationId");
 
                     b.ToTable("Cities");
                 });
@@ -339,9 +326,6 @@ namespace HireAProfessional.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<string>("LocationId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
@@ -352,8 +336,6 @@ namespace HireAProfessional.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
-
-                    b.HasIndex("LocationId");
 
                     b.ToTable("Companies");
                 });
@@ -401,9 +383,15 @@ namespace HireAProfessional.Data.Migrations
                     b.Property<string>("CategoryId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("CityId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Company")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CountryId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -429,9 +417,6 @@ namespace HireAProfessional.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LocationId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
@@ -444,40 +429,13 @@ namespace HireAProfessional.Data.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("IsDeleted");
-
-                    b.HasIndex("LocationId");
-
-                    b.ToTable("JobPosts");
-                });
-
-            modelBuilder.Entity("HireAProfessional.Data.Models.Location", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("CountryId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
+                    b.HasIndex("CityId");
 
                     b.HasIndex("CountryId");
 
                     b.HasIndex("IsDeleted");
 
-                    b.ToTable("Locations");
+                    b.ToTable("JobPosts");
                 });
 
             modelBuilder.Entity("HireAProfessional.Data.Models.Vote", b =>
@@ -666,17 +624,6 @@ namespace HireAProfessional.Data.Migrations
                     b.HasOne("HireAProfessional.Data.Models.Country", "Country")
                         .WithMany("Cities")
                         .HasForeignKey("CountryId");
-
-                    b.HasOne("HireAProfessional.Data.Models.Location", null)
-                        .WithMany("Cites")
-                        .HasForeignKey("LocationId");
-                });
-
-            modelBuilder.Entity("HireAProfessional.Data.Models.Company", b =>
-                {
-                    b.HasOne("HireAProfessional.Data.Models.Location", "Location")
-                        .WithMany()
-                        .HasForeignKey("LocationId");
                 });
 
             modelBuilder.Entity("HireAProfessional.Data.Models.JobPost", b =>
@@ -689,13 +636,10 @@ namespace HireAProfessional.Data.Migrations
                         .WithMany("Posts")
                         .HasForeignKey("CategoryId");
 
-                    b.HasOne("HireAProfessional.Data.Models.Location", "Location")
-                        .WithMany("Posts")
-                        .HasForeignKey("LocationId");
-                });
+                    b.HasOne("HireAProfessional.Data.Models.City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId");
 
-            modelBuilder.Entity("HireAProfessional.Data.Models.Location", b =>
-                {
                     b.HasOne("HireAProfessional.Data.Models.Country", "Country")
                         .WithMany()
                         .HasForeignKey("CountryId");

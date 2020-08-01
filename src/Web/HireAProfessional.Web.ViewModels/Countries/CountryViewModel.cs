@@ -9,21 +9,12 @@
     using HireAProfessional.Services.Mapping;
     using HireAProfessional.Web.ViewModels.Ctites;
 
-    public class CountryViewModel : IMapFrom<Country>, IMapTo<Country>, IHaveCustomMappings
+    public class CountryViewModel : IMapFrom<Country>, IMapTo<CountryViewModel>
     {
         public string Code { get; set; }
 
         public string Name { get; set; }
 
         public ICollection<CityViewModel> Cities { get; set; }
-
-        public void CreateMappings(IProfileExpression configuration)
-        {
-            configuration.CreateMap<Country, CountryViewModel>()
-                .ForMember(x => x.Cities, options =>
-                {
-                    options.MapFrom(p => p.Cities);
-                });
-        }
     }
 }

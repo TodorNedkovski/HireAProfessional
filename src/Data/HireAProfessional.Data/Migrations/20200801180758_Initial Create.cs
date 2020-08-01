@@ -44,6 +44,22 @@ namespace HireAProfessional.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Companies",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    Name = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Companies", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Countries",
                 columns: table => new
                 {
@@ -77,83 +93,6 @@ namespace HireAProfessional.Data.Migrations
                         name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Locations",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    CreatedOn = table.Column<DateTime>(nullable: false),
-                    ModifiedOn = table.Column<DateTime>(nullable: true),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    DeletedOn = table.Column<DateTime>(nullable: true),
-                    CountryId = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Locations", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Locations_Countries_CountryId",
-                        column: x => x.CountryId,
-                        principalTable: "Countries",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Cities",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    CreatedOn = table.Column<DateTime>(nullable: false),
-                    ModifiedOn = table.Column<DateTime>(nullable: true),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    DeletedOn = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(nullable: false),
-                    CountryId = table.Column<string>(nullable: true),
-                    CountryCode = table.Column<string>(nullable: false),
-                    Region = table.Column<string>(nullable: false),
-                    LocationId = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Cities", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Cities_Countries_CountryId",
-                        column: x => x.CountryId,
-                        principalTable: "Countries",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Cities_Locations_LocationId",
-                        column: x => x.LocationId,
-                        principalTable: "Locations",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Companies",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    CreatedOn = table.Column<DateTime>(nullable: false),
-                    ModifiedOn = table.Column<DateTime>(nullable: true),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    DeletedOn = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(nullable: false),
-                    LocationId = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Companies", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Companies_Locations_LocationId",
-                        column: x => x.LocationId,
-                        principalTable: "Locations",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -199,6 +138,29 @@ namespace HireAProfessional.Data.Migrations
                         name: "FK_AspNetUsers_Companies_CompanyId",
                         column: x => x.CompanyId,
                         principalTable: "Companies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Cities",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    Name = table.Column<string>(nullable: false),
+                    CountryId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cities", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Cities_Countries_CountryId",
+                        column: x => x.CountryId,
+                        principalTable: "Countries",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -371,7 +333,8 @@ namespace HireAProfessional.Data.Migrations
                     DeletedOn = table.Column<DateTime>(nullable: true),
                     JobTitle = table.Column<string>(nullable: false),
                     Company = table.Column<string>(nullable: false),
-                    LocationId = table.Column<string>(nullable: true),
+                    CountryId = table.Column<string>(nullable: true),
+                    CityId = table.Column<string>(nullable: true),
                     StartingSalary = table.Column<double>(nullable: false),
                     HighestSalary = table.Column<double>(nullable: false),
                     Description = table.Column<string>(nullable: false),
@@ -395,9 +358,15 @@ namespace HireAProfessional.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_JobPosts_Locations_LocationId",
-                        column: x => x.LocationId,
-                        principalTable: "Locations",
+                        name: "FK_JobPosts_Cities_CityId",
+                        column: x => x.CityId,
+                        principalTable: "Cities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_JobPosts_Countries_CountryId",
+                        column: x => x.CountryId,
+                        principalTable: "Countries",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -516,19 +485,9 @@ namespace HireAProfessional.Data.Migrations
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cities_LocationId",
-                table: "Cities",
-                column: "LocationId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Companies_IsDeleted",
                 table: "Companies",
                 column: "IsDeleted");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Companies_LocationId",
-                table: "Companies",
-                column: "LocationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Countries_IsDeleted",
@@ -546,23 +505,18 @@ namespace HireAProfessional.Data.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_JobPosts_IsDeleted",
+                name: "IX_JobPosts_CityId",
                 table: "JobPosts",
-                column: "IsDeleted");
+                column: "CityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_JobPosts_LocationId",
+                name: "IX_JobPosts_CountryId",
                 table: "JobPosts",
-                column: "LocationId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Locations_CountryId",
-                table: "Locations",
                 column: "CountryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Locations_IsDeleted",
-                table: "Locations",
+                name: "IX_JobPosts_IsDeleted",
+                table: "JobPosts",
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
@@ -603,9 +557,6 @@ namespace HireAProfessional.Data.Migrations
                 name: "Blogs");
 
             migrationBuilder.DropTable(
-                name: "Cities");
-
-            migrationBuilder.DropTable(
                 name: "Votes");
 
             migrationBuilder.DropTable(
@@ -621,10 +572,10 @@ namespace HireAProfessional.Data.Migrations
                 name: "Categories");
 
             migrationBuilder.DropTable(
-                name: "Companies");
+                name: "Cities");
 
             migrationBuilder.DropTable(
-                name: "Locations");
+                name: "Companies");
 
             migrationBuilder.DropTable(
                 name: "Countries");

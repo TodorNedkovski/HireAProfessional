@@ -21,11 +21,5 @@
         public string CountryId { get; set; }
 
         public Country Country { get; set; }
-
-        [Required]
-        public string CountryCode { get; set; }
-
-        [Required]
-        public string Region { get; set; }
     }
 }

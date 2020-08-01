@@ -7,7 +7,7 @@
     using HireAProfessional.Data.Models;
     using Newtonsoft.Json;
 
-    public class JsonInputModel<Т>
+    public class GeoDbJsonInputModel<Т>
     {
         [JsonProperty("data")]
         public List<Т> Data { get; set; }

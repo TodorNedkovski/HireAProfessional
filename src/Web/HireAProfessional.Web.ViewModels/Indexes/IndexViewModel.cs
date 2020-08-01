@@ -6,6 +6,7 @@
 
     using HireAProfessional.Web.ViewModels.Blogs;
     using HireAProfessional.Web.ViewModels.Categories;
+    using HireAProfessional.Web.ViewModels.Locations;
     using HireAProfessional.Web.ViewModels.Posts;
 
     public class IndexViewModel
@@ -15,5 +16,7 @@
         public BlogsListViewModel BlogsListViewModel { get; set; }
 
         public PostsListViewModel PostsListViewModel { get; set; }
+
+        public LocationViewModel Location { get; set; }
     }
 }

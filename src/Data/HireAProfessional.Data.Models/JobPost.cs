@@ -22,9 +22,13 @@
         [Required]
         public string Company { get; set; }
 
-        public string LocationId { get; set; }
+        public string CountryId { get; set; }
 
-        public Location Location { get; set; }
+        public Country Country { get; set; }
+
+        public string CityId { get; set; }
+
+        public City City { get; set; }
 
         [Required]
         public double StartingSalary { get; set; }

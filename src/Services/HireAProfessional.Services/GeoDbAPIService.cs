@@ -10,11 +10,11 @@
     using Newtonsoft.Json;
     using RestSharp;
 
-    public static class APIService<T>
+    public static class GeoDbAPIService<T>
     {
         private const int NUMBER = 10;
 
-        public static JsonInputModel<T> GetCountries(int offset, string entity)
+        public static GeoDbJsonInputModel<T> GetCountries(int offset, string entity)
         {
             var url = "https://wft-geo-db.p.rapidapi.com/v1/geo/" + $"{entity}?offset={offset}&limit={NUMBER}";
 
@@ -24,7 +24,7 @@
             request.AddHeader("x-rapidapi-key", "b1fc7fe185mshfa78e7b8f7c3d7fp134043jsnce488d5141b9");
             IRestResponse response = client.Execute(request);
 
-            return JsonConvert.DeserializeObject<JsonInputModel<T>>(response.Content);
+            return JsonConvert.DeserializeObject<GeoDbJsonInputModel<T>>(response.Content);
         }
     }
 }

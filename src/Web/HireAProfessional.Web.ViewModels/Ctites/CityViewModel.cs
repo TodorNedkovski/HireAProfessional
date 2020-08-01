@@ -8,7 +8,7 @@
     using HireAProfessional.Data.Models;
     using HireAProfessional.Services.Mapping;
 
-    public class CityViewModel : IMapFrom<City>, IMapTo<City>, IHaveCustomMappings
+    public class CityViewModel : IMapFrom<City>, IMapTo<CityViewModel>, IHaveCustomMappings
     {
         public string Name { get; set; }
 
