@@ -19,6 +19,40 @@ namespace HireAProfessional.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("HireAProfessional.Data.Models.Application", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CompanyId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("CompanyId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("Applications");
+                });
+
             modelBuilder.Entity("HireAProfessional.Data.Models.ApplicationRole", b =>
                 {
                     b.Property<string>("Id")
@@ -203,6 +237,8 @@ namespace HireAProfessional.Data.Migrations
 
                     b.HasKey("CompanyId", "ApplicationUserId");
 
+                    b.HasIndex("ApplicationUserId");
+
                     b.ToTable("ApplicationUsersCompanies");
                 });
 
@@ -386,9 +422,8 @@ namespace HireAProfessional.Data.Migrations
                     b.Property<string>("CityId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Company")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("CompanyId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CountryId")
                         .HasColumnType("nvarchar(450)");
@@ -430,6 +465,8 @@ namespace HireAProfessional.Data.Migrations
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("CityId");
+
+                    b.HasIndex("CompanyId");
 
                     b.HasIndex("CountryId");
 
@@ -575,6 +612,17 @@ namespace HireAProfessional.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("HireAProfessional.Data.Models.Application", b =>
+                {
+                    b.HasOne("HireAProfessional.Data.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany("Applications")
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.HasOne("HireAProfessional.Data.Models.Company", "Company")
+                        .WithMany("Applications")
+                        .HasForeignKey("CompanyId");
+                });
+
             modelBuilder.Entity("HireAProfessional.Data.Models.ApplicationUser", b =>
                 {
                     b.HasOne("HireAProfessional.Data.Models.Company", "Company")
@@ -600,13 +648,13 @@ namespace HireAProfessional.Data.Migrations
             modelBuilder.Entity("HireAProfessional.Data.Models.ApplicationUsersCompanies", b =>
                 {
                     b.HasOne("HireAProfessional.Data.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany("ApplicationUsersCompanies")
-                        .HasForeignKey("CompanyId")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("HireAProfessional.Data.Models.Company", "Company")
-                        .WithMany("ApplicationUsersCompanies")
+                        .WithMany()
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -639,6 +687,10 @@ namespace HireAProfessional.Data.Migrations
                     b.HasOne("HireAProfessional.Data.Models.City", "City")
                         .WithMany()
                         .HasForeignKey("CityId");
+
+                    b.HasOne("HireAProfessional.Data.Models.Company", "Company")
+                        .WithMany("JobPosts")
+                        .HasForeignKey("CompanyId");
 
                     b.HasOne("HireAProfessional.Data.Models.Country", "Country")
                         .WithMany()

@@ -19,8 +19,9 @@
         [Required]
         public string JobTitle { get; set; }
 
-        [Required]
-        public string Company { get; set; }
+        public string CompanyId { get; set; }
+
+        public Company Company { get; set; }
 
         public string CountryId { get; set; }
 

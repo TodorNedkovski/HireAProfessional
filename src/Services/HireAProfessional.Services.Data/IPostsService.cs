@@ -14,7 +14,7 @@
 
         PostsListViewModel GetAllPosts(int count = int.MaxValue, string param = "Id", string jobConstraints = "all", string location = "all", OrderType orderType = OrderType.Ascending);
 
-        PostViewModel GetPostById(string id);
+        PostViewModel GetPostById(string id, string userId);
 
         PostsListViewModel GetAllPostsByCategory(string categoryName);
     }

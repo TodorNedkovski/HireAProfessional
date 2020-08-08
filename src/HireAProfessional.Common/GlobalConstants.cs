@@ -6,8 +6,6 @@
 
         public const string AdministratorRoleName = "Administrator";
 
-        public const string ContractorRoleName = "Contractor";
-
-        public const string ProfessionalRoleName = "Professional";
+        public const string ModeratorRoleName = "Moderator";
     }
 }

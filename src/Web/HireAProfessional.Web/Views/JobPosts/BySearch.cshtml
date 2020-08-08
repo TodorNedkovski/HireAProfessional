@@ -9,32 +9,50 @@
 
 </div>
 
-<div>
-    <div data-aos="fade-up" data-aos-delay="100">
-        <div class="rounded border jobs-wrap row">
-            <!--Recent posts-->
-            @foreach (var post in this.Model.Posts)
-            {
-                <a href="All/@post.Id" class="job-item d-block d-md-flex align-items-center col-md-12 @post.EmploymentType.ToString().ToLower()">
-                    <div class="company-logo blank-logo text-center text-md-left pl-3">
-                        <img src="images/logo_2.png" alt="Image" class="img-fluid mx-auto">
-                    </div>
-                    <div class="job-details h-100">
-                        <div class="p-3 align-self-center">
-                            <h3>@post.JobTitle</h3>
-                            <div class="d-block d-lg-flex">
-                                <div class="mr-3"><span class="icon-suitcase mr-1"></span> @Html.Raw(post.Description)</div>
-                                <div class="mr-3"><span class="icon-room mr-1"></span> </div>
+<nav style="margin-left: 250px;">
+    <form method="get" asp-controller="Jobs" asp-action="All" class="form-inline">
+        <input name="location" class="form-control mr-sm-2" type="search" placeholder="location" aria-label="Search">
+        <input name="jobConstraints" class="form-control mr-sm-2" type="search" placeholder="category, job title etc" aria-label="Search">
+        <select class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+        </select>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+</nav>
+
+<div class="site-section bg-light">
+    <div class="container">
+        <div class="row">
+            <div data-aos="fade-up" data-aos-delay="100">
+                <div class="rounded border jobs-wrap row">
+                    <!--Recent posts-->
+                    @foreach (var post in this.Model.Posts)
+                    {
+                        <a href="All/@post.Id" class="job-item d-block d-md-flex align-items-center col-md-12 @post.EmploymentType.ToString().ToLower()">
+                            <div class="company-logo blank-logo text-center text-md-left pl-3">
+                                <img src="images/logo_2.png" alt="Image" class="img-fluid mx-auto">
                             </div>
-                        </div>
-                    </div>
-                    <div class="job-category align-self-center">
-                        <div class="p-3">
-                            <span class="text-danger p-2 rounded border border-danger">@post.EmploymentType.ToString()</span>
-                        </div>
-                    </div>
-                </a>
-            }
+                            <div class="job-details h-100">
+                                <div class="p-3 align-self-center">
+                                    <h3>@post.JobTitle</h3>
+                                    <div class="d-block d-lg-flex">
+                                        <div class="mr-3"><span class="icon-suitcase mr-1"></span> @Html.Raw(post.Description)</div>
+                                        <div class="mr-3"><span class="icon-room mr-1"></span> </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-category align-self-center">
+                                <div class="p-3">
+                                    <span class="text-danger p-2 rounded border border-danger">@post.EmploymentType.ToString()</span>
+                                </div>
+                            </div>
+                        </a>
+                    }
+                </div>
+            </div>
         </div>
     </div>
 </div>

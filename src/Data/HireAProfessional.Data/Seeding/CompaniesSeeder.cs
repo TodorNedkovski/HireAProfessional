@@ -7,6 +7,7 @@
     using System.Threading.Tasks;
 
     using HireAProfessional.Data.Models;
+    using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Diagnostics;
 
     public class CompaniesSeeder : ISeeder
@@ -34,6 +35,7 @@
             };
 
             await dbContext.AddRangeAsync(companies);
+            await dbContext.SaveChangesAsync();
         }
     }
 }

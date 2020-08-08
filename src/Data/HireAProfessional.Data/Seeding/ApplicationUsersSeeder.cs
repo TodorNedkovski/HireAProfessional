@@ -195,8 +195,6 @@
                 },
             };
 
-            var userManager = (UserManager<ApplicationUser>)serviceProvider.GetService(typeof(UserManager<ApplicationUser>));
-
             foreach (var applicationUser in applicationUsers)
             {
                 foreach (var category in dbContext.Categories)
@@ -206,11 +204,6 @@
                         Category = category,
                     });
                 }
-            }
-
-            foreach (var applicationUser in applicationUsers)
-            {
-                await userManager.AddToRoleAsync(applicationUser, "Professional");
             }
 
             await dbContext.Users.AddRangeAsync(applicationUsers);

@@ -32,6 +32,8 @@
 
         public DbSet<JobPost> JobPosts { get; set; }
 
+        public DbSet<Application> Applications { get; set; }
+
         public DbSet<ApplicationUserCategory> ApplicationUsersCategories { get; set; }
 
         public DbSet<Blog> Blogs { get; set; }

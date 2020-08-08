@@ -68,6 +68,7 @@
             services.AddTransient<IBlogsService, BlogsService>();
             services.AddTransient<IVotesService, VotesService>();
             services.AddTransient<ICountriesService, CountriesService>();
+            services.AddTransient<IApplicationService, ApplicationService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

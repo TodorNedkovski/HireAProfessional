@@ -21,16 +21,17 @@
 
             var country = await dbContext.Countries.FirstOrDefaultAsync();
             var city = await dbContext.Cities.FirstOrDefaultAsync();
+            var companyId = (await dbContext.Companies.FirstOrDefaultAsync()).Id;
 
             var posts = new List<JobPost>
             {
                 new JobPost
                 {
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
-                    Company = "Apple",
                     Description = "Loerm 1234",
                     JobTitle = "Coffee Guy",
                     City = city,
+                    CompanyId = companyId,
                     Country = country,
                     HighestSalary = 10000,
                     StartingSalary = 100,
@@ -39,10 +40,10 @@
                 new JobPost
                 {
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Front End Developer"),
-                    Company = "Microsoft",
                     Description = "Loerm 1234",
                     City = city,
                     Country = country,
+                    CompanyId = companyId,
                     HighestSalary = 10000,
                     StartingSalary = 100,
                     JobTitle = "Coffee Guy",
@@ -51,10 +52,10 @@
                 new JobPost
                 {
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
-                    Company = "Amazon",
                     Description = "Loerm 1234",
                     City = city,
                     Country = country,
+                    CompanyId = companyId,
                     HighestSalary = 10000,
                     StartingSalary = 100,
                     JobTitle = "Coffee Guy",
@@ -63,10 +64,10 @@
                 new JobPost
                 {
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
-                    Company = "Apple",
                     Description = "Loerm 1234",
                     City = city,
                     Country = country,
+                    CompanyId = companyId,
                     JobTitle = "Coffee Guy",
                     HighestSalary = 10000,
                     StartingSalary = 100,
@@ -75,10 +76,10 @@
                 new JobPost
                 {
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
-                    Company = "Apple",
                     Description = "Loerm 1234",
                     City = city,
                     Country = country,
+                    CompanyId = companyId,
                     JobTitle = "Coffee Guy",
                     HighestSalary = 10000,
                     StartingSalary = 100,
@@ -87,10 +88,10 @@
                 new JobPost
                 {
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
-                    Company = "Apple",
                     Description = "Loerm 1234",
                     City = city,
                     Country = country,
+                    CompanyId = companyId,
                     JobTitle = "Coffee Guy",
                     HighestSalary = 10000,
                     StartingSalary = 100,
@@ -99,10 +100,10 @@
                 new JobPost
                 {
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
-                    Company = "Apple",
                     Description = "Loerm 1234",
                     City = city,
                     Country = country,
+                    CompanyId = companyId,
                     JobTitle = "Coffee Guy",
                     HighestSalary = 10000,
                     StartingSalary = 100,
@@ -111,10 +112,10 @@
                 new JobPost
                 {
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
-                    Company = "Apple",
                     Description = "Loerm 1234",
                     City = city,
                     Country = country,
+                    CompanyId = companyId,
                     JobTitle = "Coffee Guy",
                     HighestSalary = 10000,
                     StartingSalary = 100,
@@ -123,10 +124,10 @@
                 new JobPost
                 {
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
-                    Company = "Apple",
                     Description = "Loerm 1234",
                     City = city,
                     Country = country,
+                    CompanyId = companyId,
                     JobTitle = "Coffee Guy",
                     HighestSalary = 10000,
                     StartingSalary = 100,
@@ -135,10 +136,10 @@
                 new JobPost
                 {
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
-                    Company = "Apple",
                     Description = "Loerm 1234",
                     City = city,
                     Country = country,
+                    CompanyId = companyId,
                     JobTitle = "Coffee Guy",
                     HighestSalary = 10000,
                     StartingSalary = 100,
@@ -147,10 +148,10 @@
                 new JobPost
                 {
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
-                    Company = "Apple",
                     Description = "Loerm 1234",
                     City = city,
                     Country = country,
+                    CompanyId = companyId,
                     JobTitle = "Coffee Guy",
                     HighestSalary = 10000,
                     StartingSalary = 100,
@@ -159,10 +160,10 @@
                 new JobPost
                 {
                     Category = dbContext.Categories.FirstOrDefault(c => c.Name == "Back End Developer"),
-                    Company = "Apple",
                     Description = "Loerm 1234",
                     City = city,
                     Country = country,
+                    CompanyId = companyId,
                     JobTitle = "Coffee Guy",
                     HighestSalary = 10000,
                     StartingSalary = 100,

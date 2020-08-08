@@ -166,6 +166,35 @@ namespace HireAProfessional.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Applications",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    ApplicationUserId = table.Column<string>(nullable: true),
+                    CompanyId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Applications", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Applications_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Applications_Companies_CompanyId",
+                        column: x => x.CompanyId,
+                        principalTable: "Companies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ApplicationUserCategory",
                 columns: table => new
                 {
@@ -200,8 +229,8 @@ namespace HireAProfessional.Data.Migrations
                 {
                     table.PrimaryKey("PK_ApplicationUsersCompanies", x => new { x.CompanyId, x.ApplicationUserId });
                     table.ForeignKey(
-                        name: "FK_ApplicationUsersCompanies_AspNetUsers_CompanyId",
-                        column: x => x.CompanyId,
+                        name: "FK_ApplicationUsersCompanies_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -332,7 +361,7 @@ namespace HireAProfessional.Data.Migrations
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
                     JobTitle = table.Column<string>(nullable: false),
-                    Company = table.Column<string>(nullable: false),
+                    CompanyId = table.Column<string>(nullable: true),
                     CountryId = table.Column<string>(nullable: true),
                     CityId = table.Column<string>(nullable: true),
                     StartingSalary = table.Column<double>(nullable: false),
@@ -361,6 +390,12 @@ namespace HireAProfessional.Data.Migrations
                         name: "FK_JobPosts_Cities_CityId",
                         column: x => x.CityId,
                         principalTable: "Cities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_JobPosts_Companies_CompanyId",
+                        column: x => x.CompanyId,
+                        principalTable: "Companies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -401,8 +436,28 @@ namespace HireAProfessional.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Applications_ApplicationUserId",
+                table: "Applications",
+                column: "ApplicationUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Applications_CompanyId",
+                table: "Applications",
+                column: "CompanyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Applications_IsDeleted",
+                table: "Applications",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ApplicationUserCategory_ApplicationUserId",
                 table: "ApplicationUserCategory",
+                column: "ApplicationUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ApplicationUsersCompanies_ApplicationUserId",
+                table: "ApplicationUsersCompanies",
                 column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
@@ -510,6 +565,11 @@ namespace HireAProfessional.Data.Migrations
                 column: "CityId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_JobPosts_CompanyId",
+                table: "JobPosts",
+                column: "CompanyId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_JobPosts_CountryId",
                 table: "JobPosts",
                 column: "CountryId");
@@ -532,6 +592,9 @@ namespace HireAProfessional.Data.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Applications");
+
             migrationBuilder.DropTable(
                 name: "ApplicationUserCategory");
 

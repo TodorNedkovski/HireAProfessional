@@ -32,11 +32,12 @@
                               new CategoriesSeeder(),
                               new CountriesSeeder(),
                               new CitiesSeeder(),
-                              new CompaniesSeeder(),
-                              new RolesSeeder(),
                               new ApplicationUsersSeeder(),
+                              new CompaniesSeeder(),
                               new PostSeeder(),
+                              new RolesSeeder(),
                               new BlogsSeeder(),
+                              new AdminSeeder(),
                           };
 
             foreach (var seeder in seeders)

@@ -14,16 +14,6 @@
         {
             applicationUserCategoryBuilder
                 .HasKey(uc => new { uc.CompanyId, uc.ApplicationUserId });
-
-            applicationUserCategoryBuilder
-                .HasOne(uc => uc.ApplicationUser)
-                .WithMany(u => u.ApplicationUsersCompanies)
-                .HasForeignKey(uc => uc.CompanyId);
-
-            applicationUserCategoryBuilder
-                .HasOne(uc => uc.Company)
-                .WithMany(c => c.ApplicationUsersCompanies)
-                .HasForeignKey(uc => uc.CompanyId);
         }
     }
 }

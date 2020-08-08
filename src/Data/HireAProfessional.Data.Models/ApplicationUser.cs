@@ -66,7 +66,7 @@ namespace HireAProfessional.Data.Models
 
         public ICollection<Vote> Votes { get; set; }
 
-        public ICollection<ApplicationUsersCompanies> ApplicationUsersCompanies { get; set; }
+        public ICollection<Application> Applications { get; set; }
 
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 
