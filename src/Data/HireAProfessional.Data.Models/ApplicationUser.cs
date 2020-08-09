@@ -68,6 +68,10 @@ namespace HireAProfessional.Data.Models
 
         public ICollection<Application> Applications { get; set; }
 
+        public ICollection<UserReport> UserReports { get; set; }
+
+        public ICollection<UserReport> ReportedByUsers { get; set; }
+
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }

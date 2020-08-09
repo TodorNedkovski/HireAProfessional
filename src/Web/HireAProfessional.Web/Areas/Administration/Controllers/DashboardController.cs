@@ -15,5 +15,10 @@
         {
             return this.View();
         }
+
+        public IActionResult Users()
+        {
+            return this.View();
+        }
     }
 }
