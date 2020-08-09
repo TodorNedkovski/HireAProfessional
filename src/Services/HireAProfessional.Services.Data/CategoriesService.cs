@@ -65,7 +65,7 @@
                         TwitterAccountLink = p.ApplicationUser.TwitterAccountLink,
                         LinkedInAccountLink = p.ApplicationUser.LinkedInAccountLink,
                         Age = p.ApplicationUser.Age,
-                        Company = p.ApplicationUser.Company,
+                        CompanyId = p.ApplicationUser.Company.Id,
                         Education = p.ApplicationUser.Education,
                         ImageUrl = p.ApplicationUser.ImageUrl,
                     }),

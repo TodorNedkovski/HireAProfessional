@@ -14,6 +14,11 @@
     {
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
+            if (dbContext.Companies.Any())
+            {
+                return;
+            }
+
             var companies = new List<Company>()
             {
                 new Company

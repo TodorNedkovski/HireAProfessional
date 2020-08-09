@@ -1,0 +1,19 @@
+﻿@using HireAProfessional.Web.ViewModels.Administration.Dashboard.Companies;
+@model ICollection<DashboardCompanyViewModel>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Companies</title>
+</head>
+<body>
+    <h3 class="text-center">Top 10 Companies</h3>
+
+    @foreach (var company in this.Model)
+    {
+        <h1>@company.Id - @company.Name</h1>
+    }
+</body>
+</html>

@@ -1,8 +1,10 @@
-﻿using HireAProfessional.Data.Models;
-
-namespace HireAProfessional.Web.ViewModels.ApplicationUsers
+﻿namespace HireAProfessional.Web.ViewModels.ApplicationUsers
 {
-    public class ApplicationUserViewModel
+    using HireAProfessional.Data.Models;
+    using HireAProfessional.Services.Mapping;
+    using HireAProfessional.Web.ViewModels.Companies;
+
+    public class ApplicationUserViewModel : IMapFrom<ApplicationUser>, IMapTo<ApplicationUserViewModel>
     {
         public string FirstName { get; set; }
 
@@ -12,7 +14,9 @@ namespace HireAProfessional.Web.ViewModels.ApplicationUsers
 
         public string ImageUrl { get; set; }
 
-        public Company Company { get; set; }
+        public string CompanyId { get; set; }
+
+        public CompanyViewModel Company { get; set; }
 
         public string Education { get; set; }
 
