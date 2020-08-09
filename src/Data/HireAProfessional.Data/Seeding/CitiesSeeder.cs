@@ -23,6 +23,15 @@
                 return;
             }
 
+            var country = await dbContext.Countries.FirstOrDefaultAsync(c => c.Name == "Bulgaria");
+            var city = new City
+            {
+                Name = "Sliven",
+                Country = country,
+            };
+
+            await dbContext.AddAsync(city);
+
             //273570
 
             for (int offset = 0; offset <= 100; offset += 10)
