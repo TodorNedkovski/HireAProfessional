@@ -26,7 +26,7 @@
             this.countryService = countryService;
         }
 
-        public async Task<ActionResult<IEnumerable<CountryViewModel>>> Get()
+        public ActionResult<IEnumerable<CountryViewModel>> Get()
         {
             var countries = this.countryService.GetAllCountries<CountryViewModel>().ToList();
 

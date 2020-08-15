@@ -7,7 +7,7 @@
 
     using HireAProfessional.Data.Models;
 
-    public interface IApplicationService
+    public interface IApplicationsService
     {
         Task CreateApplicationAsync(string userId, string companyId);
     }

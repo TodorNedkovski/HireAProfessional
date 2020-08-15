@@ -7,7 +7,7 @@
 
     using HireAProfessional.Web.ViewModels.Companies;
 
-    public interface ICompanyService
+    public interface ICompaniesService
     {
         ICollection<T> GetAllCompanies<T>();
     }

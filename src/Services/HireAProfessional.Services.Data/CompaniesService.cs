@@ -16,11 +16,11 @@
     using HireAProfessional.Web.ViewModels.Companies;
     using HireAProfessional.Web.ViewModels.Posts;
 
-    public class CompanyService : ICompanyService
+    public class CompaniesService : ICompaniesService
     {
         private readonly IDeletableEntityRepository<Company> repository;
 
-        public CompanyService(IDeletableEntityRepository<Company> repository)
+        public CompaniesService(IDeletableEntityRepository<Company> repository)
         {
             this.repository = repository;
         }

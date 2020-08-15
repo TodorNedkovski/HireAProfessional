@@ -6,14 +6,102 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <title>Companies</title>
 </head>
 <body>
-    <h3 class="text-center">Top 10 Companies</h3>
+    <h3 class="text-xl-center">Companies Dashboard</h3>
 
-    @foreach (var company in this.Model)
-    {
-        <h1>@company.Id - @company.Name</h1>
-    }
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">View Statistics</h5>
+                    <a href="Companies/Statistics" class="btn btn-primary">Go</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Crud Operations</h5>
+                    <a href="Companies/CrudOperations" class="btn btn-primary">Go</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*<canvas id="myChart"></canvas>*@
 </body>
 </html>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script>
+    async function main() {
+
+        let response = await fetch("https://localhost:44319/api/companies")
+        let json = await response.json()
+
+        let companies = {
+            names: [],
+            employeesCount: [],
+        }
+
+        console.log(companies)
+
+        json.forEach((v, i) => companies['names'][i] = v['name'])
+        json.forEach((v, i) => companies['employeesCount'][i] = v['employeesCount'])
+
+        const cfg = {
+            // The type of chart we want to create
+            type: 'bar',
+
+            // The data for our dataset
+            data: {
+                labels: companies['names'],
+                datasets: [{
+                    barThickness: 6,
+                    maxBarThickness: 8,
+                    backgroundColor: 'rgb(0, 0, 0)',
+                    borderColor: 'rgb(0, 0, 0)',
+                    data: companies['employeesCount']
+                }]
+            },
+
+            // Configuration options go here
+            options: {}
+        };
+
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var chart = new Chart(ctx, cfg);
+    }
+
+    main()
+</script>
+
+@*@foreach (var company in this.Model)
+    {
+        int i = 0;
+
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Applicants</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">@i</th>
+                    <td>@company.Id</td>
+                    <td>@company.Name</td>
+                    <td>@company.Applications.Count</td>
+                </tr>
+            </tbody>
+        </table>
+
+        i++;
+    }*@

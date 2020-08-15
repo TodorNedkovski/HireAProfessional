@@ -28,6 +28,8 @@
 
         public DbSet<City> Cities { get; set; }
 
+        public DbSet<Comment> Comments { get; set; }
+
         public DbSet<Company> Companies { get; set; }
 
         public DbSet<JobPost> JobPosts { get; set; }

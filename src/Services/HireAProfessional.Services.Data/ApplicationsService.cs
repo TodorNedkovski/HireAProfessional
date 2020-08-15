@@ -8,11 +8,11 @@
     using HireAProfessional.Data.Common.Repositories;
     using HireAProfessional.Data.Models;
 
-    public class ApplicationService : IApplicationService
+    public class ApplicationsService : IApplicationsService
     {
         private IDeletableEntityRepository<Application> applicationRepository;
 
-        public ApplicationService(IDeletableEntityRepository<Application> applicationRepository)
+        public ApplicationsService(IDeletableEntityRepository<Application> applicationRepository)
         {
             this.applicationRepository = applicationRepository;
         }

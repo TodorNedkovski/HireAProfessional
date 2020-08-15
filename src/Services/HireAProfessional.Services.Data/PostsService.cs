@@ -78,6 +78,8 @@
 
         public PostsListViewModel GetAllPosts(int count, string param, string jobConstraints, string location, OrderType orderType)
         {
+            var geolocation = GeolocationAPIService.GetCurrentLocation();
+
             string countryName = string.Empty;
             string cityName = string.Empty;
 
@@ -85,8 +87,8 @@
 
             if (string.IsNullOrEmpty(location))
             {
-                countryName = GeolocationAPIService.GetCurrentLocation().CountryName;
-                cityName = GeolocationAPIService.GetCurrentLocation().CityName;
+                countryName = geolocation.CountryName;
+                cityName = geolocation.CityName;
             }
             else
             {

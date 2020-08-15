@@ -72,6 +72,8 @@ namespace HireAProfessional.Data.Models
 
         public ICollection<UserReport> ReportedByUsers { get; set; }
 
+        public ICollection<Comment> Comments { get; set; }
+
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }

@@ -16,9 +16,9 @@
     [ApiController]
     public class ApplicationsController : ControllerBase
     {
-        private IApplicationService applicationService;
+        private IApplicationsService applicationService;
 
-        public ApplicationsController(IApplicationService applicationService)
+        public ApplicationsController(IApplicationsService applicationService)
         {
             this.applicationService = applicationService;
         }

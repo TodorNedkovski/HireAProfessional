@@ -44,6 +44,8 @@
 
         public Category Category { get; set; }
 
+        public ICollection<Comment> Comments { get; set; }
+
         public EmploymentType EmploymentType { get; set; }
 
         public ICollection<Vote> Votes { get; set; }

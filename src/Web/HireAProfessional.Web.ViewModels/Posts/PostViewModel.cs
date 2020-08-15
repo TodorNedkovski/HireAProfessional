@@ -6,10 +6,12 @@
     using System.Text;
 
     using AutoMapper;
+    using Ganss.XSS;
     using HireAProfessional.Data.Models;
     using HireAProfessional.Data.Models.Enums;
     using HireAProfessional.Services.Mapping;
     using HireAProfessional.Web.ViewModels.Categories;
+    using HireAProfessional.Web.ViewModels.Comments;
 
     public class PostViewModel : IMapFrom<JobPost>, IMapTo<PostViewModel>, IHaveCustomMappings
     {
@@ -19,6 +21,10 @@
 
         public string JobTitle { get; set; }
 
+        public string CityName { get; set; }
+
+        public string CountryName { get; set; }
+
         public int VotesCount { get; set; }
 
         public string Company { get; set; }
@@ -27,9 +33,13 @@
 
         public string Description { get; set; }
 
+        public string SanitizedDescription => new HtmlSanitizer().Sanitize(this.Description);
+
         public CategoryViewModel Category { get; set; }
 
         public EmploymentType EmploymentType { get; set; }
+
+        public ICollection<CommentViewModel> Comments { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {

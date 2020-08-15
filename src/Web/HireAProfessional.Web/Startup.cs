@@ -21,6 +21,7 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using Microsoft.Extensions.Logging;
 
     public class Startup
     {
@@ -68,8 +69,9 @@
             services.AddTransient<IBlogsService, BlogsService>();
             services.AddTransient<IVotesService, VotesService>();
             services.AddTransient<ICountriesService, CountriesService>();
-            services.AddTransient<IApplicationService, ApplicationService>();
-            services.AddTransient<ICompanyService, CompanyService>();
+            services.AddTransient<IApplicationsService, ApplicationsService>();
+            services.AddTransient<ICompaniesService, CompaniesService>();
+            services.AddTransient<ICommentsService, CommentsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -108,8 +110,10 @@
             app.UseEndpoints(
                 endpoints =>
                     {
-                        endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-                        endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                        //endpoints.MapControllerRoute(
+                        //    "dashboard",
+                        //    "Administration/Dashboard/{action}/{entity}",
+                        //    new { controller = "Dashboard" });
                         endpoints.MapControllerRoute(
                             "post",
                             "Jobs/All/{id}",
@@ -126,6 +130,8 @@
                             "blogs",
                             "Blogs/All",
                             new { controller = "Blogs", action = "AllBlogs" });
+                        endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                        endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();
                     });
         }
