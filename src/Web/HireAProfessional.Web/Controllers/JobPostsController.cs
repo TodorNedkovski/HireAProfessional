@@ -24,9 +24,15 @@
             this.userManager = userManager;
         }
 
-        public IActionResult BySearch(string location, string jobConstraints)
+        public IActionResult BySearch(string location, string jobConstraints, int page = 1)
         {
-            var searchResult = this.postsService.GetAllPosts(10, "Id", jobConstraints, location, OrderType.Ascending);
+            int itemsPerPage = 10;
+
+            var searchResult = this.postsService.GetAllPosts(int.MaxValue, (page - 1) * itemsPerPage, "Id", jobConstraints, location, OrderType.Ascending);
+            var count = searchResult.Posts.Count;
+
+            searchResult.PagesCount = (int)Math.Ceiling((double)count / itemsPerPage);
+            searchResult.CurrentPage = page;
 
             return this.View(searchResult);
         }

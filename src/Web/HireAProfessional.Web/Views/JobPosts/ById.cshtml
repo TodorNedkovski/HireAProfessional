@@ -93,7 +93,7 @@
                         </div>
 
                         <article>
-                            @this.Model.Description
+                            @Html.Raw(this.Model.Description)
                         </article>
                         <p class="mt-5"><a onclick="apply('@this.Model.UserId', '@this.Model.CompanyId')" class="btn btn-primary py-2 px-4">Apply Job</a></p>
                     </div>

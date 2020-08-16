@@ -10,5 +10,9 @@
     public class PostsListViewModel
     {
         public ICollection<PostViewModel> Posts { get; set; }
+
+        public int CurrentPage { get; set; }
+
+        public int PagesCount { get; set; }
     }
 }

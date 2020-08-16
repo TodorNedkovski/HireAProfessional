@@ -39,7 +39,7 @@
                                 <div class="p-3 align-self-center">
                                     <h3>@post.JobTitle</h3>
                                     <div class="d-block d-lg-flex">
-                                        <div class="mr-3"><span class="icon-suitcase mr-1"></span> @Html.Raw(post.Description)</div>
+                                        <div class="mr-3"><span class="icon-suitcase mr-1"></span> @Html.Raw(post.Description.Substring(0, Math.Min(post.Description.Length, 250)))...</div>
                                         <div class="mr-3"><span class="icon-room mr-1"></span> </div>
                                     </div>
                                 </div>
@@ -56,3 +56,47 @@
         </div>
     </div>
 </div>
+
+<nav>
+    <ul class="pagination justify-content-center">
+        @if (this.Model.CurrentPage == 1)
+        {
+            <li class="page-item disabled">
+                <a class="page-link" href="#">Previous</a>
+            </li>
+        }
+        else
+        {
+            <li class="page-item">
+                <a class="page-link"
+                   asp-route="posts"
+                   asp-route-page="@(this.Model.CurrentPage - 1)">Previous</a>
+            </li>
+        }
+
+        @for (int i = 1; i <= this.Model.PagesCount; i++)
+        {
+            var active = i == this.Model.CurrentPage ? "active" : string.Empty;
+            <li class="page-item @active">
+                <a class="page-link"
+                   asp-route="posts"
+                   asp-route-page="@i">@i</a>
+            </li>
+        }
+
+        @if (this.Model.CurrentPage == this.Model.PagesCount)
+        {
+            <li class="page-item disabled">
+                <a class="page-link" href="#">Next</a>
+            </li>
+        }
+        else
+        {
+            <li class="page-item">
+                <a class="page-link"
+                   asp-route="posts"
+                   asp-route-page="@(this.Model.CurrentPage + 1)">Next</a>
+            </li>
+        }
+    </ul>
+</nav>

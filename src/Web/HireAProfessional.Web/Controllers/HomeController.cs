@@ -38,7 +38,7 @@
             {
                 BlogsListViewModel = this.blogsService.GetAllBlogs(3, "CreatedOn", OrderType.Descending),
                 CategoriesListViewModel = this.categoriesService.GetAllCategories(8, "CreatedOn", OrderType.Descending),
-                PostsListViewModel = this.postsService.GetAllPosts(5, "CreatedOn", string.Empty, string.Empty, OrderType.Descending),
+                PostsListViewModel = this.postsService.GetAllPosts(5, 0, "CreatedOn", string.Empty, string.Empty, OrderType.Descending),
                 Location = new LocationViewModel
                 {
                     CityName = location.CityName,

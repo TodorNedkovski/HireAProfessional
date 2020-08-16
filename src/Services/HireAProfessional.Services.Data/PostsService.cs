@@ -76,7 +76,7 @@
             await this.postRepository.SaveChangesAsync();
         }
 
-        public PostsListViewModel GetAllPosts(int count, string param, string jobConstraints, string location, OrderType orderType)
+        public PostsListViewModel GetAllPosts(int count, int skip, string param, string jobConstraints, string location, OrderType orderType)
         {
             var geolocation = GeolocationAPIService.GetCurrentLocation();
 
@@ -107,6 +107,7 @@
             || p.City.Name.ToLower() == cityName.ToLower()
             || p.JobTitle.ToLower() == jobConstraints.ToLower())
             .OrderBy<JobPost>(param, orderType)
+            .Skip(skip)
             .Take(count)
             .To<PostViewModel>()
             .ToList();
