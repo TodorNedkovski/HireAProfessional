@@ -21,6 +21,8 @@
 
         public async Task<string> CreateComment(string posterId, string parentId, string postId, string content)
         {
+            parentId = parentId == "0" ? null : parentId;
+
             var comment = new Comment
             {
                 PosterId = posterId,

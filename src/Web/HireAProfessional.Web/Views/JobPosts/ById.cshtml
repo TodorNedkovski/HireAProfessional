@@ -87,7 +87,7 @@
                                 </div>
                             </div>
                             <div class="job-post-item-body d-block d-md-flex">
-                                <div class="mr-3"><span class="fl-bigmug-line-portfolio23"></span> <a href="#">New York Times</a></div>
+                                <div class="mr-3"><span class="fl-bigmug-line-portfolio23"></span> <a href="#">@this.Model.CompanyName</a></div>
                                 <div><span class="fl-bigmug-line-big104"></span> <span>@this.Model.CityName, @this.Model.CountryName</span></div>
                             </div>
                         </div>
@@ -128,7 +128,7 @@
 <div>
     <form asp-controller="Comments" asp-action="Create" method="post" id="AddCommentForm" style="display: none">
         <input type="hidden" name="postId" value="@this.Model.Id" />
-        <input type="hidden" name="parentId" value="" />
+        <input type="hidden" name="parentId" value='' />
         <div>
             <label for="Content"></label>
             <textarea name="content" id="Content" class="form-control"></textarea>
