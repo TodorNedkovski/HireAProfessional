@@ -18,12 +18,16 @@ using Microsoft.Extensions.Logging;
 using HireAProfessional.Services.Data;
 using System.Collections.Immutable;
 using HireAProfessional.Web.ViewModels.Categories;
+using HireAProfessional.Data.Common.Repositories;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 
 namespace HireAProfessional.Web.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
+        private readonly IDeletableEntityRepository<Company> companyRepository;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
@@ -35,13 +39,15 @@ namespace HireAProfessional.Web.Areas.Identity.Pages.Account
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            ICategoriesService categoryService)
+            ICategoriesService categoryService,
+            IDeletableEntityRepository<Company> userRepository)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
             _categoryService = categoryService;
+            this.companyRepository = userRepository;
         }
 
         [BindProperty]
@@ -127,6 +133,8 @@ namespace HireAProfessional.Web.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            var company = await this.companyRepository.AllAsNoTracking().FirstOrDefaultAsync(c => c.Name == this.Input.Company);
+
             returnUrl = returnUrl ?? Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
@@ -137,7 +145,7 @@ namespace HireAProfessional.Web.Areas.Identity.Pages.Account
                     Email = this.Input.Email,
                     FirstName = this.Input.FirstName,
                     LastName = this.Input.LastName,
-                    //Company = this.Input.Company,
+                    CompanyId = company.Id,
                     Education = this.Input.Education,
                     Age = this.Input.Age,
                     FacebookAccountLink = this.Input.FacebookAccountLink,

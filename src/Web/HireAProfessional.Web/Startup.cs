@@ -1,6 +1,7 @@
 ﻿namespace HireAProfessional.Web
 {
     using System.Reflection;
+
     using AutoMapper;
     using HireAProfessional.Data;
     using HireAProfessional.Data.Common;
