@@ -42,11 +42,13 @@
             await this.usersRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<T> GetAll<T>()
+        public IEnumerable<T> GetAll<T>(int take, int skips)
         {
             return this.usersRepository
                 .AllAsNoTracking()
                 .To<T>()
+                .Skip(skips)
+                .Take(take)
                 .ToList();
         }
     }

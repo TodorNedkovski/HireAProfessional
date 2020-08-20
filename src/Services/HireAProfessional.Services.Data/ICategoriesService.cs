@@ -11,9 +11,9 @@
 
     public interface ICategoriesService
     {
-        CategoriesListViewModel GetAllCategories(int count = int.MaxValue, string param = "Id", OrderType orderType = OrderType.Ascending);
+        IEnumerable<T> GetAll<T>(int count = int.MaxValue, string param = "Id", OrderType orderType = OrderType.Ascending);
 
-        ICollection<Category> GetAllCategoriesWithoutViewModel();
+        Task Create(Category category);
 
         CategoryViewModel GetCategoryByName(string name);
     }

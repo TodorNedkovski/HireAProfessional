@@ -56,7 +56,7 @@ namespace HireAProfessional.Web.Areas.Identity.Pages.Account
         public string ReturnUrl { get; set; }
 
         public IEnumerable<CategoryRegisterViewModel> Categories
-            => this._categoryService.GetAllCategoriesWithoutViewModel()
+            => this._categoryService.GetAll<CategoryViewModel>()
             .Select(c => new CategoryRegisterViewModel { Name = c.Name });
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }

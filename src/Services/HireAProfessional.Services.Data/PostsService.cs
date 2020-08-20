@@ -131,6 +131,11 @@
             };
         }
 
+        public int GetCountsBySearch(string param = "Id", string jobConstraints = "all", string location = "all", OrderType orderType = OrderType.Ascending)
+        {
+            throw new NotImplementedException();
+        }
+
         public PostViewModel GetPostById(string id, string userId)
         {
             var companyId = this.postRepository

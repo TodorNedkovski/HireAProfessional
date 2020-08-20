@@ -19,10 +19,9 @@
     public class UsersApiController : ControllerBase
     {
         private readonly IUsersService usersService;
-        private readonly UserManager<ApplicationUser> userManager;
         private readonly ICompaniesService companiesService;
 
-        public UsersApiController(IUsersService usersService, ICompaniesService companiesService, UserManager<ApplicationUser> userManager)
+        public UsersApiController(IUsersService usersService, ICompaniesService companiesService)
         {
             this.usersService = usersService;
             this.companiesService = companiesService;
@@ -39,14 +38,14 @@
         }
 
         [Route("api/users/edit")]
-        //[Authorize]
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<DeleteUserResponseViewModel>> Edit(RegisterUserInputModel input)
         {
-            //if (!this.ModelState.IsValid)
-            //{
-            //    return this.BadRequest();
-            //}
+            if (!this.ModelState.IsValid)
+            {
+                return this.BadRequest();
+            }
 
             var company = this.companiesService.GetAllCompanies<CompanyViewModel>().FirstOrDefault(c => c.Name == input.CompanyName);
 

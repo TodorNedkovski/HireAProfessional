@@ -28,8 +28,8 @@
         {
             int itemsPerPage = 10;
 
-            var searchResult = this.postsService.GetAllPosts(int.MaxValue, (page - 1) * itemsPerPage, "Id", jobConstraints, location, OrderType.Ascending);
-            var count = searchResult.Posts.Count;
+            var searchResult = this.postsService.GetAllPosts(itemsPerPage, (page - 1) * itemsPerPage, "Id", jobConstraints, location, OrderType.Ascending);
+            var count = this.postsService.GetAllPosts(int.MaxValue, 0, "Id", jobConstraints, location, OrderType.Ascending).Posts.Count;
 
             searchResult.PagesCount = (int)Math.Ceiling((double)count / itemsPerPage);
             searchResult.CurrentPage = page;

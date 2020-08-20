@@ -17,5 +17,7 @@
         PostViewModel GetPostById(string id, string userId);
 
         PostsListViewModel GetAllPostsByCategory(string categoryName);
+
+        int GetCountsBySearch(string param = "Id", string jobConstraints = "all", string location = "all", OrderType orderType = OrderType.Ascending);
     }
 }

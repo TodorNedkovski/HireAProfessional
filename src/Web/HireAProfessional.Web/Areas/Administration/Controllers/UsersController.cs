@@ -27,11 +27,19 @@
         }
 
         [Route("Administration/Dashboard/Users/CrudOperations")]
-        public IActionResult CrudOperations()
+        public IActionResult CrudOperations(int page = 1)
         {
-            var users = this.usersService.GetAll<ApplicationUserViewModel>();
+            var users = this.usersService.GetAll<ApplicationUserViewModel>(10, (page - 1) * 10);
+            var count = this.usersService.GetAll<ApplicationUserViewModel>(int.MaxValue, 0).Count();
 
-            return this.View(string.Format(ViewPaths.CrudOperationsViewPath, "Users"), users);
+            var model = new CrudApplicationUserViewModel
+            {
+                Users = users,
+                CurrentPage = page,
+                PagesCount = (int)Math.Ceiling((double)count / 10),
+            };
+
+            return this.View(string.Format(ViewPaths.CrudOperationsViewPath, "Users"), model);
         }
     }
 }

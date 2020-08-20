@@ -132,6 +132,10 @@
                             "blogs",
                             "Blogs/All",
                             new { controller = "Blogs", action = "AllBlogs" });
+                        //Administration / Dashboard / Categories / CrudOperations / CreateCategory
+                        endpoints.MapControllerRoute("crudOperationsCreate", "{area:exists}/Dashboard/{controller=Home}/CrudOperations/Create");
+                        endpoints.MapControllerRoute("statistics", "{area:exists}/Dashboard/{controller=Home}/Statistics{action=Index}");
+                        endpoints.MapControllerRoute("dashboardArea", "{area:exists}/Dashboard/{controller=Home}/{action=Index}");
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();

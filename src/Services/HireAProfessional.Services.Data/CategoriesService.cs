@@ -8,6 +8,7 @@
 
     using HireAProfessional.Data.Common.Repositories;
     using HireAProfessional.Data.Models;
+    using HireAProfessional.Services.Mapping;
     using HireAProfessional.Web.Infrastructure;
     using HireAProfessional.Web.Infrastructure.Enums;
     using HireAProfessional.Web.ViewModels.ApplicationUsers;
@@ -23,29 +24,22 @@
             this.categoryRepository = categoryRepository;
         }
 
-        public CategoriesListViewModel GetAllCategories(int count, string param, OrderType orderType)
+        public async Task Create(Category category)
+        {
+            await this.categoryRepository.AddAsync(category);
+            await this.categoryRepository.SaveChangesAsync();
+        }
+
+        public IEnumerable<T> GetAll<T>(int count, string param, OrderType orderType)
         {
             var categories = this.categoryRepository
                 .All()
                 .Take(count)
                 .OrderBy<Category>(param, orderType)
-                .Select(c => new CategoryViewModel
-                {
-                    Description = c.Description,
-                    ImageUrl = c.ImageUrl,
-                    Name = c.Name,
-                })
+                .To<T>()
                 .ToList();
 
-            return new CategoriesListViewModel
-            {
-                Categories = categories,
-            };
-        }
-
-        public ICollection<Category> GetAllCategoriesWithoutViewModel()
-        {
-            return this.categoryRepository.All().ToList();
+            return categories;
         }
 
         public CategoryViewModel GetCategoryByName(string name)

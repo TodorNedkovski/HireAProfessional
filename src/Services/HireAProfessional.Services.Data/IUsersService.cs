@@ -10,7 +10,7 @@
 
     public interface IUsersService
     {
-        IEnumerable<T> GetAll<T>();
+        IEnumerable<T> GetAll<T>(int take, int skips);
 
         Task DeleteAsync(string userId);
 
