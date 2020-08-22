@@ -13,6 +13,7 @@
     using HireAProfessional.Web.Infrastructure.Enums;
     using HireAProfessional.Web.ViewModels.ApplicationUsers;
     using HireAProfessional.Web.ViewModels.Categories;
+    using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Internal;
 
     public class CategoriesService : ICategoriesService
@@ -27,6 +28,27 @@
         public async Task Create(Category category)
         {
             await this.categoryRepository.AddAsync(category);
+            await this.categoryRepository.SaveChangesAsync();
+        }
+
+        public async Task Delete(string categoryId)
+        {
+            var category = await this.categoryRepository.All().FirstOrDefaultAsync(c => c.Id == categoryId);
+
+            this.categoryRepository.Delete(category);
+
+            await this.categoryRepository.SaveChangesAsync();
+        }
+
+        public async Task Edit(string categoryId, Category category)
+        {
+            var categoryToUpdate = await this.categoryRepository.All().FirstOrDefaultAsync(c => c.Id == categoryId);
+
+            categoryToUpdate.Name = category.Name;
+            categoryToUpdate.Description = category.Description;
+            categoryToUpdate.ApplicationUserCategories = category.ApplicationUserCategories;
+            categoryToUpdate.Posts = category.Posts;
+
             await this.categoryRepository.SaveChangesAsync();
         }
 

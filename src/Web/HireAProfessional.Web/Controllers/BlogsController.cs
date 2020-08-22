@@ -26,7 +26,7 @@
 
         public IActionResult AllBlogs()
         {
-            var result = this.blogService.GetAllBlogs();
+            var result = this.blogService.GetAll();
 
             return this.View(result);
         }

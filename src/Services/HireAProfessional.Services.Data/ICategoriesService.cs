@@ -15,6 +15,10 @@
 
         Task Create(Category category);
 
+        Task Delete(string categoryId);
+
+        Task Edit(string categoryId, Category category);
+
         CategoryViewModel GetCategoryByName(string name);
     }
 }

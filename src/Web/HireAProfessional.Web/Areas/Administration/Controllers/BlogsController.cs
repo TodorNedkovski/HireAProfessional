@@ -6,6 +6,8 @@
     using System.Threading.Tasks;
 
     using HireAProfessional.Common;
+    using HireAProfessional.Services.Data;
+    using HireAProfessional.Web.ViewModels.Blogs;
     using Microsoft.AspNetCore.Mvc;
 
     [Area("Administration")]

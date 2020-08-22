@@ -10,9 +10,9 @@
 
     public interface IBlogsService
     {
-        Task CreateBlog(BlogInputViewModel post);
+        Task Create(BlogInputViewModel post);
 
-        BlogsListViewModel GetAllBlogs(int count = int.MaxValue, string param = "Id", OrderType orderType = OrderType.Ascending);
+        BlogsListViewModel GetAll(int count = int.MaxValue, string param = "Id", OrderType orderType = OrderType.Ascending);
 
         BlogViewModel GetBlogByTitle(string title);
 

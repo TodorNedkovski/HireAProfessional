@@ -34,18 +34,5 @@
 
             return this.View(string.Format(ViewPaths.CrudOperationsViewPath, "Categories"), categories);
         }
-
-        [Route("Administration/Dashboard/Categories/CrudOperations/Create")]
-        public async Task<IActionResult> Create(string categoryName, string description)
-        {
-            await this.categoriesService.Create(new Category
-            {
-                Name = categoryName,
-                Description = description,
-                ImageUrl = string.Empty,
-            });
-
-            return this.RedirectToAction("CrudOperations");
-        }
     }
 }

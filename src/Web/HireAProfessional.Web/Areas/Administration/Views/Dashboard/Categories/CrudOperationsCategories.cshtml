@@ -17,56 +17,56 @@
 
     <h1>Crud Operation</h1>
 
-    <form method="post" asp-route="crudOperationsCreate">
-        <div class="container">
-            <!-- Trigger the modal with a button -->
-            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Create Category</button>
+    <div id="someModal" class="container">
+        <!-- Trigger the modal with a button -->
+        <button onclick="showCreateModal()" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Create Category</button>
 
-            <!-- Modal -->
-            <div class="modal fade" id="myModal" role="dialog">
-                <div class="modal-dialog">
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+                <input id="categoryId" type="hidden" name="categoryId" placeholder="Sales">
 
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 style="margin-right: 100px;" class="modal-title">Create Category</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label>Category Name</label>
-                                                <input class="form-control" type="text" name="categoryName" placeholder="Sales">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Category Description</label>
-                                                <input class="form-control" type="text" name="description" placeholder="">
-                                            </div>
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 style="margin-right: 100px;" class="modal-title">Create Category</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Category Name</label>
+                                            <input class="form-control" type="text" name="categoryName" placeholder="Sales">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Category Description</label>
+                                            <input class="form-control" type="text" name="description" placeholder="">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Create Category</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
                     </div>
-
+                    <div class="modal-footer">
+                        <button id="modalButton" type="button" class="btn btn-primary" data-dismiss="modal">Create Category</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
-            </div>
 
+            </div>
         </div>
-    </form>
+
+    </div>
 
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>Category Name</th>
                 <th>Posts Count</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -75,6 +75,10 @@
                 <tr>
                     <td>@category.Name</td>
                     <td>@category.PostsCount</td>
+                    <td>
+                        <a onclick="showEditModal('@category.Id')" data-toggle="modal" data-target="#myModal" class="btn btn-warning">Edit</a>
+                        <a onclick="deleteCategory('@category.Id')" class="btn btn-danger">Delete</a>
+                    </td>
                 </tr>
             }
         </tbody>
@@ -93,4 +97,70 @@
         modal.find('.modal-title').text('New message to ' + recipient)
         modal.find('.modal-body input').val(recipient)
     })
+
+    function showCreateModal() {
+        document.getElementById('modalButton').onclick = function () { createCategory() }
+        console.log(document.getElementById('modalButton').onclick)
+    }
+
+    function showEditModal(categoryId) {
+        document.getElementById('modalButton').onclick = function () { editCategory(categoryId) }
+        console.log(document.getElementById('modalButton').onclick)
+    }
+
+    function deleteCategory(categoryId) {
+        let headers = {
+            method: 'POST',
+            body: JSON.stringify({
+                'categoryId': categoryId
+            }),
+            headers: {
+                'content-type': 'application/json'
+            }
+        }
+
+        fetch('https://localhost:44319/api/categories/delete', headers)
+    }
+
+    function editCategory(categoryId) {
+
+        let categoryName = document.getElementsByName('categoryName')[0].value
+        let description = document.getElementsByName('description')[0].value
+
+        let headers = {
+            method: 'POST',
+            body: JSON.stringify({
+                'categoryId': categoryId,
+                'name': categoryName,
+                'description': description
+            }),
+            headers: {
+                'content-type': 'application/json'
+            }
+        }
+
+        fetch('https://localhost:44319/api/categories/edit', headers)
+    }
+
+    function createCategory() {
+
+        let categoryName = document.getElementsByName('categoryName')[0].value
+        let description = document.getElementsByName('description')[0].value
+
+        console.log(categoryName)
+        console.log(description)
+
+        let headers = {
+            method: 'POST',
+            body: JSON.stringify({
+                'name': categoryName,
+                'description': description,
+            }),
+            headers: {
+                'content-type': 'application/json'
+            }
+        }
+
+        fetch('https://localhost:44319/api/categories/create', headers)
+    }
 </script>

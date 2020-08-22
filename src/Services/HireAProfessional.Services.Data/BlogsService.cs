@@ -12,36 +12,32 @@
     using HireAProfessional.Web.Infrastructure.Enums;
     using HireAProfessional.Web.ViewModels.ApplicationUsers;
     using HireAProfessional.Web.ViewModels.Blogs;
+    using Microsoft.EntityFrameworkCore.ValueGeneration;
 
     public class BlogsService : IBlogsService
     {
         private readonly IDeletableEntityRepository<Blog> blogRepository;
+        private readonly IDeletableEntityRepository<ApplicationUser> userRepository;
 
-        public BlogsService(IDeletableEntityRepository<Blog> blogRepository)
+        public BlogsService(IDeletableEntityRepository<Blog> blogRepository, IDeletableEntityRepository<ApplicationUser> userRepository)
         {
             this.blogRepository = blogRepository;
+            this.userRepository = userRepository;
         }
 
-        public async Task CreateBlog(BlogInputViewModel blog)
+        public async Task Create(BlogInputViewModel blog)
         {
+            var author = this.userRepository.AllAsNoTracking().FirstOrDefault(u => u.Id == blog.AuthorId);
+
             await this.blogRepository.AddAsync(new Blog
             {
-                Author = new ApplicationUser
-                {
-                    FacebookAccountLink = blog.Author.FacebookAccountLink,
-                    FirstName = blog.Author.FirstName,
-                    Age = blog.Author.Age,
-                    LastName = blog.Author.LastName,
-                    CompanyId = blog.Author.Company.Id,
-                    Education = blog.Author.Education,
-                    ImageUrl = blog.Author.ImageUrl,
-                },
+                AuthorId = author.Id,
                 Content = blog.Content,
                 Title = blog.Title,
             });
         }
 
-        public BlogsListViewModel GetAllBlogs(int count, string param, OrderType orderType)
+        public BlogsListViewModel GetAll(int count, string param, OrderType orderType)
         {
             return new BlogsListViewModel
             {

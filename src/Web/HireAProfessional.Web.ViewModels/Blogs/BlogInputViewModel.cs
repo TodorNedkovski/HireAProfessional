@@ -8,7 +8,7 @@
 
     public class BlogInputViewModel
     {
-        public ApplicationUserViewModel Author { get; set; }
+        public string AuthorId { get; set; }
 
         public string Title { get; set; }
 

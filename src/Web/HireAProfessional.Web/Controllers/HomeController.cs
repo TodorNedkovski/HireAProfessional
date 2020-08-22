@@ -36,7 +36,7 @@
 
             var indexModel = new IndexViewModel
             {
-                BlogsListViewModel = this.blogsService.GetAllBlogs(3, "CreatedOn", OrderType.Descending),
+                BlogsListViewModel = this.blogsService.GetAll(3, "CreatedOn", OrderType.Descending),
                 CategoriesListViewModel = new CategoriesListViewModel { Categories = this.categoriesService.GetAll<CategoryViewModel>(8, "CreatedOn", OrderType.Descending) },
                 PostsListViewModel = this.postsService.GetAllPosts(5, 0, "CreatedOn", string.Empty, string.Empty, OrderType.Descending),
                 Location = new LocationViewModel
