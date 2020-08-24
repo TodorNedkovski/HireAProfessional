@@ -8,10 +8,12 @@
 
     using HireAProfessional.Data.Common.Repositories;
     using HireAProfessional.Data.Models;
+    using HireAProfessional.Services.Mapping;
     using HireAProfessional.Web.Infrastructure;
     using HireAProfessional.Web.Infrastructure.Enums;
     using HireAProfessional.Web.ViewModels.ApplicationUsers;
     using HireAProfessional.Web.ViewModels.Blogs;
+    using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.ValueGeneration;
 
     public class BlogsService : IBlogsService
@@ -25,7 +27,7 @@
             this.userRepository = userRepository;
         }
 
-        public async Task Create(BlogInputViewModel blog)
+        public async Task CreateAsync(BlogInputViewModel blog)
         {
             var author = this.userRepository.AllAsNoTracking().FirstOrDefault(u => u.Id == blog.AuthorId);
 
@@ -35,6 +37,31 @@
                 Content = blog.Content,
                 Title = blog.Title,
             });
+
+            await this.blogRepository.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(string blogId)
+        {
+            var blog = await this.blogRepository
+                .All()
+                .FirstOrDefaultAsync(b => b.Id == blogId);
+
+            this.blogRepository.Delete(blog);
+
+            await this.blogRepository.SaveChangesAsync();
+        }
+
+        public async Task EditAsync(string blogId, BlogInputViewModel blog)
+        {
+            var blogToEdit = await this.blogRepository
+                .All()
+                .FirstOrDefaultAsync(b => b.Id == blogId);
+
+            blogToEdit.Title = blog.Title;
+            blogToEdit.Content = blog.Content;
+
+            await this.blogRepository.SaveChangesAsync();
         }
 
         public BlogsListViewModel GetAll(int count, string param, OrderType orderType)
@@ -47,6 +74,7 @@
                 .OrderBy<Blog>(param, orderType)
                 .Select(b => new BlogViewModel
                 {
+                    Id = b.Id,
                     Author = new ApplicationUserViewModel
                     {
                         FacebookAccountLink = b.Author.FacebookAccountLink,

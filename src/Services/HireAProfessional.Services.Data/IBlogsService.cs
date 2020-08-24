@@ -10,7 +10,11 @@
 
     public interface IBlogsService
     {
-        Task Create(BlogInputViewModel post);
+        Task CreateAsync(BlogInputViewModel post);
+
+        Task DeleteAsync(string blogId);
+
+        Task EditAsync(string blogId, BlogInputViewModel post);
 
         BlogsListViewModel GetAll(int count = int.MaxValue, string param = "Id", OrderType orderType = OrderType.Ascending);
 

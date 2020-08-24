@@ -9,6 +9,7 @@
     using HireAProfessional.Web.ViewModels.Blogs;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Server.IIS.Core;
 
     [ApiController]
     public class BlogsApiController : ControllerBase
@@ -20,41 +21,36 @@
             this.blogsService = blogsService;
         }
 
-        [Route("Administration/Dashboard/Blogs/CrudOperations/Create")]
-        public async Task<IActionResult> Create(string title, string content, string authorId)
+        [Route("api/blogs/create")]
+        public async Task<IActionResult> Create(BlogRequestModel input)
         {
-            await this.blogsService.Create(new BlogInputViewModel
+            await this.blogsService.CreateAsync(new BlogInputViewModel
             {
-                Title = title,
-                Content = content,
-                AuthorId = authorId,
+                Title = input.BlogTitle,
+                Content = input.Content,
+                AuthorId = input.AuthorId,
             });
 
             return this.RedirectToAction("CrudOperations");
         }
 
-        [Route("Administration/Dashboard/Blogs/CrudOperations/Delete")]
-        public async Task<IActionResult> Delete(string title, string content, string authorId)
+        [Route("api/blogs/delete")]
+        public async Task<ActionResult<BlogResponseModel>> Delete(BlogRequestModel input)
         {
-            await this.blogsService.Create(new BlogInputViewModel
-            {
-                Title = title,
-                Content = content,
-                AuthorId = authorId,
-            });
+            await this.blogsService.DeleteAsync(input.BlogId);
 
-            return this.RedirectToAction("CrudOperations");
+            return new BlogResponseModel { };
         }
 
-        [Route("Administration/Dashboard/Blogs/CrudOperations/Edit")]
-        public async Task<IActionResult> Edit(string title, string content, string authorId)
+        [Route("api/blogs/edit")]
+        public async Task<IActionResult> Edit(BlogRequestModel input)
         {
-            //await this.blogsService.Create(new BlogInputViewModel
-            //{
-            //    Title = title,
-            //    Content = content,
-            //    AuthorId = authorId,
-            //});
+            await this.blogsService.EditAsync(input.BlogId, new BlogInputViewModel
+            {
+                Title = input.BlogTitle,
+                Content = input.Content,
+                AuthorId = input.AuthorId,
+            });
 
             return this.RedirectToAction("CrudOperations");
         }

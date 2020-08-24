@@ -1,18 +1,19 @@
 ﻿namespace HireAProfessional.Web.Areas.Administration.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-
     using HireAProfessional.Common;
     using HireAProfessional.Services.Data;
-    using HireAProfessional.Web.ViewModels.Blogs;
     using Microsoft.AspNetCore.Mvc;
 
     [Area("Administration")]
     public class BlogsController : Controller
     {
+        private readonly IBlogsService blogsService;
+
+        public BlogsController(IBlogsService blogsService)
+        {
+            this.blogsService = blogsService;
+        }
+
         [Route("Administration/Dashboard/Blogs/Statistics")]
         public IActionResult Statistics()
         {
@@ -22,7 +23,9 @@
         [Route("Administration/Dashboard/Blogs/CrudOperations")]
         public IActionResult CrudOperations()
         {
-            return this.View(string.Format(ViewPaths.CrudOperationsViewPath, "Blogs"));
+            var blogs = this.blogsService.GetAll();
+
+            return this.View(string.Format(ViewPaths.CrudOperationsViewPath, "Blogs"), blogs);
         }
     }
 }
