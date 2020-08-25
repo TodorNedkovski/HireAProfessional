@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@model HireAProfessional.Web.ViewModels.Locations.LocationListViewModel
+@inject Microsoft.AspNetCore.Identity.UserManager<HireAProfessional.Data.Models.ApplicationUser> _userManager
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -7,5 +10,200 @@
 </head>
 <body>
     <h1>Crud Operation</h1>
+
+    <div id="someModal" class="container">
+        <!-- Trigger the modal with a button -->
+        @{
+            var userId = _userManager.GetUserId(this.User);
+        }
+
+        <input id="userId" type="hidden" value="@userId" />
+
+        <button onclick="showCreateModal('@userId')" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Create Category</button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 style="margin-right: 100px;" class="modal-title">Create Category</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Blog Title</label>
+                                            <input class="form-control" type="text" name="blogTitle" placeholder="Sales">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Content</label>
+                                            <input class="form-control" type="text" name="content" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="modalButton" type="button" class="btn btn-primary" data-dismiss="modal">Create Blog</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>City</th>
+                <th>Country</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var location in this.Model.Locations)
+            {
+                <tr>
+                    <td>@location.CityName</td>
+                    <td>@location.CountryName</td>
+                    <td>
+                        <a onclick="showEditModal('')" data-toggle="modal" data-target="#myModal" class="btn btn-warning">Edit</a>
+                        <a onclick="deleteBlog('')" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <nav>
+        <ul class="pagination justify-content-center">
+            @if (this.Model.CurrentPage == 1)
+            {
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">Previous</a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link"
+                       asp-area="administration"
+                       asp-route="dashboardArea"
+                       asp-route-page="@(this.Model.CurrentPage - 1)">Previous</a>
+                </li>
+            }
+
+            @for (int i = 1; i <= this.Model.PagesCount; i++)
+            {
+                var active = i == this.Model.CurrentPage ? "active" : string.Empty;
+                <li class="page-item @active">
+                    <a class="page-link"
+                       asp-area="administration"
+                       asp-route="dashboardArea"
+                       asp-route-page="@i">@i</a>
+                </li>
+            }
+
+            @if (this.Model.CurrentPage == this.Model.PagesCount)
+            {
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link"
+                       asp-area="administration"
+                       asp-route="dashboardArea"
+                       asp-route-page="@(this.Model.CurrentPage + 1)">Next</a>
+                </li>
+            }
+        </ul>
+    </nav>
 </body>
 </html>
+<script>
+    $('#exampleModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var recipient = button.data('whatever') // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+        modal.find('.modal-title').text('New message to ' + recipient)
+        modal.find('.modal-body input').val(recipient)
+    })
+
+    function showCreateModal(authorId) {
+        document.getElementById('modalButton').onclick = function () { createBlog(authorId) }
+        console.log(document.getElementById('modalButton').onclick)
+    }
+
+    function showEditModal(categoryId) {
+        document.getElementById('modalButton').onclick = function () { editBlog(categoryId) }
+        console.log(document.getElementById('modalButton').onclick)
+    }
+
+    function deleteBlog(blogId) {
+        let headers = {
+            method: 'POST',
+            body: JSON.stringify({
+                'blogId': blogId
+            }),
+            headers: {
+                'content-type': 'application/json'
+            }
+        }
+
+        fetch('https://localhost:44319/api/blogs/delete', headers)
+    }
+
+    function editBlog(blogId) {
+
+        let blogTitle = document.getElementsByName('blogTitle')[0].value
+        let content = document.getElementsByName('content')[0].value
+        let userId = document.getElementById('userId').value
+
+        let headers = {
+            method: 'POST',
+            body: JSON.stringify({
+                'authorId': userId,
+                'blogId': blogId,
+                'blogTitle': blogTitle,
+                'content': content
+            }),
+            headers: {
+                'content-type': 'application/json'
+            }
+        }
+
+        fetch('https://localhost:44319/api/blogs/edit', headers)
+    }
+
+    function createBlog(authorId) {
+
+        let blogTitle = document.getElementsByName('blogTitle')[0].value
+        let content = document.getElementsByName('content')[0].value
+
+        let headers = {
+            method: 'POST',
+            body: JSON.stringify({
+                'authorId': authorId,
+                'blogTitle': blogTitle,
+                'content': content,
+            }),
+            headers: {
+                'content-type': 'application/json'
+            }
+        }
+
+        fetch('https://localhost:44319/api/blogs/create', headers)
+    }
+</script>
