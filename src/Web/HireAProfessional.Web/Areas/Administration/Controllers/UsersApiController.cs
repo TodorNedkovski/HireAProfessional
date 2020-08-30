@@ -47,7 +47,7 @@
                 return this.BadRequest();
             }
 
-            var company = this.companiesService.GetAllCompanies<CompanyViewModel>().FirstOrDefault(c => c.Name == input.CompanyName);
+            var company = this.companiesService.GetAll<CompanyViewModel>(int.MaxValue, 0).FirstOrDefault(c => c.Name == input.CompanyName);
 
             var user = new ApplicationUser
             {

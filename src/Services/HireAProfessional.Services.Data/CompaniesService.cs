@@ -15,6 +15,7 @@
     using HireAProfessional.Web.ViewModels.Categories;
     using HireAProfessional.Web.ViewModels.Companies;
     using HireAProfessional.Web.ViewModels.Posts;
+    using Microsoft.EntityFrameworkCore;
 
     public class CompaniesService : ICompaniesService
     {
@@ -25,7 +26,26 @@
             this.repository = repository;
         }
 
-        public ICollection<T> GetAllCompanies<T>()
+        public async Task AddAsync(string name)
+        {
+            await this.repository.AddAsync(new Company
+            {
+                Name = name,
+            });
+
+            await this.repository.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(string id)
+        {
+            var company = await this.repository.All().FirstOrDefaultAsync(c => c.Id == id);
+
+            this.repository.Delete(company);
+
+            await this.repository.SaveChangesAsync();
+        }
+
+        public ICollection<T> GetAll<T>(int take, int skips)
         {
             return this.repository
             .AllAsNoTracking()

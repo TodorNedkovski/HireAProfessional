@@ -6,6 +6,8 @@
 
     public class ApplicationRequestViewModel
     {
+        public string Id { get; set; }
+
         public string CompanyId { get; set; }
 
         public string ApplicationUserId { get; set; }

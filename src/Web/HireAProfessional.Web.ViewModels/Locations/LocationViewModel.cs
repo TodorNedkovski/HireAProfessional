@@ -10,6 +10,10 @@
 
     public class LocationViewModel : IMapFrom<City>, IMapTo<LocationViewModel>, IHaveCustomMappings
     {
+        public string CountryId { get; set; }
+
+        public string CityId { get; set; }
+
         public string CountryName { get; set; }
 
         public string CityName { get; set; }
@@ -18,7 +22,8 @@
         {
             configuration.CreateMap<City, LocationViewModel>()
                 .ForMember(x => x.CityName, y => y.MapFrom(x => x.Name))
-                .ForMember(x => x.CountryName, y => y.MapFrom(x => x.Country.Name));
+                .ForMember(x => x.CountryName, y => y.MapFrom(x => x.Country.Name))
+                .ForMember(x => x.CityId, y => y.MapFrom(x => x.Id));
         }
     }
 }

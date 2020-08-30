@@ -22,9 +22,9 @@
             this.companyService = companyService;
         }
 
-        public ActionResult<IEnumerable<DashboardCompanyViewModel>> Get()
-        {
-            return this.companyService.GetAllCompanies<DashboardCompanyViewModel>().ToList();
-        }
+        //public ActionResult<IEnumerable<DashboardCompanyViewModel>> Get()
+        //{
+        //    return this.companyService.GetAll<DashboardCompanyViewModel>().ToList();
+        //}
     }
 }

@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Text;
 
+    using AutoMapper;
     using HireAProfessional.Data.Models;
     using HireAProfessional.Services.Mapping;
     using HireAProfessional.Web.ViewModels.ApplicationUsers;
@@ -15,10 +16,12 @@
 
         public string ApplicationUserId { get; set; }
 
-        public ApplicationUserViewModel ApplicationUser { get; set; }
+        public string ApplicationUserFirstName { get; set; }
+
+        public string ApplicationUserLastName { get; set; }
 
         public string CompanyId { get; set; }
 
-        public CompanyViewModel Company { get; set; }
+        public string CompanyName { get; set; }
     }
 }

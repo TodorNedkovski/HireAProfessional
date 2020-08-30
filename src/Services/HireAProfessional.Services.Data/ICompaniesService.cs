@@ -9,6 +9,10 @@
 
     public interface ICompaniesService
     {
-        ICollection<T> GetAllCompanies<T>();
+        ICollection<T> GetAll<T>(int take, int skips);
+
+        Task AddAsync(string name);
+
+        Task DeleteAsync(string id);
     }
 }

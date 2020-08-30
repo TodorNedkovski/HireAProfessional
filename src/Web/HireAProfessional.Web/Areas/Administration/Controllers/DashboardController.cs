@@ -28,9 +28,7 @@
 
         public IActionResult Companies()
         {
-            var companiesList = this.companyService.GetAllCompanies<DashboardCompanyViewModel>();
-
-            return this.View(companiesList);
+            return this.View();
         }
 
         public IActionResult Users()

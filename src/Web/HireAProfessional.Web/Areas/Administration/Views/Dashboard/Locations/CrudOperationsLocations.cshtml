@@ -1,5 +1,4 @@
 ﻿@model HireAProfessional.Web.ViewModels.Locations.LocationListViewModel
-@inject Microsoft.AspNetCore.Identity.UserManager<HireAProfessional.Data.Models.ApplicationUser> _userManager
 
 <!DOCTYPE html>
 
@@ -7,19 +6,16 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Locations</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
     <h1>Crud Operation</h1>
 
     <div id="someModal" class="container">
         <!-- Trigger the modal with a button -->
-        @{
-            var userId = _userManager.GetUserId(this.User);
-        }
-
-        <input id="userId" type="hidden" value="@userId" />
-
-        <button onclick="showCreateModal('@userId')" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Create Category</button>
+        <button onclick="showCreateModal()" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Add Location</button>
 
         <!-- Modal -->
         <div class="modal fade" id="myModal" role="dialog">
@@ -27,7 +23,7 @@
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 style="margin-right: 100px;" class="modal-title">Create Category</h4>
+                        <h4 style="margin-right: 100px;" class="modal-title">Add Location</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
@@ -36,12 +32,12 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label>Blog Title</label>
-                                            <input class="form-control" type="text" name="blogTitle" placeholder="Sales">
+                                            <label>City Name</label>
+                                            <input class="form-control" type="text" name="cityName" placeholder="Sales">
                                         </div>
                                         <div class="form-group">
-                                            <label>Content</label>
-                                            <input class="form-control" type="text" name="content" placeholder="">
+                                            <label>Country Name</label>
+                                            <input class="form-control" type="text" name="countryName" placeholder="">
                                         </div>
                                     </div>
                                 </div>
@@ -74,8 +70,7 @@
                     <td>@location.CityName</td>
                     <td>@location.CountryName</td>
                     <td>
-                        <a onclick="showEditModal('')" data-toggle="modal" data-target="#myModal" class="btn btn-warning">Edit</a>
-                        <a onclick="deleteBlog('')" class="btn btn-danger">Delete</a>
+                        <a onclick="deleteLocation('@location.CityId', '@location.CountryId')" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
             }
@@ -141,69 +136,41 @@
         modal.find('.modal-body input').val(recipient)
     })
 
-    function showCreateModal(authorId) {
-        document.getElementById('modalButton').onclick = function () { createBlog(authorId) }
-        console.log(document.getElementById('modalButton').onclick)
+    function showCreateModal() {
+        document.getElementById('modalButton').onclick = function () { addLocation() }
     }
 
-    function showEditModal(categoryId) {
-        document.getElementById('modalButton').onclick = function () { editBlog(categoryId) }
-        console.log(document.getElementById('modalButton').onclick)
-    }
-
-    function deleteBlog(blogId) {
+    function deleteLocation(cityId, countryId) {
         let headers = {
             method: 'POST',
             body: JSON.stringify({
-                'blogId': blogId
+                'cityId': cityId,
+                'countryId': countryId,
             }),
             headers: {
                 'content-type': 'application/json'
             }
         }
 
-        fetch('https://localhost:44319/api/blogs/delete', headers)
+        fetch('https://localhost:44319/api/locations/delete', headers)
     }
 
-    function editBlog(blogId) {
+    function addLocation() {
 
-        let blogTitle = document.getElementsByName('blogTitle')[0].value
-        let content = document.getElementsByName('content')[0].value
-        let userId = document.getElementById('userId').value
+        let cityName = document.getElementsByName('cityName')[0].value
+        let countryName = document.getElementsByName('countryName')[0].value
 
         let headers = {
             method: 'POST',
             body: JSON.stringify({
-                'authorId': userId,
-                'blogId': blogId,
-                'blogTitle': blogTitle,
-                'content': content
+                'cityName': cityName,
+                'countryName': countryName,
             }),
             headers: {
                 'content-type': 'application/json'
             }
         }
 
-        fetch('https://localhost:44319/api/blogs/edit', headers)
-    }
-
-    function createBlog(authorId) {
-
-        let blogTitle = document.getElementsByName('blogTitle')[0].value
-        let content = document.getElementsByName('content')[0].value
-
-        let headers = {
-            method: 'POST',
-            body: JSON.stringify({
-                'authorId': authorId,
-                'blogTitle': blogTitle,
-                'content': content,
-            }),
-            headers: {
-                'content-type': 'application/json'
-            }
-        }
-
-        fetch('https://localhost:44319/api/blogs/create', headers)
+        fetch('https://localhost:44319/api/locations/create', headers)
     }
 </script>

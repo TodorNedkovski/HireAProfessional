@@ -2,7 +2,7 @@
     let headers = {
         method: 'POST',
         body: JSON.stringify({
-            'userId': userId,
+            'applicationUserId': userId,
             'companyId': companyId
         }),
         headers: {

@@ -27,7 +27,6 @@
         {
             var city = await this.cityRepository.AllAsNoTracking().FirstOrDefaultAsync(c => c.Name == location.CityName);
             var country = await this.countryRepository.AllAsNoTracking().FirstOrDefaultAsync(c => c.Name == location.CountryName);
-
             if (city == null)
             {
                 await this.cityRepository.AddAsync(new City
@@ -46,12 +45,13 @@
 
         public async Task DeleteAsync(string cityId, string countryId)
         {
-            var city = await this.cityRepository.AllAsNoTracking().FirstOrDefaultAsync(c => c.Id == cityId);
-            var country = await this.countryRepository.AllAsNoTracking().FirstOrDefaultAsync(c => c.Id == countryId);
+            var city = await this.cityRepository.AllAsNoTracking().Include(c => c.Country).FirstOrDefaultAsync(c => c.Id == cityId);
+            var country = await this.countryRepository.AllAsNoTracking().Include(c => c.Cities).FirstOrDefaultAsync(c => c.Id == countryId);
 
-            country.Cities.Remove(city);
+            city.Country = null;
+            city.CountryId = string.Empty;
 
-            await this.countryRepository.SaveChangesAsync();
+            await this.cityRepository.SaveChangesAsync();
         }
 
         public Task EditAsync(string cityId, string countryId, LocationViewModel post)
