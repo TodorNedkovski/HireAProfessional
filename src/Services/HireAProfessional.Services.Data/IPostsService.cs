@@ -12,6 +12,8 @@
     {
         Task CreatePost(PostInputViewModel post);
 
+        Task DeleteAsync(string postId);
+
         PostsListViewModel GetAllPosts(int count = int.MaxValue, int skip = 0, string param = "Id", string jobConstraints = "all", string location = "all", OrderType orderType = OrderType.Ascending);
 
         PostViewModel GetPostById(string id, string userId);

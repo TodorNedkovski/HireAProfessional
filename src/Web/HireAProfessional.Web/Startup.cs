@@ -58,6 +58,8 @@
 
             services.AddSingleton(this.configuration);
 
+            services.AddSignalR();
+
             // Data repositories
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
@@ -75,6 +77,12 @@
             services.AddTransient<ICommentsService, CommentsService>();
             services.AddTransient<IUsersService, UsersService>();
             services.AddTransient<ILocationsService, LocationsService>();
+
+            services.AddAuthentication().AddFacebook(facebookOptions =>
+            {
+                facebookOptions.AppId = this.configuration["Authentication:Facebook:AppId"];
+                facebookOptions.AppSecret = this.configuration["Authentication:Facebook:AppSecret"];
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -133,12 +141,12 @@
                             "blogs",
                             "Blogs/All",
                             new { controller = "Blogs", action = "AllBlogs" });
-                        //Administration / Dashboard / Categories / CrudOperations / CreateCategory
                         endpoints.MapControllerRoute("crudOperationsCreate", "{area:exists}/Dashboard/{controller=Home}/CrudOperations/Create");
                         endpoints.MapControllerRoute("statistics", "{area:exists}/Dashboard/{controller=Home}/Statistics{action=Index}");
                         endpoints.MapControllerRoute("dashboardArea", "{area:exists}/Dashboard/{controller=Home}/{action=Index}");
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                        endpoints.MapControllerRoute("externalLogin", "Identity/Account/Login/ExternalLogin");
                         endpoints.MapRazorPages();
                     });
         }

@@ -10,6 +10,7 @@
     using HireAProfessional.Services;
     using HireAProfessional.Services.Json;
     using Microsoft.EntityFrameworkCore.Internal;
+    using Microsoft.Extensions.Configuration;
 
     public class CountriesSeeder : ISeeder
     {
@@ -20,9 +21,15 @@
                 return;
             }
 
+            IConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
+            // Duplicate here any configuration sources you use.
+            configurationBuilder.AddJsonFile("appsettings.json");
+            IConfiguration configuration = configurationBuilder.Build();
+
+
             for (int offset = 0; offset <= 190; offset += 10)
             {
-                var countriesJsonModel = GeoDbAPIService<CountryJsonModel>.GetCountries(offset, "countries").Data;
+                var countriesJsonModel = new GeoDbAPIService<CityJsonModel>(configuration).Get(offset, "countries").Data;
 
                 var countries = new List<Country>();
 
@@ -30,7 +37,7 @@
                 {
                     countries.Add(new Country
                     {
-                        Code = countryJsonModel.Code,
+                        Code = countryJsonModel.Country,
                         Name = countryJsonModel.Name,
                     });
                 }
@@ -38,7 +45,7 @@
                 Thread.Sleep(2000);
 
                 await dbContext.Countries.AddRangeAsync(countries);
-                await dbContext.SaveChangesAsync();
+                //await dbContext.SaveChangesAsync();
             }
         }
     }

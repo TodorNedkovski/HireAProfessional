@@ -76,6 +76,17 @@
             await this.postRepository.SaveChangesAsync();
         }
 
+        public async Task DeleteAsync(string postId)
+        {
+            var post = await this.postRepository.All().FirstOrDefaultAsync(p => p.Id == postId);
+
+            if (post == null)
+            {
+                this.postRepository.Delete(post);
+                await this.postRepository.SaveChangesAsync();
+            }
+        }
+
         public PostsListViewModel GetAllPosts(int count, int skip, string param, string jobConstraints, string location, OrderType orderType)
         {
             var geolocation = GeolocationAPIService.GetCurrentLocation();
@@ -85,7 +96,7 @@
 
             string jobTitle = string.Empty;
 
-            if (string.IsNullOrEmpty(location))
+            if (string.IsNullOrEmpty(location) || location.ToLower() == "all")
             {
                 countryName = geolocation.CountryName;
                 cityName = geolocation.CityName;
