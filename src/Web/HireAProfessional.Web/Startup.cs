@@ -9,6 +9,7 @@
     using HireAProfessional.Data.Models;
     using HireAProfessional.Data.Repositories;
     using HireAProfessional.Data.Seeding;
+    using HireAProfessional.Hubs;
     using HireAProfessional.Services.Data;
     using HireAProfessional.Services.Mapping;
     using HireAProfessional.Services.Messaging;
@@ -141,6 +142,7 @@
                             "blogs",
                             "Blogs/All",
                             new { controller = "Blogs", action = "AllBlogs" });
+                        endpoints.MapHub<ChatHub>("/chat");
                         endpoints.MapControllerRoute("crudOperationsCreate", "{area:exists}/Dashboard/{controller=Home}/CrudOperations/Create");
                         endpoints.MapControllerRoute("statistics", "{area:exists}/Dashboard/{controller=Home}/Statistics{action=Index}");
                         endpoints.MapControllerRoute("dashboardArea", "{area:exists}/Dashboard/{controller=Home}/{action=Index}");

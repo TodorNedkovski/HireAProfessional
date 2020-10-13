@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Web\HireAProfessional.Web.ViewModels\HireAProfessional.Web.ViewModels.csproj" />
+    <ProjectReference Include="..\HireAProfessionalML.Model\HireAProfessionalML.Model.csproj" />
   </ItemGroup>
 
 </Project>

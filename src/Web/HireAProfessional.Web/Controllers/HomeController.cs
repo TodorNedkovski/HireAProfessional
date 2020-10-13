@@ -49,6 +49,12 @@
             return this.View(indexModel);
         }
 
+        [Authorize]
+        public IActionResult Chat()
+        {
+            return this.View();
+        }
+
         public IActionResult Privacy()
         {
             return this.View();
