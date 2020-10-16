@@ -8,6 +8,8 @@
     <PackageReference Include="Microsoft.ML" Version="1.5.0-preview2" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Data\HireAProfessional.Data\HireAProfessional.Data.csproj" />
+    <ProjectReference Include="..\HireAProfessional.Services.Data\HireAProfessional.Services.Data.csproj" />
     <ProjectReference Include="..\HireAProfessionalML.Model\HireAProfessionalML.Model.csproj" />
   </ItemGroup>
 

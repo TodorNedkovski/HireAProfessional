@@ -11,6 +11,6 @@
     {
         ICollection<T> GetAll<T>();
 
-        Task<string> CreateComment(string posterId, string parentId, string postId, string content);
+        Task<string> CreateComment(string posterId, string parentId, string postId, string content, bool isRude);
     }
 }

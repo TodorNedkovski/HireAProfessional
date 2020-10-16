@@ -50,7 +50,7 @@
                 </div>
             </form>
             @{
-                if (this.Model.ExternalLogins.Count == 0)
+                if (this.Model.ExternalLogins == null || this.Model.ExternalLogins.Count == 0)
                 {
                     <div>No External logins</div>
                 }

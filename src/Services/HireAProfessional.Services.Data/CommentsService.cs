@@ -19,7 +19,7 @@
             this.commentRepository = commentRepo;
         }
 
-        public async Task<string> CreateComment(string posterId, string parentId, string postId, string content)
+        public async Task<string> CreateComment(string posterId, string parentId, string postId, string content, bool isRude)
         {
             parentId = parentId == "0" ? null : parentId;
 
@@ -29,6 +29,7 @@
                 ParentId = parentId,
                 PostId = postId,
                 Content = content,
+                IsRemovedByBot = isRude,
             };
 
             await this.commentRepository.AddAsync(comment);

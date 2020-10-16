@@ -26,5 +26,7 @@
         public JobPost Post { get; set; }
 
         public string Content { get; set; }
+
+        public bool IsRemovedByBot { get; set; }
     }
 }

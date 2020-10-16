@@ -22,6 +22,8 @@
 
         public string PosterId { get; set; }
 
+        public bool IsRemovedByBot { get; set; }
+
         public ApplicationUserViewModel Poster { get; set; }
 
         public string PostId { get; set; }

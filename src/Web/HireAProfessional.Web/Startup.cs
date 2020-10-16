@@ -1,5 +1,6 @@
 ﻿namespace HireAProfessional.Web
 {
+    using System;
     using System.Reflection;
 
     using AutoMapper;
@@ -14,7 +15,7 @@
     using HireAProfessional.Services.Mapping;
     using HireAProfessional.Services.Messaging;
     using HireAProfessional.Web.ViewModels;
-
+    using HireAProfessionalML.Model;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -24,6 +25,8 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Logging;
+    using Microsoft.Extensions.ML;
+    //using SentimentAnalysisWebAPI.DataModels;
 
     public class Startup
     {
@@ -55,6 +58,11 @@
                     {
                         //options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
                     }).AddRazorRuntimeCompilation();
+            services.AddPredictionEnginePool<ModelInput, ModelOutput>()
+              .FromUri(
+                  modelName: "SentimentAnalysisModel",
+                  uri: @"D:\Git\HireAProfessional\src\Services\HireAProfessionalML.Model\MLModel.zip",
+                  period: TimeSpan.FromMinutes(1));
             services.AddRazorPages();
 
             services.AddSingleton(this.configuration);

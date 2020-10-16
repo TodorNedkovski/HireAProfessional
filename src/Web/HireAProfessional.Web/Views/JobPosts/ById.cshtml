@@ -35,7 +35,16 @@
                             </div>
                             <div class="card-body">
                                 <article>
-                                    @Html.Raw(comment.SanitizedContent)
+                                    @if (comment.IsRemovedByBot)
+                                    {
+                                        <a>Your comment has been deleted by out BOT!!</a>
+                                    }
+                                    else
+                                    {
+                                        @Html.Raw(comment.SanitizedContent);
+                                    }
+
+
                                 </article>
                                 @{ ShowComments(comment.Id); }
                             </div>
