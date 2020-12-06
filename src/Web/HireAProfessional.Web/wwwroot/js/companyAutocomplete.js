@@ -1,7 +1,6 @@
-﻿function get(inp) {
+﻿function getCompanies(inp) {
     function autocomplete(inp, arr) {
         inp = document.getElementById(inp)
-
         /*the autocomplete function takes two arguments,
         the text field element and an array of possible autocompleted values:*/
         var currentFocus;
@@ -18,40 +17,28 @@
             a.setAttribute("class", "autocomplete-items");
             /*append the DIV element as a child of the autocomplete container:*/
             this.parentNode.appendChild(a);
-
-            arr = arr.filter(c => c['cities'].length > 0)
-            arr = arr.filter(c => c['cities'] = c['cities'].filter(x => x['name'].toLowerCase().startsWith(val.toLowerCase())))
             /*for each item in the array...*/
             for (i = 0; i < arr.length; i++) {
-
-                for (var c = 0; c < arr[i]['cities'].length; c++) {
-
-                    /*check if the item starts with the same letters as the text field value:*/
-                    if (arr[i]['cities'][c]['name'].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-                        /*create a DIV element for each matching element:*/
-                        b = document.createElement("DIV");
-
-                        let match = arr[i]['cities'][c]['name'] + ', ' + arr[i]['name']
-
-                        /*make the matching letters bold:*/
-                        b.innerHTML = "<strong>" + match.substr(0, val.length) + "</strong>";
-                        b.innerHTML += match.substr(val.length);
-                        /*insert a input field that will hold the current array item's value:*/
-                        b.innerHTML += "<input type='hidden' value='" + match + "'>";
-                        /*execute a function when someone clicks on the item value (DIV element):*/
-                        b.addEventListener("click", function (e) {
-                            /*insert the value for the autocomplete text field:*/
-                            inp.value = this.getElementsByTagName("input")[0].value;
-                            /*close the list of autocompleted values,
-                            (or any other open lists of autocompleted values:*/
-                            closeAllLists();
-                        });
-                        a.appendChild(b);
-                    }
+                /*check if the item starts with the same letters as the text field value:*/
+                if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                    /*create a DIV element for each matching element:*/
+                    b = document.createElement("DIV");
+                    /*make the matching letters bold:*/
+                    b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                    b.innerHTML += arr[i].substr(val.length);
+                    /*insert a input field that will hold the current array item's value:*/
+                    b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                    /*execute a function when someone clicks on the item value (DIV element):*/
+                    b.addEventListener("click", function (e) {
+                        /*insert the value for the autocomplete text field:*/
+                        inp.value = this.getElementsByTagName("input")[0].value;
+                        /*close the list of autocompleted values,
+                        (or any other open lists of autocompleted values:*/
+                        closeAllLists();
+                    });
+                    a.appendChild(b);
                 }
             }
-
-            limitFive();
         });
         /*execute a function presses a key on the keyboard:*/
         inp.addEventListener("keydown", function (e) {
@@ -104,27 +91,22 @@
                 }
             }
         }
-        function limitFive() {
-            var x = document.getElementsByClassName("autocomplete-items")[0]['childNodes']
-
-            if (x.length > 8) {
-                let length = x.length - 1
-
-                while (length != 7) {
-                    x[length].outerHTML = ''
-                    length--;
-                }
-            }
-        }
         /*execute a function when someone clicks in the document:*/
         document.addEventListener("click", function (e) {
             closeAllLists(e.target);
         });
     }
 
-    fetch("https://localhost:44319/api/countries")
-        .then(countries => countries.json())
-        .then(countries => {
-            autocomplete(inp, countries)
+    let headers = {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json'
+        }
+    }
+
+    fetch('https://localhost:44319/api/companies/all', headers)
+        .then(companies => companies.json())
+        .then(companies => {
+            autocomplete(inp, companies)
         })
 }

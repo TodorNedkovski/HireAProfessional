@@ -2,6 +2,7 @@
     @using HireAProfessional.Data.Common.Repositories;
     @using HireAProfessional.Data.Models
     @inject IDeletableEntityRepository<Category> categoryRepository
+    @inject IDeletableEntityRepository<Company> companyRepository
 
     @using HireAProfessional.Data.Models.Enums;
     <!DOCTYPE html>
@@ -52,7 +53,7 @@
                             <div class="row form-group mb-5">
                                 <div class="col-md-12 mb-3 mb-md-0">
                                     <label class="font-weight-bold" for="fullname">Company</label>
-                                    <input name="companyName" type="text" id="fullname" class="form-control" placeholder="eg. Facebook, Inc.">
+                                    <input autocomplete="on" onclick="getCompanies('fullname')" name="companyName" type="text" id="fullname" class="form-control" placeholder="eg. Facebook, Inc.">
                                 </div>
                             </div>
                             <div class="row form-group">
@@ -73,7 +74,7 @@
                             <div class="row form-group mb-4">
                                 <div class="col-md-12"><h3>Location</h3></div>
                                 <div class="col-md-12 mb-3 mb-md-0">
-                                    <input onclick="get('myInput')" id="myInput" name="location" type="text" class="form-control" placeholder="New York City">
+                                    <input autocomplete="off" onclick="get('myInput')" id="myInput" name="location" type="text" class="form-control" placeholder="New York City">
                                 </div>
                             </div>
                             <div class="row form-group">
@@ -99,3 +100,5 @@
 
 
 }
+
+<script src="~/js/companyAutocomplete.js"></script>

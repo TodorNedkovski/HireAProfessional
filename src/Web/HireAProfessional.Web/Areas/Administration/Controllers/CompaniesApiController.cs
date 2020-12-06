@@ -10,7 +10,6 @@
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
-
     [ApiController]
     public class CompaniesApiController : ControllerBase
     {
@@ -35,6 +34,15 @@
             await this.companiesService.DeleteAsync(input.CompanyId);
 
             return new CompanyResponseModel { };
+        }
+
+        [HttpGet]
+        [Route("api/companies/all")]
+        public ActionResult<List<CompanyResponseModel>> All()
+        {
+            var a = this.companiesService.GetAll<CompanyResponseModel>(int.MaxValue, 0).ToList();
+
+            return a;
         }
     }
 }

@@ -26,6 +26,7 @@
             return this.View(string.Format(ViewPaths.StatisticsCompaniesViewPath, "Companies"));
         }
 
+
         [Route("Administration/Dashboard/Companies/CrudOperations")]
         public IActionResult CrudOperations(int page = 1)
         {

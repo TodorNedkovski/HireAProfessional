@@ -13,5 +13,8 @@
 
         [JsonProperty("city")]
         public string CityName { get; set; }
+
+        [JsonProperty("state")]
+        public string State { get; set; }
     }
 }

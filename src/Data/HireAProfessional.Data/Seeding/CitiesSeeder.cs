@@ -19,10 +19,10 @@
     {
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
-            //if (dbContext.Cities.Any())
-            //{
-            //    return;
-            //}
+            if (dbContext.Cities.Any())
+            {
+                return;
+            }
 
             IConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
             // Duplicate here any configuration sources you use.
@@ -58,7 +58,7 @@
                 Thread.Sleep(2000);
 
                 await dbContext.Cities.AddRangeAsync(cities);
-                //await dbContext.SaveChangesAsync();
+                await dbContext.SaveChangesAsync();
             }
         }
     }

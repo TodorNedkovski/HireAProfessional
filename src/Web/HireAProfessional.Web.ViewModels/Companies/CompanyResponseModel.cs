@@ -4,8 +4,11 @@
     using System.Collections.Generic;
     using System.Text;
 
-    public class CompanyResponseModel
-    {
+    using HireAProfessional.Data.Models;
+    using HireAProfessional.Services.Mapping;
 
+    public class CompanyResponseModel : IMapFrom<Company>, IMapTo<CompanyResponseModel>
+    {
+        public string Name { get; set; }
     }
 }

@@ -26,7 +26,6 @@
             configurationBuilder.AddJsonFile("appsettings.json");
             IConfiguration configuration = configurationBuilder.Build();
 
-
             for (int offset = 0; offset <= 190; offset += 10)
             {
                 var countriesJsonModel = new GeoDbAPIService<CityJsonModel>(configuration).Get(offset, "countries").Data;
@@ -37,7 +36,6 @@
                 {
                     countries.Add(new Country
                     {
-                        Code = countryJsonModel.Country,
                         Name = countryJsonModel.Name,
                     });
                 }
@@ -45,7 +43,7 @@
                 Thread.Sleep(2000);
 
                 await dbContext.Countries.AddRangeAsync(countries);
-                //await dbContext.SaveChangesAsync();
+                await dbContext.SaveChangesAsync();
             }
         }
     }

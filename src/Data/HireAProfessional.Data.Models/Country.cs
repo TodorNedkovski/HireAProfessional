@@ -14,7 +14,6 @@
             this.Id = Guid.NewGuid().ToString();
         }
 
-        [Required]
         public string Code { get; set; }
 
         [Required]

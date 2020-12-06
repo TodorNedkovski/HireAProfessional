@@ -93,6 +93,7 @@
 
             string countryName = string.Empty;
             string cityName = string.Empty;
+            string state = string.Empty;
 
             string jobTitle = string.Empty;
 
@@ -100,6 +101,7 @@
             {
                 countryName = geolocation.CountryName;
                 cityName = geolocation.CityName;
+                state = geolocation.State;
             }
             else
             {

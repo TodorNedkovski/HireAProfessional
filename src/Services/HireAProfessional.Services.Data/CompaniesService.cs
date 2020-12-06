@@ -48,8 +48,9 @@
         public ICollection<T> GetAll<T>(int take, int skips)
         {
             return this.repository
-            .AllAsNoTracking()
+            .All()
             .To<T>()
+            .Take(take)
             .ToList();
         }
     }
