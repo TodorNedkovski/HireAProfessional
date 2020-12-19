@@ -27,7 +27,7 @@ namespace HireAProfessionalML.Model
             MLContext mlContext = new MLContext();
 
             // Load model & create prediction engine
-            string modelPath = @"C:\Users\Tedy\AppData\Local\Temp\MLVSTools\HireAProfessionalML\HireAProfessionalML.Model\MLModel.zip";
+            string modelPath = @"D:\Git\HireAProfessional\src\HireAProfessionalML.Model\MLModel.zip";
             ITransformer mlModel = mlContext.Model.Load(modelPath, out var modelInputSchema);
             var predEngine = mlContext.Model.CreatePredictionEngine<ModelInput, ModelOutput>(mlModel);
 

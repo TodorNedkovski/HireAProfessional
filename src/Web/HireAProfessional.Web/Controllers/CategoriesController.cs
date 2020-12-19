@@ -23,7 +23,7 @@
         [Authorize]
         public IActionResult CategoryByName(string name)
         {
-            var posts = this.postService.GetAllPostsByCategory(name);
+            var posts = this.postService.GetAllPostsByCategory(name.Replace('%', ' '));
 
             return this.View(posts);
         }

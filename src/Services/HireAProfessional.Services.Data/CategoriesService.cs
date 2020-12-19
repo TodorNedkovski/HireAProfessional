@@ -35,7 +35,7 @@
         {
             var category = await this.categoryRepository.All().FirstOrDefaultAsync(c => c.Id == categoryId);
 
-            this.categoryRepository.Delete(category);
+            category.IsDeleted = true;
 
             await this.categoryRepository.SaveChangesAsync();
         }

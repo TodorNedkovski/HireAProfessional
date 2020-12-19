@@ -7,5 +7,9 @@
     public class BlogsListViewModel
     {
         public ICollection<BlogViewModel> Blogs { get; set; }
+
+        public int CurrentPage { get; set; }
+
+        public int PagesCount { get; set; }
     }
 }

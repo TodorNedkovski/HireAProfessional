@@ -24,12 +24,12 @@
             this.userManager = userManager;
         }
 
-        public IActionResult BySearch(string location, string jobConstraints, int page = 1)
+        public IActionResult BySearch(string location, string jobConstraints, string categoryName, int page = 1)
         {
             int itemsPerPage = 10;
 
-            var searchResult = this.postsService.GetAllPosts(itemsPerPage, (page - 1) * itemsPerPage, "Id", jobConstraints, location, OrderType.Ascending);
-            var count = this.postsService.GetAllPosts(int.MaxValue, 0, "Id", jobConstraints, location, OrderType.Ascending).Posts.Count;
+            var searchResult = this.postsService.GetAllPosts(itemsPerPage, (page - 1) * itemsPerPage, "Id", jobConstraints, location, categoryName, OrderType.Ascending);
+            var count = this.postsService.GetAllPosts(int.MaxValue, 0, "Id", jobConstraints, location, categoryName, OrderType.Ascending).Posts.Count;
 
             searchResult.PagesCount = (int)Math.Ceiling((double)count / itemsPerPage);
             searchResult.CurrentPage = page;

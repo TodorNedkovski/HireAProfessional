@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
 
     using HireAProfessional.Services.Data;
+    using HireAProfessional.Web.Infrastructure.Enums;
     using Microsoft.AspNetCore.Mvc;
 
     public class BlogsController : Controller
@@ -24,11 +25,17 @@
             return this.View(blog);
         }
 
-        public IActionResult AllBlogs()
+        public IActionResult AllBlogs(int page = 1)
         {
-            var result = this.blogService.GetAll();
+            int itemsPerPage = 10;
 
-            return this.View(result);
+            var searchResult = this.blogService.GetAll(itemsPerPage, (page - 1) * itemsPerPage, "Id", OrderType.Ascending);
+            var count = this.blogService.GetAll(int.MaxValue, 0, "Id", OrderType.Ascending).Blogs.Count;
+
+            searchResult.PagesCount = (int)Math.Ceiling((double)count / itemsPerPage);
+            searchResult.CurrentPage = page;
+
+            return this.View(searchResult);
         }
     }
 }

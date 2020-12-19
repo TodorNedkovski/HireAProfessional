@@ -47,7 +47,7 @@
                 .All()
                 .FirstOrDefaultAsync(b => b.Id == blogId);
 
-            this.blogRepository.Delete(blog);
+            blog.IsDeleted = true;
 
             await this.blogRepository.SaveChangesAsync();
         }
@@ -64,12 +64,13 @@
             await this.blogRepository.SaveChangesAsync();
         }
 
-        public BlogsListViewModel GetAll(int count, string param, OrderType orderType)
+        public BlogsListViewModel GetAll(int count, int skip, string param, OrderType orderType)
         {
             return new BlogsListViewModel
             {
                 Blogs = this.blogRepository
                 .AllAsNoTracking()
+                .Skip(skip)
                 .Take(count)
                 .OrderBy<Blog>(param, orderType)
                 .Select(b => new BlogViewModel
@@ -121,21 +122,21 @@
                 .All()
                 .FirstOrDefault(b => b.Title == title);
 
-            return new BlogViewModel
+            var blogAuthor = this.userRepository.All().FirstOrDefault(u => u.Id == blog.AuthorId);
+
+            var valToReturn = new BlogViewModel
             {
-                Author = new ApplicationUserViewModel
+                Author = new ApplicationUserViewModel 
                 {
-                    FacebookAccountLink = blog.Author.FacebookAccountLink,
-                    FirstName = blog.Author.FirstName,
-                    Age = blog.Author.Age,
-                    LastName = blog.Author.LastName,
-                    CompanyId = blog.Author.Company.Id,
-                    Education = blog.Author.Education,
-                    ImageUrl = blog.Author.ImageUrl,
+                    FirstName = blogAuthor.FirstName,
+                    LastName = blogAuthor.LastName,
+                    Age = blogAuthor.Age,
                 },
                 Content = blog.Content,
                 Title = blog.Title,
             };
+
+            return valToReturn;
         }
     }
 }

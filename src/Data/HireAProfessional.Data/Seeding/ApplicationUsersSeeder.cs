@@ -27,8 +27,8 @@
                 {
                     Email = "example@example.com",
                     NormalizedEmail = "EXAMPLE@EXAMPLE.COM",
-                    FirstName = "Bon",
-                    LastName = "Jovi",
+                    FirstName = "Georgi",
+                    LastName = "Todorov",
                     Company = company,
                     Education = "MIT",
                     FacebookAccountLink = "de",
@@ -39,8 +39,8 @@
                 },
                 new ApplicationUser
                 {
-                    FirstName = "Sarah",
-                    LastName = "Hyland",
+                    FirstName = "Valeri",
+                    LastName = "Stoaynov",
                     Age = 29,
                     Company = company,
                     FacebookAccountLink = "de",
@@ -51,8 +51,8 @@
                 },
                 new ApplicationUser
                 {
-                    FirstName = "Ty",
-                    LastName = "Burrell",
+                    FirstName = "Ivan",
+                    LastName = "ivanov",
                     Age = 40,
                     Company = company,
                     FacebookAccountLink = "de",
@@ -63,8 +63,8 @@
                 },
                 new ApplicationUser
                 {
-                    FirstName = "Nathan",
-                    LastName = "Fillion",
+                    FirstName = "Plamen",
+                    LastName = "plamenov",
                     Age = 49,
                     Company = company,
                     FacebookAccountLink = "de",
@@ -75,8 +75,8 @@
                 },
                 new ApplicationUser
                 {
-                    FirstName = "Stana",
-                    LastName = "Katic",
+                    FirstName = "Nqkoi",
+                    LastName = "SiTam",
                     Age = 40,
                     Company = company,
                     FacebookAccountLink = "de",
@@ -87,8 +87,8 @@
                 },
                 new ApplicationUser
                 {
-                    FirstName = "Charlie",
-                    LastName = "Sheen",
+                    FirstName = "Misho",
+                    LastName = "Peevski",
                     Age = 40,
                     Company = company,
                     FacebookAccountLink = "de",
@@ -159,8 +159,8 @@
                 },
                 new ApplicationUser
                 {
-                    FirstName = "Sarah",
-                    LastName = "Hyland",
+                    FirstName = "Todor",
+                    LastName = "Todorov",
                     Age = 29,
                     Company = company,
                     FacebookAccountLink = "de",
@@ -171,8 +171,8 @@
                 },
                 new ApplicationUser
                 {
-                    FirstName = "Ty",
-                    LastName = "Burrell",
+                    FirstName = "Gosho",
+                    LastName = "Goshovski",
                     Age = 40,
                     Company = company,
                     FacebookAccountLink = "de",
@@ -183,8 +183,8 @@
                 },
                 new ApplicationUser
                 {
-                    FirstName = "Nathan",
-                    LastName = "Fillion",
+                    FirstName = "Pesho",
+                    LastName = "Penskovski",
                     Age = 49,
                     Company = company,
                     FacebookAccountLink = "de",

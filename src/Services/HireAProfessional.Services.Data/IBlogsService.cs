@@ -16,7 +16,7 @@
 
         Task EditAsync(string blogId, BlogInputViewModel post);
 
-        BlogsListViewModel GetAll(int count = int.MaxValue, string param = "Id", OrderType orderType = OrderType.Ascending);
+        BlogsListViewModel GetAll(int count, int skip, string param, OrderType orderType);
 
         BlogViewModel GetBlogByTitle(string title);
 

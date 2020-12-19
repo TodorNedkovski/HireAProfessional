@@ -6,45 +6,169 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<!-- Search form -->
-<input id="search" class="form-control" onkeyup="myFunction()" type="text" placeholder="Search" aria-label="Search">
-
 <hr />
 
-<div id="professionalsTable" class="row">
-    @foreach (var post in this.Model.Posts)
-    {
-        <div class="card">
-            <img src="12" alt="@post.JobTitle" style="width:100%">
-            <h1>@post.JobTitle @post.JobTitle</h1>
-            <p class="title">@post.CompanyName</p>
-            <p>@post.JobTitle</p>
-            <a href="@post.JobTitle"><i class="fa fa-twitter"></i></a>
-            <a href="@post.JobTitle"><i class="fa fa-linkedin"></i></a>
-            <a href="@post.JobTitle"><i class="fa fa-facebook"></i></a>
-            <p><button>Contact</button></p>
-        </div>
-    }
-</div>
-
-<script>
-    function myFunction() {
-        // Declare variables
-        var input, filter, ul, li, a, i, txtValue;
-        input = document.getElementById('search');
-        filter = input.value.toUpperCase();
-        ul = document.getElementById("professionalsTable");
-        li = ul.getElementsByTagName('div');
-
-        // Loop through all list items, and hide those who don't match the search query
-        for (i = 0; i < li.length; i++) {
-            a = li[i].getElementsByTagName("h1")[0];
-            txtValue = a.textContent || a.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                li[i].style.display = "";
-            } else {
-                li[i].style.display = "none";
-            }
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/autocomplete.css" rel="stylesheet" />
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
         }
-    }
-</script>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Button used to open the chat form - fixed at the bottom of the page */
+        .open-button {
+            background-color: #555;
+            color: white;
+            padding: 16px 20px;
+            border: none;
+            cursor: pointer;
+            opacity: 0.8;
+            position: fixed;
+            bottom: 23px;
+            right: 28px;
+            width: 280px;
+        }
+
+        /* The popup chat - hidden by default */
+        .chat-popup {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            right: 15px;
+            border: 3px solid #f1f1f1;
+            z-index: 9;
+        }
+
+        /* Add styles to the form container */
+        .form-container {
+            max-width: 300px;
+            padding: 10px;
+            background-color: white;
+        }
+
+            /* Full-width textarea */
+            .form-container textarea {
+                width: 100%;
+                padding: 15px;
+                margin: 5px 0 22px 0;
+                border: none;
+                background: #f1f1f1;
+                resize: none;
+                min-height: 200px;
+            }
+
+                /* When the textarea gets focus, do something */
+                .form-container textarea:focus {
+                    background-color: #ddd;
+                    outline: none;
+                }
+
+            /* Set a style for the submit/send button */
+            .form-container .btn {
+                background-color: #4CAF50;
+                color: white;
+                padding: 16px 20px;
+                border: none;
+                cursor: pointer;
+                width: 100%;
+                margin-bottom: 10px;
+                opacity: 0.8;
+            }
+
+            /* Add a red background color to the cancel button */
+            .form-container .cancel {
+                background-color: red;
+            }
+
+            /* Add some hover effects to buttons */
+            .form-container .btn:hover, .open-button:hover {
+                opacity: 1;
+            }
+    </style>
+    <title>CreatePost</title>
+</head>
+
+<body>
+    <div class="site-section bg-light">
+        <div class="container">
+            <div class="row">
+                <div data-aos="fade-up" data-aos-delay="100">
+                    <div class="rounded border jobs-wrap row">
+                        <!--Recent posts-->
+                        @foreach (var post in this.Model.Posts)
+                        {
+                            <a href="All/@post.Id" class="job-item d-block d-md-flex align-items-center col-md-12 @post.EmploymentType.ToString().ToLower()">
+                                <div class="company-logo blank-logo text-center text-md-left pl-3">
+                                    <img src="images/logo_2.png" alt="Image" class="img-fluid mx-auto">
+                                </div>
+                                <div class="job-details h-100">
+                                    <div class="p-3 align-self-center">
+                                        <h3>@post.JobTitle</h3>
+                                        <div class="d-block d-lg-flex">
+                                            <div class="mr-3"><span class="icon-suitcase mr-1"></span> @Html.Raw(post.Description.Substring(0, Math.Min(post.Description.Length, 250)))...</div>
+                                            <div class="mr-3"><span class="icon-room mr-1"></span> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="job-category align-self-center">
+                                    <div class="p-3">
+                                        <span class="text-danger p-2 rounded border border-danger">@post.EmploymentType.ToString()</span>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav>
+        <ul class="pagination justify-content-center">
+            @if (this.Model.CurrentPage == 1)
+            {
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">Previous</a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link"
+                       asp-route="posts"
+                       asp-route-page="@(this.Model.CurrentPage - 1)">Previous</a>
+                </li>
+            }
+
+            @for (int i = 1; i <= this.Model.PagesCount; i++)
+            {
+                var active = i == this.Model.CurrentPage ? "active" : string.Empty;
+                <li class="page-item @active">
+                    <a class="page-link"
+                       asp-route="posts"
+                       asp-route-page="@i">@i</a>
+                </li>
+            }
+
+            @if (this.Model.CurrentPage == this.Model.PagesCount)
+            {
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link"
+                       asp-route="posts"
+                       asp-route-page="@(this.Model.CurrentPage + 1)">Next</a>
+                </li>
+            }
+        </ul>
+    </nav>
+</body>

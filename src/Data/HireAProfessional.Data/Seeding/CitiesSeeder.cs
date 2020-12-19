@@ -38,8 +38,6 @@
 
             await dbContext.AddAsync(city);
 
-            //273570
-
             for (int offset = 0; offset <= 100; offset += 10)
             {
                 var citiesJsonModel = new GeoDbAPIService<CityJsonModel>(configuration).Get(offset, "cities").Data;

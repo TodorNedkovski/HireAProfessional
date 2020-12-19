@@ -14,7 +14,7 @@
 
         Task DeleteAsync(string postId);
 
-        PostsListViewModel GetAllPosts(int count = int.MaxValue, int skip = 0, string param = "Id", string jobConstraints = "all", string location = "all", OrderType orderType = OrderType.Ascending);
+        PostsListViewModel GetAllPosts(int count = int.MaxValue, int skip = 0, string param = "Id", string jobConstraints = null, string location = "all", string categoryName = ".Net Back End Enginner", OrderType orderType = OrderType.Ascending);
 
         PostViewModel GetPostById(string id, string userId);
 

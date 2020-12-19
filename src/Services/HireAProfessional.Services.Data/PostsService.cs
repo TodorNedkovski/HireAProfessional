@@ -82,12 +82,12 @@
 
             if (post == null)
             {
-                this.postRepository.Delete(post);
+                post.IsDeleted = true;
                 await this.postRepository.SaveChangesAsync();
             }
         }
 
-        public PostsListViewModel GetAllPosts(int count, int skip, string param, string jobConstraints, string location, OrderType orderType)
+        public PostsListViewModel GetAllPosts(int count, int skip, string param, string jobConstraints, string location, string categoryName, OrderType orderType)
         {
             var geolocation = GeolocationAPIService.GetCurrentLocation();
 
@@ -109,21 +109,39 @@
                 cityName = location.Split(", ")[0];
             }
 
-            if (string.IsNullOrEmpty(jobConstraints))
+            if (string.IsNullOrEmpty(cityName))
             {
-                jobConstraints = "lol 123";
+                cityName = "Sofia";
             }
 
-            var posts = this.postRepository
-            .All()
-            .Where(p => p.Country.Name.ToLower() == countryName.ToLower()
-            || p.City.Name.ToLower() == cityName.ToLower()
-            || p.JobTitle.ToLower() == jobConstraints.ToLower())
-            .OrderBy<JobPost>(param, orderType)
-            .Skip(skip)
-            .Take(count)
-            .To<PostViewModel>()
-            .ToList();
+            var postsQuery = this.postRepository
+            .All();
+
+            var posts = new List<PostViewModel>();
+
+            if (string.IsNullOrEmpty(jobConstraints))
+            {
+                posts = postsQuery.Where(p => p.Country.Name.ToLower() == countryName.ToLower()
+                    && p.City.Name.ToLower() == cityName.ToLower())
+                    .OrderBy<JobPost>(param, orderType)
+                    .Skip(skip)
+                    .Take(count)
+                    .To<PostViewModel>()
+                    .ToList();
+            }
+            else
+            {
+                posts = postsQuery.Where(p => p.Country.Name.ToLower() == countryName.ToLower()
+                    && p.City.Name.ToLower() == cityName.ToLower()
+                    && p.JobTitle.ToLower() == jobConstraints.ToLower())
+                    .OrderBy<JobPost>(param, orderType)
+                    .Skip(skip)
+                    .Take(count)
+                    .To<PostViewModel>()
+                    .ToList();
+            }
+
+            ;
 
             return new PostsListViewModel
             {
@@ -133,14 +151,16 @@
 
         public PostsListViewModel GetAllPostsByCategory(string categoryName)
         {
+            var posts = this.
+                        postRepository
+                        .All()
+                        .Where(p => p.Category.Name == categoryName)
+                        .To<PostViewModel>()
+                        .ToList();
+
             return new PostsListViewModel
             {
-                Posts = this.
-                        postRepository
-                        .AllAsNoTracking()
-                        .To<PostViewModel>()
-                        .Where(p => p.Category.Name == categoryName)
-                        .ToList(),
+                Posts = posts,
             };
         }
 

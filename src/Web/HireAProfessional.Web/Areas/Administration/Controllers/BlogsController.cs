@@ -2,6 +2,7 @@
 {
     using HireAProfessional.Common;
     using HireAProfessional.Services.Data;
+    using HireAProfessional.Web.Infrastructure.Enums;
     using Microsoft.AspNetCore.Mvc;
 
     [Area("Administration")]
@@ -23,7 +24,7 @@
         [Route("Administration/Dashboard/Blogs/CrudOperations")]
         public IActionResult CrudOperations()
         {
-            var blogs = this.blogsService.GetAll();
+            var blogs = this.blogsService.GetAll(int.MaxValue, 0, "Id", OrderType.Ascending);
 
             return this.View(string.Format(ViewPaths.CrudOperationsViewPath, "Blogs"), blogs);
         }
